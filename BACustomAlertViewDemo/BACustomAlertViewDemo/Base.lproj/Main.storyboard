@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rkn-z1-op2">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="f9d-hb-adW">
+            <objects>
+                <navigationController id="rkn-z1-op2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tah-5F-jnE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="vpA-Th-PKb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E7z-Mb-bpD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-292" y="357"/>
+        </scene>
+        <!--博爱的BACustomAlertView-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QD9-Tz-wmZ">
+                                <rect key="frame" x="70" y="109" width="248" height="30"/>
+                                <color key="backgroundColor" red="0.99314747317568264" green="1" blue="0.60293011382188211" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="1、类似系统alert【加边缘手势消失】"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bio-XJ-Urk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0L-5f-eVD">
+                                <rect key="frame" x="70" y="159" width="129" height="30"/>
+                                <color key="backgroundColor" red="0.74255263548395245" green="1" blue="0.63647192904127059" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="2、自定义按钮颜色"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PCE-yY-KUW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kh2-w3-ihQ">
+                                <rect key="frame" x="70" y="209" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.71105097896908653" green="1" blue="0.92282973690221415" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="3、自定义背景图片"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Rn-cO-QkB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox9-1R-EBE">
+                                <rect key="frame" x="70" y="259" width="220" height="30"/>
+                                <color key="backgroundColor" red="0.96304460171739636" green="0.84362275092625316" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="4、内置图片和文字，可滑动查看"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nbs-Wz-Cuu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbJ-P3-iAw">
+                                <rect key="frame" x="70" y="309" width="131" height="30"/>
+                                <color key="backgroundColor" red="0.96304460169999995" green="0.84362275090000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dze-Sm-phi"/>
+                                </constraints>
+                                <state key="normal" title="5、完全自定义alert"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dze-Sm-phi"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BFj-zk-roB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="M0L-5f-eVD" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="3gJ-kD-VbV"/>
+                            <constraint firstItem="Ox9-1R-EBE" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="JbN-XY-ayS"/>
+                            <constraint firstItem="M0L-5f-eVD" firstAttribute="top" secondItem="QD9-Tz-wmZ" secondAttribute="bottom" constant="20" id="MyQ-03-dKe"/>
+                            <constraint firstItem="QD9-Tz-wmZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="45" id="Szr-9w-ow8"/>
+                            <constraint firstItem="kh2-w3-ihQ" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="aTT-s3-bhc"/>
+                            <constraint firstItem="Ox9-1R-EBE" firstAttribute="top" secondItem="kh2-w3-ihQ" secondAttribute="bottom" constant="20" id="cHn-Cu-1sh"/>
+                            <constraint firstItem="IbJ-P3-iAw" firstAttribute="top" secondItem="Ox9-1R-EBE" secondAttribute="bottom" constant="20" id="fQm-kp-ijc"/>
+                            <constraint firstItem="kh2-w3-ihQ" firstAttribute="top" secondItem="M0L-5f-eVD" secondAttribute="bottom" constant="20" id="kfV-9a-fSl"/>
+                            <constraint firstItem="IbJ-P3-iAw" firstAttribute="leading" secondItem="Ox9-1R-EBE" secondAttribute="leading" id="nHq-8R-jwv"/>
+                            <constraint firstItem="QD9-Tz-wmZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="vOf-BY-SRr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="博爱的BACustomAlertView" id="245-5V-lLH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
