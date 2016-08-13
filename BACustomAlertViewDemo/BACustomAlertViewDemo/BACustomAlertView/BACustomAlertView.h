@@ -82,8 +82,8 @@
 /*! 背景图片名字 */
 @property (nonatomic, strong) NSString  *bgImageName;
 
-/**
- * 事件回调
+/*!
+ * 按钮点击事件回调
  */
 @property (strong, nonatomic) void (^buttonActionBlock)(NSInteger index);
 

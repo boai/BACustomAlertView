@@ -112,6 +112,16 @@
                                     <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BFj-zk-roB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVU-IB-YAg">
+                                <rect key="frame" x="50" y="389" width="500" height="82"/>
+                                <string key="text">本alert特点：
+1、手势触摸隐藏
+2、可以自定义背景图片、按钮颜色
+3、可以添加文字和图片，且可以滑动查看！</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -119,15 +129,21 @@
                             <constraint firstItem="Ox9-1R-EBE" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="JbN-XY-ayS"/>
                             <constraint firstItem="M0L-5f-eVD" firstAttribute="top" secondItem="QD9-Tz-wmZ" secondAttribute="bottom" constant="20" id="MyQ-03-dKe"/>
                             <constraint firstItem="QD9-Tz-wmZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="45" id="Szr-9w-ow8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JVU-IB-YAg" secondAttribute="trailing" constant="30" id="XRy-xt-vC3"/>
                             <constraint firstItem="kh2-w3-ihQ" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="aTT-s3-bhc"/>
                             <constraint firstItem="Ox9-1R-EBE" firstAttribute="top" secondItem="kh2-w3-ihQ" secondAttribute="bottom" constant="20" id="cHn-Cu-1sh"/>
                             <constraint firstItem="IbJ-P3-iAw" firstAttribute="top" secondItem="Ox9-1R-EBE" secondAttribute="bottom" constant="20" id="fQm-kp-ijc"/>
+                            <constraint firstItem="JVU-IB-YAg" firstAttribute="top" secondItem="IbJ-P3-iAw" secondAttribute="bottom" constant="50" id="i4M-LD-4NZ"/>
                             <constraint firstItem="kh2-w3-ihQ" firstAttribute="top" secondItem="M0L-5f-eVD" secondAttribute="bottom" constant="20" id="kfV-9a-fSl"/>
                             <constraint firstItem="IbJ-P3-iAw" firstAttribute="leading" secondItem="Ox9-1R-EBE" secondAttribute="leading" id="nHq-8R-jwv"/>
+                            <constraint firstItem="JVU-IB-YAg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="nrY-WD-PAJ"/>
                             <constraint firstItem="QD9-Tz-wmZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="vOf-BY-SRr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="博爱的BACustomAlertView" id="245-5V-lLH"/>
+                    <connections>
+                        <outlet property="label" destination="JVU-IB-YAg" id="oEp-n1-oNv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

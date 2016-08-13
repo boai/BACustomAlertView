@@ -25,6 +25,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 @property (nonatomic,strong ) UILabel            *titleLabel;
 
 
+@property (weak, nonatomic) IBOutlet UILabel *label;
+
 - (IBAction)buttonAction:(UIButton *)sender;
 
 @end
@@ -34,6 +36,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+//    self.label.text = @"本alert特点：<br />1、手势触摸隐藏<br />2、可以自定义背景图片、按钮颜色<br />3、可以添加文字和图片，且可以滑动查看！";
 }
 
 - (void)didReceiveMemoryWarning {
