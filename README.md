@@ -1,6 +1,9 @@
 # BACustomAlertView
 一个完全实现自定义的alertView！
 
+> ###目前为止，最为精简的alert封装，欢迎小伙伴儿们刷刷刷！
+
+
 本alert特点：<br />
 1、手势触摸隐藏<br />
 2、可以自定义背景图片、按钮颜色<br />
