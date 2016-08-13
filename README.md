@@ -8,4 +8,6 @@
 4、完全兼容左右iOS系统版本
 
 ### 示例：
+![image](https://github.com/boai/BACustomAlertView/blob/master/image2.png)
+
 ![image](https://github.com/boai/BACustomAlertView/blob/master/image.png)
