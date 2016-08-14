@@ -173,7 +173,6 @@
 
 ## 2、图片示例：
 ![alert1](https://github.com/boai/BACustomAlertView/blob/master/images/alert0.png)
-
 ![alert2](https://github.com/boai/BACustomAlertView/blob/master/images/alert4.png)
 
 ---
