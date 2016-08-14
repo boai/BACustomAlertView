@@ -172,9 +172,9 @@
 ---
 
 ## 2、图片示例：
-![image1](https://github.com/boai/BACustomAlertView/blob/master/image2.png)
+![alert1](https://github.com/boai/BACustomAlertView/blob/master/images/alert0.png)
 
-![image2](https://github.com/boai/BACustomAlertView/blob/master/image.png)
+![alert2](https://github.com/boai/BACustomAlertView/blob/master/images/alert4.png)
 
 ---
 
