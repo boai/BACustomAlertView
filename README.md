@@ -1,7 +1,7 @@
 # BACustomAlertView
-一个完全实现自定义的alertView！
+一个完全实现自定义的alertView！目前为止，最为精简的alert封装，以后alert就用博爱的[『BACustomAlertView』](https://github.com/boai/BACustomAlertView)了！
 
-> ##目前为止，最为精简的alert封装，以后alert就用博爱的[『BACustomAlertView』](https://github.com/boai/BACustomAlertView)了！
+> ##ios 开发还不会自定义 alert ？<br>你还在为 iOS7 和 iOS8 的 alert 而烦恼吗？<br>你不知道博爱的 alert ，你就 out 了！<br>如果觉得好用就赶紧分享吧 ！
 
 
 博爱的alert特点：
