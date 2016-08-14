@@ -111,7 +111,10 @@
 }
 
 #pragma mark - ***** 创建一个类似系统的警告框
-- (instancetype)ba_showTitle:(NSString *)title message:(NSString *)message image:(UIImage *)image buttonTitles:(NSArray *)buttonTitles
+- (instancetype)ba_showTitle:(NSString *)title
+                     message:(NSString *)message
+                       image:(UIImage *)image
+                buttonTitles:(NSArray *)buttonTitles
 {
     if (self == [super initWithFrame:CGRectMake(0, 0, kBAAlertWidth, 0)])
     {

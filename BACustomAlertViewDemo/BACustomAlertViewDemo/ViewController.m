@@ -36,8 +36,6 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-//    self.label.text = @"本alert特点：<br />1、手势触摸隐藏<br />2、可以自定义背景图片、按钮颜色<br />3、可以添加文字和图片，且可以滑动查看！";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,10 +47,12 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
     if (sender.tag == 1)
     {
+        /*! 1、类似系统alert【加边缘手势消失】 */
         _alertView1 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                       message:titleMsg1
                                                         image:nil
                                                  buttonTitles:@[@"取消", @"确定"]];
+        /*! 显示alert */
         [_alertView1 ba_showAlertView];
         
         BAWeak;
@@ -60,85 +60,107 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
             if (index == 0)
             {
                 NSLog(@"点击了取消按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView1 ba_dismissAlertView];
             }
             else if (index == 1)
             {
                 NSLog(@"点击了确定按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView1 ba_dismissAlertView];
             }
         };
     }
     else if (sender.tag == 2)
     {
+        /*! 2、自定义按钮颜色 */
         _alertView2 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                       message:titleMsg2
                                                         image:nil
                                                  buttonTitles:@[@"取消", @"确定"]];
+        /*! 自定义按钮文字颜色 */
         _alertView2.buttonTitleColor = [UIColor orangeColor];
+        /*! 显示alert */
         [_alertView2 ba_showAlertView];
         BAWeak;
         _alertView2.buttonActionBlock = ^(NSInteger index){
             if (index == 0)
             {
                 NSLog(@"点击了取消按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView2 ba_dismissAlertView];
             }
             else if (index == 1)
             {
                 NSLog(@"点击了确定按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView2 ba_dismissAlertView];
             }
         };
     }
     else if (sender.tag == 3)
     {
+        /*! 3、自定义背景图片 */
         _alertView3 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                       message:titleMsg1
                                                         image:nil
                                                  buttonTitles:@[@"取消", @"确定"]];
+        /*! 自定义按钮文字颜色 */
         _alertView3.buttonTitleColor = [UIColor orangeColor];
+        /*! 自定义alert的背景图片 */
         _alertView3.bgImageName = @"背景.jpg";
+        /*! 显示alert */
         [_alertView3 ba_showAlertView];
         BAWeak;
         _alertView3.buttonActionBlock = ^(NSInteger index){
             if (index == 0)
             {
                 NSLog(@"点击了取消按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView3 ba_dismissAlertView];
             }
             else if (index == 1)
             {
                 NSLog(@"点击了确定按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView3 ba_dismissAlertView];
             }
         };
     }
     else if (sender.tag == 4)
     {
+        /*! 4、内置图片和文字，可滑动查看 */
         _alertView4 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                       message:titleMsg1
                                                         image:[UIImage imageNamed:@"美女.jpg"]
                                                  buttonTitles:@[@"取消", @"确定"]];
+        /*! 自定义按钮文字颜色 */
         _alertView4.buttonTitleColor = [UIColor orangeColor];
+        /*! 自定义alert的背景图片 */
         _alertView4.bgImageName = @"背景.jpg";
+        /*! 是否显示动画效果 */
+        _alertView4.isShowAnimate = YES;
+        /*! 显示alert */
         [_alertView4 ba_showAlertView];
         BAWeak;
         _alertView4.buttonActionBlock = ^(NSInteger index){
             if (index == 0)
             {
                 NSLog(@"点击了取消按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView4 ba_dismissAlertView];
             }
             else if (index == 1)
             {
                 NSLog(@"点击了确定按钮！");
+                /*! 隐藏alert */
                 [weakSelf.alertView4 ba_dismissAlertView];
             }
         };
     }
     else if (sender.tag == 5)
     {
+        /*! 5、完全自定义alert */
         UIView *view1 = [UIView new];
         view1.frame = CGRectMake(30, 100, SCREENWIDTH - 60, 200);
         view1.backgroundColor = [UIColor yellowColor];
@@ -169,6 +191,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)chooseBtnClick:(UIButton *)sender
 {
     NSLog(@"点击了取消按钮！");
+    /*! 隐藏alert */
     [_alertView5 ba_dismissAlertView];
 }
 
