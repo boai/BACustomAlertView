@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rkn-z1-op2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rkn-z1-op2">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -15,138 +14,51 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="vpA-Th-PKb"/>
+                        <segue destination="4db-9W-lOY" kind="relationship" relationship="rootViewController" id="bNY-Pm-2jr"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E7z-Mb-bpD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-292" y="357"/>
         </scene>
-        <!--博爱的BACustomAlertView-->
-        <scene sceneID="tne-QT-ifu">
+        <!--View Controller-->
+        <scene sceneID="XTt-Ry-yFf">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="4db-9W-lOY" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="BI0-kk-9oI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Day-oC-nsj"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="DHp-vC-D3b">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QD9-Tz-wmZ">
-                                <rect key="frame" x="70" y="109" width="248" height="30"/>
-                                <color key="backgroundColor" red="0.99314747317568264" green="1" blue="0.60293011382188211" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="1、类似系统alert【加边缘手势消失】"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="OtT-3H-Upt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bio-XJ-Urk"/>
+                                    <outlet property="dataSource" destination="4db-9W-lOY" id="rwk-BA-V5x"/>
+                                    <outlet property="delegate" destination="4db-9W-lOY" id="19c-Bc-1ef"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0L-5f-eVD">
-                                <rect key="frame" x="70" y="159" width="129" height="30"/>
-                                <color key="backgroundColor" red="0.74255263548395245" green="1" blue="0.63647192904127059" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="2、自定义按钮颜色"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PCE-yY-KUW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kh2-w3-ihQ">
-                                <rect key="frame" x="70" y="209" width="130" height="30"/>
-                                <color key="backgroundColor" red="0.71105097896908653" green="1" blue="0.92282973690221415" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="3、自定义背景图片"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Rn-cO-QkB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox9-1R-EBE">
-                                <rect key="frame" x="70" y="259" width="220" height="30"/>
-                                <color key="backgroundColor" red="0.96304460171739636" green="0.84362275092625316" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="4、内置图片和文字，可滑动查看"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nbs-Wz-Cuu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbJ-P3-iAw">
-                                <rect key="frame" x="70" y="309" width="131" height="30"/>
-                                <color key="backgroundColor" red="0.96304460169999995" green="0.84362275090000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="dze-Sm-phi"/>
-                                </constraints>
-                                <state key="normal" title="5、完全自定义alert"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="dze-Sm-phi"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BFj-zk-roB"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVU-IB-YAg">
-                                <rect key="frame" x="50" y="389" width="500" height="82"/>
-                                <string key="text">本alert特点：
-1、手势触摸隐藏
-2、可以自定义背景图片、按钮颜色
-3、可以添加文字和图片，且可以滑动查看！</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="M0L-5f-eVD" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="3gJ-kD-VbV"/>
-                            <constraint firstItem="Ox9-1R-EBE" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="JbN-XY-ayS"/>
-                            <constraint firstItem="M0L-5f-eVD" firstAttribute="top" secondItem="QD9-Tz-wmZ" secondAttribute="bottom" constant="20" id="MyQ-03-dKe"/>
-                            <constraint firstItem="QD9-Tz-wmZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="45" id="Szr-9w-ow8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JVU-IB-YAg" secondAttribute="trailing" constant="30" id="XRy-xt-vC3"/>
-                            <constraint firstItem="kh2-w3-ihQ" firstAttribute="leading" secondItem="QD9-Tz-wmZ" secondAttribute="leading" id="aTT-s3-bhc"/>
-                            <constraint firstItem="Ox9-1R-EBE" firstAttribute="top" secondItem="kh2-w3-ihQ" secondAttribute="bottom" constant="20" id="cHn-Cu-1sh"/>
-                            <constraint firstItem="IbJ-P3-iAw" firstAttribute="top" secondItem="Ox9-1R-EBE" secondAttribute="bottom" constant="20" id="fQm-kp-ijc"/>
-                            <constraint firstItem="JVU-IB-YAg" firstAttribute="top" secondItem="IbJ-P3-iAw" secondAttribute="bottom" constant="50" id="i4M-LD-4NZ"/>
-                            <constraint firstItem="kh2-w3-ihQ" firstAttribute="top" secondItem="M0L-5f-eVD" secondAttribute="bottom" constant="20" id="kfV-9a-fSl"/>
-                            <constraint firstItem="IbJ-P3-iAw" firstAttribute="leading" secondItem="Ox9-1R-EBE" secondAttribute="leading" id="nHq-8R-jwv"/>
-                            <constraint firstItem="JVU-IB-YAg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="nrY-WD-PAJ"/>
-                            <constraint firstItem="QD9-Tz-wmZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="vOf-BY-SRr"/>
+                            <constraint firstItem="Day-oC-nsj" firstAttribute="top" secondItem="OtT-3H-Upt" secondAttribute="bottom" id="4a3-XL-b9S"/>
+                            <constraint firstAttribute="trailing" secondItem="OtT-3H-Upt" secondAttribute="trailing" id="SNW-5B-8ic"/>
+                            <constraint firstItem="OtT-3H-Upt" firstAttribute="top" secondItem="BI0-kk-9oI" secondAttribute="bottom" id="X1G-t6-9aH"/>
+                            <constraint firstItem="OtT-3H-Upt" firstAttribute="leading" secondItem="DHp-vC-D3b" secondAttribute="leading" id="ofe-43-PwJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="博爱的BACustomAlertView" id="245-5V-lLH"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="kpZ-dY-qNc"/>
                     <connections>
-                        <outlet property="label" destination="JVU-IB-YAg" id="oEp-n1-oNv"/>
+                        <outlet property="tableView" destination="OtT-3H-Upt" id="lER-tG-xmi"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="haY-Tt-DFJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="389" y="357"/>
         </scene>
     </scenes>
 </document>
