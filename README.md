@@ -4,7 +4,12 @@
 > ##ios 开发还不会自定义 alert ？<br>你还在为 iOS7 和 iOS8 的 alert 而烦恼吗？<br>你不知道博爱的 alert ，你就 out 了！<br>如果觉得好用就赶紧分享吧 ！
 
 
-博爱的alert特点：【倒叙更新】
+博爱的alert更新：【倒叙更新】
+
+#### version 1.0.4 【2016.***】
+* 正在努力完善中...
+
+#### version 1.0.4 【2016.08.13】
 * 6、完美适配横竖屏
 * 5、简单的两行搞定一个自定义alert
 * 4、手势触摸隐藏
@@ -17,7 +22,7 @@
 ---
 
 ## 0、安装和导入示例：
-* 0.1、pod导入：<br> ` pod 'BACustomAlertView' ` <br>导入头文件：<br>`  #import <BACustomAlertView.h> `
+* 0.1、pod导入【当前最新版本：1.0.4】：<br> ` pod 'BACustomAlertView' ` <br>导入头文件：<br>`  #import <BACustomAlertView.h> `
 * 0.2、下载demo，把 BACustomAlertView 文件夹拖入项目即可，<br>导入头文件：<br>`  #import "BACustomAlertView.h" `
 
 ---
