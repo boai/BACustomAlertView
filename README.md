@@ -16,9 +16,9 @@
 
 ---
 
-## 0、pod使用示例：
-* 1、pod导入：<br> ` pod 'BACustomAlertView' ` <br>导入头文件：`  #import <BACustomAlertView.h> `
-* 2、下载demo，把BACustomAlertView文件夹拖入项目即可，<br>导入头文件：`  #import "BACustomAlertView.h" `
+## 0、安装和导入示例：
+* 0.1、pod导入：<br> ` pod 'BACustomAlertView' ` <br>导入头文件：<br>`  #import <BACustomAlertView.h> `
+* 0.2、下载demo，把 BACustomAlertView 文件夹拖入项目即可，<br>导入头文件：<br>`  #import "BACustomAlertView.h" `
 
 ---
 
