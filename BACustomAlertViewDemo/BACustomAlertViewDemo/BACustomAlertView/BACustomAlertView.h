@@ -87,8 +87,6 @@
  */
 @property (strong, nonatomic) void (^buttonActionBlock)(NSInteger index);
 
-
-
 /*!
  *  初始化自定义动画视图
  *  @return id

@@ -61,8 +61,7 @@
 
 #import "BACustomAlertView.h"
 
-
-#define kBAAlertWidth              SCREENWIDTH - 50
+#define kBAAlertWidth              self.viewWidth - 50
 #define kBAAlertPaddingV           11
 #define kBAAlertPaddingH           18
 #define kBAAlertRadius             13
@@ -89,6 +88,9 @@
 @property (strong, nonatomic        ) NSMutableArray          *buttons;
 @property (strong, nonatomic        ) NSMutableArray          *lines;
 
+@property (assign, nonatomic) CGFloat viewWidth;
+@property (assign, nonatomic) CGFloat viewHeight;
+
 @end
 
 @implementation BACustomAlertView
@@ -106,6 +108,11 @@
     {
         self.subView = customView;
         [self setupUI];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeFrames:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -116,6 +123,9 @@
                        image:(UIImage *)image
                 buttonTitles:(NSArray *)buttonTitles
 {
+    self.viewWidth = SCREENWIDTH;
+    self.viewHeight = SCREENHEIGHT;
+    
     if (self == [super initWithFrame:CGRectMake(0, 0, kBAAlertWidth, 0)])
     {
         _title = [title copy];
@@ -123,7 +133,13 @@
         _message = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeFrames:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
+        
         [self loadUI];
+        
     }
     return self;
 }
@@ -146,11 +162,15 @@
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     [self addSubview:_containerView];
+
 }
 
 #pragma mark - ***** 加载自定义View
 - (void)setupUI
 {
+    self.viewWidth = SCREENWIDTH;
+    self.viewHeight = SCREENHEIGHT;
+    
     self.frame = [UIScreen mainScreen].bounds;
     self.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
 
@@ -283,7 +303,7 @@
     _scrollBottom = 0;
     CGFloat insetY = kBAAlertPaddingV;
     _maxContentWidth = kBAAlertWidth-2*kBAAlertPaddingH;
-    _maxAlertViewHeight = [UIScreen mainScreen].bounds.size.height-50;
+    _maxAlertViewHeight = self.viewHeight - 50;
     [self loadTitle];
     [self loadImage];
     [self loadMessage];
@@ -496,4 +516,32 @@
     return image;
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
+-(void)changeFrames:(NSNotification *)notification
+{
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        if ( self.subView ) {
+            self.frame = CGRectMake(0.f, 0.f, self.viewWidth, self.viewHeight);
+            self.subView.frame = CGRectMake(30.f, 0.f, self.viewWidth - 60.f, CGRectGetHeight(self.subView.frame));
+            self.subView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
+        }else {
+            [self prepareForShow];
+            self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
+        }
+    }];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    self.viewWidth = [UIScreen mainScreen].bounds.size.width;
+    self.viewHeight = [UIScreen mainScreen].bounds.size.height;
+}
 @end
