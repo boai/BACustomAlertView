@@ -61,6 +61,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         cell.textLabel.numberOfLines = 0;
         
         cell.accessoryType = 0 == indexPath.section?UITableViewCellAccessoryDisclosureIndicator:UITableViewCellAccessoryNone;
+        cell.selectionStyle = 0 == indexPath.section?UITableViewCellSelectionStyleDefault:UITableViewCellSelectionStyleNone;
     }
     NSArray *tempArray = self.dataArray[indexPath.section];
     cell.textLabel.text = tempArray[indexPath.row];
