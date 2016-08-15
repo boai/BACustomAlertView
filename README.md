@@ -14,9 +14,13 @@
 
 ####~~注：目前此版本只支持竖屏适配，小伙伴儿记得哦！~~
 
+---
+
 ## 0、pod使用示例：
-* 1、pod导入： ` pod 'BACustomAlertView' ` 导入头文件：`  #import <BACustomAlertView.h> `
-* 2、下载demo，把BACustomAlertView文件夹拖入项目即可，导入头文件：`  #import "BACustomAlertView.h" `
+* 1、pod导入：<br> ` pod 'BACustomAlertView' ` <br>导入头文件：`  #import <BACustomAlertView.h> `
+* 2、下载demo，把BACustomAlertView文件夹拖入项目即可，<br>导入头文件：`  #import "BACustomAlertView.h" `
+
+---
 
 ## 1、代码示例：
 * 1.1 类似系统alert【加边缘手势消失】
