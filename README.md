@@ -1,15 +1,18 @@
 # BACustomAlertView
 一个完全实现自定义的alertView！目前为止，最为精简的alert封装，以后alert就用博爱的[『BACustomAlertView』](https://github.com/boai/BACustomAlertView)了！
 
-> ##ios 开发还不会自定义 alert ？<br>你还在为 iOS7 和 iOS8 的 alert 而烦恼吗？<br>你不知道博爱的 alert ，你就 out 了！<br>如果觉得好用就赶紧分享吧 ！
-
+---
 
 博爱的alert更新：【倒叙更新】
 
-#### version 1.0.4 【2016.***】
+#### version 1.0.5 【2016.开发ing...】
 * 正在努力完善中...
+* 高斯模糊马上就要来了
+* 更多的动画特效，让你的 alert 狂拽炫酷刁炸天！
+* 如果你有更好的建议，可以给博爱提issue哦！
+* 也可以加入我们的大家庭：QQ群 `479663605`，希望广大小白和大神能够积极加入！
 
-#### version 1.0.4 【2016.08.13】
+#### version 1.0.4 【2016.08.13 已上架】
 * 6、完美适配横竖屏
 * 5、简单的两行搞定一个自定义alert
 * 4、手势触摸隐藏
