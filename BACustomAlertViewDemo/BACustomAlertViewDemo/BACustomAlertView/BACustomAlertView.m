@@ -77,7 +77,7 @@
 
 @property (copy, nonatomic, readonly) NSString                *title;
 @property (copy, nonatomic, readonly) NSString                *message;
-@property (copy, nonatomic, readonly  ) UIImage               *image;
+@property (copy, nonatomic, readonly) UIImage                 *image;
 @property (copy, nonatomic, readonly) NSArray                 *buttonTitles;
 
 @property (strong, nonatomic        ) UIImageView             *containerView;
@@ -88,8 +88,8 @@
 @property (strong, nonatomic        ) NSMutableArray          *buttons;
 @property (strong, nonatomic        ) NSMutableArray          *lines;
 
-@property (assign, nonatomic) CGFloat viewWidth;
-@property (assign, nonatomic) CGFloat viewHeight;
+@property (assign, nonatomic        ) CGFloat                  viewWidth;
+@property (assign, nonatomic        ) CGFloat                  viewHeight;
 
 @end
 
@@ -516,29 +516,33 @@
     return image;
 }
 
-- (void)dealloc {
-    
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
 
 -(void)changeFrames:(NSNotification *)notification
 {
 //    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     
+    BAWeak;
     [UIView animateWithDuration:0.25 animations:^{
-        if ( self.subView ) {
-            self.frame = CGRectMake(0.f, 0.f, self.viewWidth, self.viewHeight);
-            self.subView.frame = CGRectMake(30.f, 0.f, self.viewWidth - 60.f, CGRectGetHeight(self.subView.frame));
-            self.subView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
-        }else {
-            [self prepareForShow];
-            self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
+        if (weakSelf.subView)
+        {
+            weakSelf.frame = CGRectMake(0.f, 0.f, weakSelf.viewWidth, weakSelf.viewHeight);
+            weakSelf.subView.frame = CGRectMake(50.f, 0.f, weakSelf.viewWidth - 100.f, CGRectGetHeight(weakSelf.subView.frame));
+            weakSelf.subView.center = CGPointMake(weakSelf.viewWidth/2.f, weakSelf.viewHeight/2.f);
+        }
+        else
+        {
+            [weakSelf prepareForShow];
+            weakSelf.containerView.center = CGPointMake(weakSelf.viewWidth/2.f, weakSelf.viewHeight/2.f);
         }
     }];
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
 
     self.viewWidth = [UIScreen mainScreen].bounds.size.width;

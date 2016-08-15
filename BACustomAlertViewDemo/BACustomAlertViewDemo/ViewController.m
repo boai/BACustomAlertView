@@ -40,19 +40,23 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 }
 
 #pragma mark - UITableView
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return self.dataArray.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [self.dataArray[section] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *identifier = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if ( !cell ) {
+    if ( !cell )
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
         cell.textLabel.numberOfLines = 0;
         
@@ -63,8 +67,10 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ( 0 == indexPath.section ) {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ( 0 == indexPath.section )
+    {
         [self showAlertAction:indexPath.row + 1];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -77,11 +83,18 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 
 #pragma mark - 
 - (NSArray *)dataArray {
-    if ( !_dataArray ) {
-        _dataArray = [NSArray arrayWithObjects:@[@"1、类似系统alert【加边缘手势消失】",@"2、自定义按钮颜色",@"3、自定义背景图片",@"4、内置图片和文字，可滑动查看",@"5、完全自定义alert"],@[@"本alert特点：\
-                                                                                                                                         1、手势触摸隐藏\
-                                                                                                                                         2、可以自定义背景图片、按钮颜色\
-                                                                                                                                         3、可以添加文字和图片，且可以滑动查看！"], nil];
+    if ( !_dataArray )
+    {
+        _dataArray = [NSArray arrayWithObjects:@[@"1、类似系统alert【加边缘手势消失】",
+                                                 @"2、自定义按钮颜色",
+                                                 @"3、自定义背景图片",
+                                                 @"4、内置图片和文字，可滑动查看",
+                                                 @"5、完全自定义alert"],
+                                                @[@"本alert特点：\
+                                                    1、手势触摸隐藏\
+                                                    2、可以自定义背景图片、按钮颜色\
+                                                    3、可以添加文字和图片，且可以滑动查看！"
+                                                ], nil];
     }
     return _dataArray;
 }
