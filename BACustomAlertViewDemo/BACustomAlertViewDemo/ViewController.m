@@ -1,10 +1,64 @@
+
+/*!
+ *  @header BAKit.h
+ *          BABaseProject
+ *
+ *  @brief  BAKit
+ *
+ *  @author 博爱
+ *  @copyright    Copyright © 2016年 博爱. All rights reserved.
+ *  @version    V1.0
+ */
+
+//                            _ooOoo_
+//                           o8888888o
+//                           88" . "88
+//                           (| -_- |)
+//                            O\ = /O
+//                        ____/`---'\____
+//                      .   ' \\| |// `.
+//                       / \\||| : |||// \
+//                     / _||||| -:- |||||- \
+//                       | | \\\ - /// | |
+//                     | \_| ''\---/'' | |
+//                      \ .-\__ `-` ___/-. /
+//                   ___`. .' /--.--\ `. . __
+//                ."" '< `.___\_<|>_/___.' >'"".
+//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+//                 \ \ `-. \_ __\ /__ _/ .-` / /
+//         ======`-.____`-.___\_____/___.-`____.-'======
+//                            `=---='
 //
-//  ViewController.m
-//  BACustomAlertViewDemo
-//
-//  Created by boai on 16/8/13.
-//  Copyright © 2016年 博爱. All rights reserved.
-//
+//         .............................................
+//                  佛祖镇楼                  BUG辟易
+//          佛曰:
+//                  写字楼里写字间，写字间里程序员；
+//                  程序人员写程序，又拿程序换酒钱。
+//                  酒醒只在网上坐，酒醉还来网下眠；
+//                  酒醉酒醒日复日，网上网下年复年。
+//                  但愿老死电脑间，不愿鞠躬老板前；
+//                  奔驰宝马贵者趣，公交自行程序员。
+//                  别人笑我忒疯癫，我笑自己命太贱；
+//                  不见满街漂亮妹，哪个归得程序员？
+
+/*
+ 
+ *********************************************************************************
+ *
+ * 在使用BAKit的过程中如果出现bug请及时以以下任意一种方式联系我，我会及时修复bug
+ *
+ * QQ     : 可以添加ios开发技术群 479663605 在这里找到我(博爱1616【137361770】)
+ * 微博    : 博爱1616
+ * Email  : 137361770@qq.com
+ * GitHub : https://github.com/boai
+ * 博客园  : http://www.cnblogs.com/boai/
+ * 博客    : http://boai.github.io
+ * 简书    : http://www.jianshu.com/users/95c9800fdf47/latest_articles
+ * 简书专题 : http://www.jianshu.com/collection/072d578bf782
+ 
+ *********************************************************************************
+ 
+ */
 
 #import "ViewController.h"
 #import "BACustomAlertView.h"
@@ -13,18 +67,18 @@ static NSString * const titleMsg1 = @"欢迎使用 iPhone SE，迄今最高性�
 static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了一个几乎不可能实现的目标：在有史以来最为轻盈纤薄的 Mac 笔记本电脑上，打造全尺寸的使用体验。这就要求每个元素都必须重新构想，不仅令其更为纤薄轻巧，还要更加出色。最终我们带来的，不仅是一部新款的笔记本电脑，更是一种对笔记本电脑的前瞻性思考。现在，有了第六代 Intel 处理器、提升的图形处理性能、高速闪存和最长可达 10 小时的电池使用时间*，MacBook 的强大更进一步。";
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic  ) IBOutlet UITableView  *tableView;
 
-@property (nonatomic, strong) BACustomAlertView  *alertView1;
-@property (nonatomic, strong) BACustomAlertView  *alertView2;
-@property (nonatomic, strong) BACustomAlertView  *alertView3;
-@property (nonatomic, strong) BACustomAlertView  *alertView4;
-@property (nonatomic, strong) BACustomAlertView  *alertView5;
+@property (nonatomic, strong) BACustomAlertView     *alertView1;
+@property (nonatomic, strong) BACustomAlertView     *alertView2;
+@property (nonatomic, strong) BACustomAlertView     *alertView3;
+@property (nonatomic, strong) BACustomAlertView     *alertView4;
+@property (nonatomic, strong) BACustomAlertView     *alertView5;
 
-@property (nonatomic,strong ) UIButton           *chooseBtn;
-@property (nonatomic,strong ) UILabel            *titleLabel;
+@property (nonatomic,strong ) UIButton              *chooseBtn;
+@property (nonatomic,strong ) UILabel               *titleLabel;
 
-@property (strong, nonatomic) NSArray *dataArray;
+@property (strong, nonatomic) NSArray               *dataArray;
 
 @end
 
@@ -153,7 +207,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)alert2
 {
     /*! 2、自定义按钮颜色 */
-    _alertView2 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
+    _alertView2                  = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                   message:titleMsg2
                                                     image:nil
                                              buttonTitles:@[@"取消", @"确定"]];
@@ -181,14 +235,14 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)alert3
 {
     /*! 3、自定义背景图片 */
-    _alertView3 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
+    _alertView3                  = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                   message:titleMsg1
                                                     image:nil
                                              buttonTitles:@[@"取消", @"确定"]];
     /*! 自定义按钮文字颜色 */
     _alertView3.buttonTitleColor = [UIColor orangeColor];
     /*! 自定义alert的背景图片 */
-    _alertView3.bgImageName = @"背景.jpg";
+    _alertView3.bgImageName      = @"背景.jpg";
     /*! 显示alert */
     [_alertView3 ba_showAlertView];
     BAWeak;
@@ -211,16 +265,16 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)alert4
 {
     /*! 4、内置图片和文字，可滑动查看 */
-    _alertView4 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
+    _alertView4                  = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                   message:titleMsg1
                                                     image:[UIImage imageNamed:@"美女.jpg"]
                                              buttonTitles:@[@"取消", @"确定"]];
     /*! 自定义按钮文字颜色 */
     _alertView4.buttonTitleColor = [UIColor orangeColor];
     /*! 自定义alert的背景图片 */
-    _alertView4.bgImageName = @"背景.jpg";
+    _alertView4.bgImageName      = @"背景.jpg";
     /*! 是否显示动画效果 */
-    _alertView4.isShowAnimate = YES;
+    _alertView4.isShowAnimate    = YES;
     /*! 显示alert */
     [_alertView4 ba_showAlertView];
     BAWeak;
@@ -243,32 +297,32 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)alert5
 {
     /*! 5、完全自定义alert */
-    UIView *view1 = [UIView new];
-    view1.frame = CGRectMake(30, 100, SCREENWIDTH - 60, 200);
-    view1.backgroundColor = [UIColor yellowColor];
-    view1.layer.masksToBounds = YES;
-    view1.layer.cornerRadius = 10.0f;
-    //    view1.clipsToBounds = YES;
+    UIView *view1                = [UIView new];
+    view1.frame                  = CGRectMake(30, 100, SCREENWIDTH - 60, 200);
+    view1.backgroundColor        = [UIColor yellowColor];
+    view1.layer.masksToBounds    = YES;
+    view1.layer.cornerRadius     = 10.0f;
+    //    view1.clipsToBounds    = YES;
     
-    _titleLabel = [UILabel new];
-    _titleLabel.frame = CGRectMake(0, 0, view1.frame.size.width, 40);
-    _titleLabel.text = @"测试title";
-    _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.font = [UIFont systemFontOfSize:18];
-    _titleLabel.backgroundColor = [UIColor greenColor];
+    _titleLabel                  = [UILabel new];
+    _titleLabel.frame            = CGRectMake(0, 0, view1.frame.size.width, 40);
+    _titleLabel.text             = @"测试title";
+    _titleLabel.textAlignment    = NSTextAlignmentCenter;
+    _titleLabel.font             = [UIFont systemFontOfSize:18];
+    _titleLabel.backgroundColor  = [UIColor greenColor];
     [view1 addSubview:_titleLabel];
     _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
-    _chooseBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, view1.frame.size.height - 40, view1.frame.size.width, 40)];
-    //        _chooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _chooseBtn                   = [[UIButton alloc]initWithFrame:CGRectMake(0, view1.frame.size.height - 40, view1.frame.size.width, 40)];
+    //        _chooseBtn         = [UIButton buttonWithType:UIButtonTypeCustom];
     [_chooseBtn setTitle:@"取消" forState:UIControlStateNormal];
     [_chooseBtn setBackgroundColor:[UIColor redColor]];
     [_chooseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_chooseBtn addTarget:self action:@selector(cancleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [view1 addSubview:_chooseBtn];
-    _chooseBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _chooseBtn.autoresizingMask  = UIViewAutoresizingFlexibleWidth;
     
-    _alertView5 = [[BACustomAlertView alloc] initWithCustomViewiew:view1];
+    _alertView5                  = [[BACustomAlertView alloc] initWithCustomViewiew:view1];
     [_alertView5 ba_showAlertView];
 }
 
