@@ -123,14 +123,14 @@
                        image:(UIImage *)image
                 buttonTitles:(NSArray *)buttonTitles
 {
-    self.viewWidth = SCREENWIDTH;
+    self.viewWidth  = SCREENWIDTH;
     self.viewHeight = SCREENHEIGHT;
     
     if (self == [super initWithFrame:CGRectMake(0, 0, kBAAlertWidth, 0)])
     {
-        _title = [title copy];
-        _image = image;
-        _message = [message copy];
+        _title        = [title copy];
+        _image        = image;
+        _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -146,17 +146,17 @@
 
 - (void)loadUI
 {
-    _buttons = [NSMutableArray new];
-    _lines = [NSMutableArray new];
+    _buttons                                      = [NSMutableArray new];
+    _lines                                        = [NSMutableArray new];
 
-    _containerView = [UIImageView new];
-    _containerView.userInteractionEnabled = YES;
-    _containerView.layer.cornerRadius = kBAAlertRadius;
-    _containerView.layer.masksToBounds = YES;
-    _containerView.backgroundColor = [UIColor whiteColor];
+    _containerView                                = [UIImageView new];
+    _containerView.        userInteractionEnabled = YES;
+    _containerView.layer.  cornerRadius           = kBAAlertRadius;
+    _containerView.layer.  masksToBounds          = YES;
+    _containerView.        backgroundColor        = [UIColor whiteColor];
 
-    _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-    _scrollView.backgroundColor = [UIColor whiteColor];
+    _scrollView                                   = [[UIScrollView alloc] initWithFrame:self.bounds];
+    _scrollView.           backgroundColor        = [UIColor whiteColor];
     [_containerView addSubview:_scrollView];
     
     /*! 添加手势 */
@@ -168,18 +168,18 @@
 #pragma mark - ***** 加载自定义View
 - (void)setupUI
 {
-    self.viewWidth = SCREENWIDTH;
-    self.viewHeight = SCREENHEIGHT;
+    self.viewWidth                   = SCREENWIDTH;
+    self.viewHeight                  = SCREENHEIGHT;
     
-    self.frame = [UIScreen mainScreen].bounds;
-    self.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    self.frame                       = [UIScreen mainScreen].bounds;
+    self.backgroundColor             = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
 
-    self.subView.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
-    self.subView.layer.shadowOffset = CGSizeZero;
+    self.subView.layer.shadowColor   = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+    self.subView.layer.shadowOffset  = CGSizeZero;
     self.subView.layer.shadowOpacity = 1;
-    self.subView.layer.shadowRadius = 10.0f;
-    self.subView.layer.borderWidth = 0.5f;
-    self.subView.layer.borderColor = BA_COLOR(110, 115, 120, 1).CGColor;
+    self.subView.layer.shadowRadius  = 10.0f;
+    self.subView.layer.borderWidth   = 0.5f;
+    self.subView.layer.borderColor   = BA_COLOR(110, 115, 120, 1).CGColor;
     
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
@@ -199,7 +199,7 @@
 
 - (void)setBgColor:(UIColor *)bgColor
 {
-    _bgColor = bgColor;
+    _bgColor             = bgColor;
     self.backgroundColor = bgColor;
 }
 
@@ -210,12 +210,12 @@
 
 - (void)setBgImageName:(NSString *)bgImageName
 {
-    _bgImageName = bgImageName;
+    _bgImageName                   = bgImageName;
     
     _containerView.backgroundColor = [UIColor clearColor];
-    _scrollView.backgroundColor = [UIColor clearColor];
-    _containerView.image = [UIImage imageNamed:bgImageName];
-    _containerView.contentMode = UIViewContentModeScaleAspectFill;
+    _scrollView.backgroundColor    = [UIColor clearColor];
+    _containerView.image           = [UIImage imageNamed:bgImageName];
+    _containerView.contentMode     = UIViewContentModeScaleAspectFill;
 }
 
 #pragma mark - **** 手势消失方法
@@ -292,28 +292,27 @@
             weakSelf.containerView.transform = CGAffineTransformIdentity;
         }
     } completion:^(BOOL finished) {
-//        [weakSelf removeFromSuperview];
         [weakSelf removeSelf];
     }];
 }
 
-#pragma mark - **** 设置UI
+#pragma mark - ***** 设置UI
 - (void)prepareForShow
 {
     [self resetViews];
-    _scrollBottom = 0;
-    CGFloat insetY = kBAAlertPaddingV;
-    _maxContentWidth = kBAAlertWidth-2*kBAAlertPaddingH;
-    _maxAlertViewHeight = self.viewHeight - 50;
+    _scrollBottom           = 0;
+    CGFloat insetY          = kBAAlertPaddingV;
+    _maxContentWidth        = kBAAlertWidth-2*kBAAlertPaddingH;
+    _maxAlertViewHeight     = self.viewHeight - 50;
     [self loadTitle];
     [self loadImage];
     [self loadMessage];
-    _buttonsHeight = kBAAlertButtonHeight*((_buttonTitles.count>2||_buttonTitles.count==0)?_buttonTitles.count:1);
+    _buttonsHeight          = kBAAlertButtonHeight*((_buttonTitles.count>2||_buttonTitles.count==0)?_buttonTitles.count:1);
     
-    self.frame = self.window.bounds;
-    self.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
-    _containerView.frame = CGRectMake(0, 0, kBAAlertWidth, MIN(MAX(_scrollBottom+2*insetY+_buttonsHeight, 2*kBAAlertRadius+kBAAlertPaddingV), _maxAlertViewHeight));
-    _scrollView.frame = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
+    self.frame              = self.window.bounds;
+    self.backgroundColor    = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    _containerView.frame    = CGRectMake(0, 0, kBAAlertWidth, MIN(MAX(_scrollBottom+2*insetY+_buttonsHeight, 2*kBAAlertRadius+kBAAlertPaddingV), _maxAlertViewHeight));
+    _scrollView.frame       = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
     _scrollView.contentSize = CGSizeMake(_maxContentWidth, _scrollBottom);
     
     [self loadButtons];
@@ -350,8 +349,8 @@
 
 - (void)addLabel:(UILabel *)label maxHeight:(CGFloat)maxHeight
 {
-    CGSize size = [label sizeThatFits:CGSizeMake(_maxContentWidth, maxHeight)];
-    label.frame = CGRectMake(kBAAlertPaddingH, _scrollBottom, _maxContentWidth, size.height);
+    CGSize size   = [label sizeThatFits:CGSizeMake(_maxContentWidth, maxHeight)];
+    label.frame   = CGRectMake(kBAAlertPaddingH, _scrollBottom, _maxContentWidth, size.height);
     [_scrollView addSubview:label];
     
     _scrollBottom = CGRectGetMaxY(label.frame)+kBAAlertPaddingV;
@@ -359,7 +358,7 @@
 
 - (void)addLine:(CGRect)frame toView:(UIView *)view
 {
-    UIView *line = [[UIView alloc] initWithFrame:frame];
+    UIView *line         = [[UIView alloc] initWithFrame:frame];
     line.backgroundColor = BA_COLOR(160, 170, 160, 0.5);
     [view addSubview:line];
     [_lines addObject:line];
@@ -373,13 +372,13 @@
     }
     if (!_titleLabel)
     {
-        _titleLabel = [UILabel new];
-        _titleLabel.textColor = [UIColor blackColor];
-        _titleLabel.font = [UIFont fontWithName:@"FontNameAmericanTypewriterBold" size:20];
+        _titleLabel               = [UILabel new];
+        _titleLabel.textColor     = [UIColor blackColor];
+        _titleLabel.font          = [UIFont fontWithName:@"FontNameAmericanTypewriterBold" size:20];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.numberOfLines = 0;
     }
-    _titleLabel.text = _title;
+    _titleLabel.text              = _title;
     [self addLabel:_titleLabel maxHeight:100];
     [self addLine:CGRectMake(kBAAlertPaddingH, _scrollBottom, _maxContentWidth, 0.5) toView:_scrollView];
     _scrollBottom += kBAAlertPaddingV;
@@ -393,18 +392,18 @@
     }
     if (!_imageView)
     {
-        _imageView = [UIImageView new];
+        _imageView   = [UIImageView new];
     }
     _imageView.image = _image;
-    CGSize size = _image.size;
+    CGSize size      = _image.size;
     if (size.width > _maxContentWidth)
     {
-        size = CGSizeMake(_maxContentWidth, size.height/size.width*_maxContentWidth);
+        size         = CGSizeMake(_maxContentWidth, size.height/size.width*_maxContentWidth);
     }
     _imageView.frame = CGRectMake(kBAAlertPaddingH+_maxContentWidth/2-size.width/2, _scrollBottom, size.width, size.height);
     [_scrollView addSubview:_imageView];
     
-    _scrollBottom = CGRectGetMaxY(_imageView.frame)+kBAAlertPaddingV;
+    _scrollBottom    = CGRectGetMaxY(_imageView.frame)+kBAAlertPaddingV;
 }
 
 - (void)loadMessage
@@ -415,25 +414,25 @@
     }
     if (!_messageLabel)
     {
-        _messageLabel = [UILabel new];
-        _messageLabel.textColor = [UIColor blackColor];
-        _messageLabel.font = [UIFont systemFontOfSize:14];
+        _messageLabel               = [UILabel new];
+        _messageLabel.textColor     = [UIColor blackColor];
+        _messageLabel.font          = [UIFont systemFontOfSize:14];
         _messageLabel.textAlignment = NSTextAlignmentCenter;
         _messageLabel.numberOfLines = 0;
     }
-    _messageLabel.text = _message;
+    _messageLabel.text              = _message;
     [self addLabel:_messageLabel maxHeight:100000];
 }
 
 - (void)loadButtons
 {
-    if (!_buttonTitles || _buttonTitles.count==0)
+    if (!_buttonTitles || _buttonTitles.count == 0)
     {
         return;
     }
     CGFloat buttonHeight = kBAAlertButtonHeight;
-    CGFloat buttonWidth = kBAAlertWidth;
-    CGFloat top = CGRectGetHeight(_containerView.frame)-_buttonsHeight;
+    CGFloat buttonWidth  = kBAAlertWidth;
+    CGFloat top          = CGRectGetHeight(_containerView.frame)-_buttonsHeight;
     [self addLine:CGRectMake(0, top-0.5, buttonWidth, 0.5) toView:_containerView];
     if (1 == _buttonTitles.count)
     {
@@ -464,10 +463,10 @@
 
 - (UIButton *)addButton:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag
 {
-    UIButton *button = [[UIButton alloc] initWithFrame:frame];
+    UIButton *button       = [[UIButton alloc] initWithFrame:frame];
     [button setTitle:title forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:17];
-    button.tag = tag;
+    button.tag             = tag;
     
     if (_buttonTitleColor)
     {
@@ -509,20 +508,21 @@
 
 - (UIImage *)imageWithColor:(UIColor *)color
 {
-    CGRect rect = CGRectMake(0, 0, 1, 1);
+    CGRect rect          = CGRectMake(0, 0, 1, 1);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [color CGColor]);
     
     CGContextFillRect(context, rect);
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *image       = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return image;
 }
 
 #pragma mark - 清楚所有视图
-- (void)removeSelf {
+- (void)removeSelf
+{
     [self resetViews];
     [self.buttons removeAllObjects];
     [self.lines removeAllObjects];
@@ -537,8 +537,6 @@
 -(void)changeFrames:(NSNotification *)notification
 {
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    
-    
     
     switch (orientation) {
         case UIDeviceOrientationPortrait:
@@ -559,14 +557,14 @@
 {
     [super layoutSubviews];
 
-    self.viewWidth = [UIScreen mainScreen].bounds.size.width;
-    self.viewHeight = [UIScreen mainScreen].bounds.size.height;
+    self.viewWidth                = [UIScreen mainScreen].bounds.size.width;
+    self.viewHeight               = [UIScreen mainScreen].bounds.size.height;
     
     if (self.subView)
     {
-        self.frame = CGRectMake(0.f, 0.f, self.viewWidth, self.viewHeight);
-        self.subView.frame = CGRectMake(50.f, 0.f, self.viewWidth - 100.f, CGRectGetHeight(self.subView.frame));
-        self.subView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
+        self.frame                = CGRectMake(0.f, 0.f, self.viewWidth, self.viewHeight);
+        self.subView.frame        = CGRectMake(50.f, 0.f, self.viewWidth - 100.f, CGRectGetHeight(self.subView.frame));
+        self.subView.center       = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
     }
     else
     {
