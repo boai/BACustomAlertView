@@ -125,8 +125,8 @@
                        image:(UIImage *)image
                 buttonTitles:(NSArray *)buttonTitles
 {
-    self.viewWidth  = SCREENWIDTH;
-    self.viewHeight = SCREENHEIGHT;
+    self.viewWidth    = SCREENWIDTH;
+    self.viewHeight   = SCREENHEIGHT;
     
     if (self == [super initWithFrame:CGRectMake(0, 0, kBAAlertWidth, 0)])
     {
@@ -262,7 +262,7 @@
             }
             
         } completion:^(BOOL finished) {
-            NSLog(@"显示完毕！");
+            NSLog(@"BACustomAlertView动画执行完毕！");
         }];
     }
     else
@@ -294,6 +294,7 @@
             weakSelf.containerView.transform = CGAffineTransformIdentity;
         }
     } completion:^(BOOL finished) {
+        NSLog(@"BACustomAlertView已经释放！");
         [weakSelf removeSelf];
     }];
 }
