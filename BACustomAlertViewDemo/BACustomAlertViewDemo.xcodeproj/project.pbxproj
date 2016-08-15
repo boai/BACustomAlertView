@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C47B3B2E1D620639002C87E1 /* 背景.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C47B3B2D1D620639002C87E1 /* 背景.jpg */; };
 		C4D3FEFB1D5F6287009BC8A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FEFA1D5F6287009BC8A6 /* main.m */; };
 		C4D3FEFE1D5F6287009BC8A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FEFD1D5F6287009BC8A6 /* AppDelegate.m */; };
 		C4D3FF011D5F6287009BC8A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FF001D5F6287009BC8A6 /* ViewController.m */; };
@@ -16,7 +17,6 @@
 		C4D3FF141D5F6287009BC8A6 /* BACustomAlertViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FF131D5F6287009BC8A6 /* BACustomAlertViewDemoTests.m */; };
 		C4D3FF1F1D5F6287009BC8A6 /* BACustomAlertViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FF1E1D5F6287009BC8A6 /* BACustomAlertViewDemoUITests.m */; };
 		C4D3FF361D5F63A6009BC8A6 /* BACustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FF341D5F63A6009BC8A6 /* BACustomAlertView.m */; };
-		C4D3FF371D5F63A6009BC8A6 /* 背景.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4D3FF351D5F63A6009BC8A6 /* 背景.jpg */; };
 		C4D3FF391D5F6AFB009BC8A6 /* 美女.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4D3FF381D5F6AFB009BC8A6 /* 美女.jpg */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C47B3B2D1D620639002C87E1 /* 背景.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "背景.jpg"; sourceTree = "<group>"; };
 		C4D3FEF61D5F6287009BC8A6 /* BACustomAlertViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BACustomAlertViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D3FEFA1D5F6287009BC8A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4D3FEFC1D5F6287009BC8A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		C4D3FF201D5F6287009BC8A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4D3FF331D5F63A6009BC8A6 /* BACustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BACustomAlertView.h; sourceTree = "<group>"; };
 		C4D3FF341D5F63A6009BC8A6 /* BACustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BACustomAlertView.m; sourceTree = "<group>"; };
-		C4D3FF351D5F63A6009BC8A6 /* 背景.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "背景.jpg"; path = "BACustomAlertView/背景.jpg"; sourceTree = "<group>"; };
 		C4D3FF381D5F6AFB009BC8A6 /* 美女.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "美女.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +114,7 @@
 				C4D3FEFF1D5F6287009BC8A6 /* ViewController.h */,
 				C4D3FF001D5F6287009BC8A6 /* ViewController.m */,
 				C4D3FF021D5F6287009BC8A6 /* Main.storyboard */,
-				C4D3FF351D5F63A6009BC8A6 /* 背景.jpg */,
+				C47B3B2D1D620639002C87E1 /* 背景.jpg */,
 				C4D3FF381D5F6AFB009BC8A6 /* 美女.jpg */,
 				C4D3FF051D5F6287009BC8A6 /* Assets.xcassets */,
 				C4D3FF071D5F6287009BC8A6 /* LaunchScreen.storyboard */,
@@ -262,8 +262,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47B3B2E1D620639002C87E1 /* 背景.jpg in Resources */,
 				C4D3FF391D5F6AFB009BC8A6 /* 美女.jpg in Resources */,
-				C4D3FF371D5F63A6009BC8A6 /* 背景.jpg in Resources */,
 				C4D3FF091D5F6287009BC8A6 /* LaunchScreen.storyboard in Resources */,
 				C4D3FF061D5F6287009BC8A6 /* Assets.xcassets in Resources */,
 				C4D3FF041D5F6287009BC8A6 /* Main.storyboard in Resources */,
