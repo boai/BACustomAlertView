@@ -292,7 +292,8 @@
             weakSelf.containerView.transform = CGAffineTransformIdentity;
         }
     } completion:^(BOOL finished) {
-        [weakSelf removeFromSuperview];
+//        [weakSelf removeFromSuperview];
+        [weakSelf removeSelf];
     }];
 }
 
@@ -491,8 +492,12 @@
     [_containerView addSubview:button];
     [_buttons addObject:button];
     return button;
+    button = nil;
 }
 
+
+
+#pragma mark - 按钮事件
 - (void)buttonClicked:(UIButton *)button
 {
     [self ba_dismissAlertView];
@@ -516,29 +521,38 @@
     return image;
 }
 
-- (void)dealloc
-{
+#pragma mark - 清楚所有视图
+- (void)removeSelf {
+    [self resetViews];
+    [self.buttons removeAllObjects];
+    [self.lines removeAllObjects];
+    [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - 转屏通知处理
 -(void)changeFrames:(NSNotification *)notification
 {
-//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     
-    BAWeak;
-    [UIView animateWithDuration:0.25 animations:^{
-        if (weakSelf.subView)
-        {
-            weakSelf.frame = CGRectMake(0.f, 0.f, weakSelf.viewWidth, weakSelf.viewHeight);
-            weakSelf.subView.frame = CGRectMake(50.f, 0.f, weakSelf.viewWidth - 100.f, CGRectGetHeight(weakSelf.subView.frame));
-            weakSelf.subView.center = CGPointMake(weakSelf.viewWidth/2.f, weakSelf.viewHeight/2.f);
-        }
-        else
-        {
-            [weakSelf prepareForShow];
-            weakSelf.containerView.center = CGPointMake(weakSelf.viewWidth/2.f, weakSelf.viewHeight/2.f);
-        }
-    }];
+    
+    
+    switch (orientation) {
+        case UIDeviceOrientationPortrait:
+            NSLog(@"UIDeviceOrientationPortrait");
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            NSLog(@"UIDeviceOrientationLandscapeLeft");
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            NSLog(@"UIDeviceOrientationLandscapeRight");
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)layoutSubviews
@@ -547,5 +561,17 @@
 
     self.viewWidth = [UIScreen mainScreen].bounds.size.width;
     self.viewHeight = [UIScreen mainScreen].bounds.size.height;
+    
+    if (self.subView)
+    {
+        self.frame = CGRectMake(0.f, 0.f, self.viewWidth, self.viewHeight);
+        self.subView.frame = CGRectMake(50.f, 0.f, self.viewWidth - 100.f, CGRectGetHeight(self.subView.frame));
+        self.subView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
+    }
+    else
+    {
+        [self prepareForShow];
+        self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
+    }
 }
 @end
