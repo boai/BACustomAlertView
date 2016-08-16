@@ -99,7 +99,7 @@
  *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...
  */
 + (void)ba_showCustomView:(UIView *)customView
-            configuration:(void (^)(BACustomAlertView *)) configuration;
+            configuration:(void (^)(BACustomAlertView *tempView)) configuration;
 
 /*!
  *  创建一个类似于系统的alert

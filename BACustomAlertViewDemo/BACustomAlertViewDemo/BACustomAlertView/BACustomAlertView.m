@@ -604,7 +604,7 @@
 
 #pragma mark - class method
 + (void)ba_showCustomView:(UIView *)customView
-            configuration:(void (^)(BACustomAlertView *)) configuration
+            configuration:(void (^)(BACustomAlertView *tempView)) configuration
 {
     BACustomAlertView *temp = [[BACustomAlertView alloc] initWithCustomView:customView];
     if (configuration)
