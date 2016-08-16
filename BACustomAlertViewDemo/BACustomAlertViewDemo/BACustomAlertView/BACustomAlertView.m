@@ -321,6 +321,7 @@
     [self loadButtons];
 }
 
+#pragma mark - 重置subviews
 - (void)resetViews
 {
     if (_titleLabel)
@@ -350,23 +351,7 @@
     }
 }
 
-- (void)addLabel:(UILabel *)label maxHeight:(CGFloat)maxHeight
-{
-    CGSize size   = [label sizeThatFits:CGSizeMake(_maxContentWidth, maxHeight)];
-    label.frame   = CGRectMake(kBAAlertPaddingH, _scrollBottom, _maxContentWidth, size.height);
-    [_scrollView addSubview:label];
-    
-    _scrollBottom = CGRectGetMaxY(label.frame)+kBAAlertPaddingV;
-}
-
-- (void)addLine:(CGRect)frame toView:(UIView *)view
-{
-    UIView *line         = [[UIView alloc] initWithFrame:frame];
-    line.backgroundColor = BA_COLOR(160, 170, 160, 0.5);
-    [view addSubview:line];
-    [_lines addObject:line];
-}
-
+#pragma mark - 初始化标题
 - (void)loadTitle
 {
     if (!_title)
@@ -387,6 +372,7 @@
     _scrollBottom += kBAAlertPaddingV;
 }
 
+#pragma mark - 初始化图片
 - (void)loadImage
 {
     if (!_image)
@@ -409,6 +395,7 @@
     _scrollBottom    = CGRectGetMaxY(_imageView.frame)+kBAAlertPaddingV;
 }
 
+#pragma mark - 初始化内容标签
 - (void)loadMessage
 {
     if (!_message)
@@ -427,6 +414,7 @@
     [self addLabel:_messageLabel maxHeight:100000];
 }
 
+#pragma mark - 初始化按钮
 - (void)loadButtons
 {
     if (!_buttonTitles || _buttonTitles.count == 0)
@@ -464,7 +452,8 @@
     }
 }
 
-- (UIButton *)addButton:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag
+#pragma mark - 添加按钮方法
+- (void)addButton:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag
 {
     UIButton *button       = [[UIButton alloc] initWithFrame:frame];
     [button setTitle:title forState:UIControlStateNormal];
@@ -493,11 +482,26 @@
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_containerView addSubview:button];
     [_buttons addObject:button];
-    return button;
-    button = nil;
 }
 
+#pragma mark - 添加标签方法
+- (void)addLabel:(UILabel *)label maxHeight:(CGFloat)maxHeight
+{
+    CGSize size   = [label sizeThatFits:CGSizeMake(_maxContentWidth, maxHeight)];
+    label.frame   = CGRectMake(kBAAlertPaddingH, _scrollBottom, _maxContentWidth, size.height);
+    [_scrollView addSubview:label];
+    
+    _scrollBottom = CGRectGetMaxY(label.frame)+kBAAlertPaddingV;
+}
 
+#pragma mark - 添加底部横线方法
+- (void)addLine:(CGRect)frame toView:(UIView *)view
+{
+    UIView *line         = [[UIView alloc] initWithFrame:frame];
+    line.backgroundColor = BA_COLOR(160, 170, 160, 0.5);
+    [view addSubview:line];
+    [_lines addObject:line];
+}
 
 #pragma mark - 按钮事件
 - (void)buttonClicked:(UIButton *)button
@@ -509,6 +513,7 @@
     }
 }
 
+#pragma mark - 纯颜色转图片
 - (UIImage *)imageWithColor:(UIColor *)color
 {
     CGRect rect          = CGRectMake(0, 0, 1, 1);
@@ -523,7 +528,7 @@
     return image;
 }
 
-#pragma mark - 清楚所有视图
+#pragma mark - 清除所有视图
 - (void)removeSelf
 {
     [self resetViews];
