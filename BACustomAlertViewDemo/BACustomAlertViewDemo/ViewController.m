@@ -185,6 +185,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                                   message:titleMsg1
                                                     image:nil
                                              buttonTitles:@[@"取消", @"确定"]];
+    _alertView1.bgColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
     /*! 是否开启边缘触摸隐藏 alert */
     _alertView1.isTouchEdgeHide = YES;
     /*! 显示alert */

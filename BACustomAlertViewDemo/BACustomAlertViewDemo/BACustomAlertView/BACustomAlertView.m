@@ -172,7 +172,7 @@
     self.viewHeight                  = SCREENHEIGHT;
     
     self.frame                       = [UIScreen mainScreen].bounds;
-    self.backgroundColor             = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    self.backgroundColor             = self.bgColor;
 
     self.subView.layer.shadowColor   = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
     self.subView.layer.shadowOffset  = CGSizeZero;
@@ -197,10 +197,13 @@
     return _dismissTap;
 }
 
-- (void)setBgColor:(UIColor *)bgColor
+-(UIColor *)bgColor
 {
-    _bgColor             = bgColor;
-    self.backgroundColor = bgColor;
+    if (_bgColor == nil)
+    {
+        _bgColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    }
+    return _bgColor;
 }
 
 - (void)setButtonTitleColor:(UIColor *)buttonTitleColor
@@ -328,7 +331,7 @@
     _buttonsHeight          = kBAAlertButtonHeight*((_buttonTitles.count>2||_buttonTitles.count==0)?_buttonTitles.count:1);
     
     self.frame              = self.window.bounds;
-    self.backgroundColor    = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    self.backgroundColor    = self.bgColor;
     _containerView.frame    = CGRectMake(0, 0, kBAAlertWidth, MIN(MAX(_scrollBottom+2*insetY+_buttonsHeight, 2*kBAAlertRadius+kBAAlertPaddingV), _maxAlertViewHeight));
     _scrollView.frame       = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
     _scrollView.contentSize = CGSizeMake(_maxContentWidth, _scrollBottom);
