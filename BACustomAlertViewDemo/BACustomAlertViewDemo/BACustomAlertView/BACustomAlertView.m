@@ -104,7 +104,7 @@
 }
 
 #pragma mark - ***** 初始化自定义View
-- (instancetype)initWithCustomViewiew:(UIView *)customView
+- (instancetype)initWithCustomView:(UIView *)customView
 {
     if (self = [super initWithFrame:CGRectZero])
     {
@@ -598,5 +598,35 @@
         [self performSelector:@selector(prepareForShow)];
         self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
     }
+}
+
+
+
+#pragma mark - class method
++(void )showCustomView:(UIView *)customView configuration:(void (^)(BACustomAlertView *)) configuration
+{
+    BACustomAlertView *temp = [[BACustomAlertView alloc] initWithCustomView:customView];
+    if (configuration)
+    {
+        configuration(temp);
+    }
+    [temp ba_showAlertView];
+}
+
++(void )showTitle:(NSString *)title
+          message:(NSString *)message
+            image:(UIImage *)image
+     buttonTitles:(NSArray *)buttonTitles
+    configuration:(void (^)(BACustomAlertView *)) configuration
+      actionClick:(void (^)(NSInteger index)) action
+{
+    BACustomAlertView *temp = [[BACustomAlertView alloc] ba_showTitle:title message:message image:image buttonTitles:buttonTitles];
+    if (configuration)
+    {
+        configuration(temp);
+    }
+    [temp ba_showAlertView];
+    
+    temp.buttonActionBlock = action;
 }
 @end
