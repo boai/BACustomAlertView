@@ -220,6 +220,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                              buttonTitles:@[@"取消", @"确定"]];
     /*! 自定义按钮文字颜色 */
     _alertView2.buttonTitleColor = [UIColor orangeColor];
+    _alertView2.bgColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.3];
+
     /*! 显示alert */
     [_alertView2 ba_showAlertView];
     BAWeak;
