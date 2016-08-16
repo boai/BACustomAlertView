@@ -603,7 +603,8 @@
 
 
 #pragma mark - class method
-+(void )showCustomView:(UIView *)customView configuration:(void (^)(BACustomAlertView *)) configuration
++ (void)ba_showCustomView:(UIView *)customView
+            configuration:(void (^)(BACustomAlertView *)) configuration
 {
     BACustomAlertView *temp = [[BACustomAlertView alloc] initWithCustomView:customView];
     if (configuration)
@@ -613,12 +614,12 @@
     [temp ba_showAlertView];
 }
 
-+(void )showTitle:(NSString *)title
-          message:(NSString *)message
-            image:(UIImage *)image
-     buttonTitles:(NSArray *)buttonTitles
-    configuration:(void (^)(BACustomAlertView *)) configuration
-      actionClick:(void (^)(NSInteger index)) action
++ (void)ba_showAlertWithTitle:(NSString *)title
+                      message:(NSString *)message
+                        image:(UIImage *)image
+                 buttonTitles:(NSArray *)buttonTitles
+                configuration:(void (^)(BACustomAlertView *tempView)) configuration
+                  actionClick:(void (^)(NSInteger index)) action
 {
     BACustomAlertView *temp = [[BACustomAlertView alloc] ba_showTitle:title message:message image:image buttonTitles:buttonTitles];
     if (configuration)
