@@ -109,8 +109,8 @@
     if (self = [super initWithFrame:CGRectZero])
     {
         self.subView = customView;
-        [self setupUI];
-        
+        [self performSelector:@selector(setupUI)];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeFrames:)
                                                      name:UIDeviceOrientationDidChangeNotification
@@ -140,16 +140,15 @@
                                                      name:UIDeviceOrientationDidChangeNotification
                                                    object:nil];
         
-        [self loadUI];
-        
+        [self performSelector:@selector(loadUI)];
     }
     return self;
 }
 
 - (void)loadUI
 {
-    _buttons                                      = [NSMutableArray new];
-    _lines                                        = [NSMutableArray new];
+    _buttons                                      = @[].mutableCopy;
+    _lines                                        = @[].mutableCopy;
 
     _containerView                                = [UIImageView new];
     _containerView.        userInteractionEnabled = YES;
@@ -164,7 +163,6 @@
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     [self addSubview:_containerView];
-
 }
 
 #pragma mark - ***** 加载自定义View
@@ -224,7 +222,7 @@
 - (void)dismissTapAction:(UITapGestureRecognizer *)tapG
 {
     NSLog(@"触摸了边缘隐藏View！");
-    [self ba_dismissAlertView];
+    [self performSelector:@selector(ba_dismissAlertView)];
 }
 
 #pragma mark - **** 视图显示方法
@@ -255,6 +253,7 @@
                                          else if (weakSelf.containerView)
                                          {
                                              [weakSelf prepareForShow];
+                                             [weakSelf performSelector:@selector(prepareForShow)];
                                              weakSelf.containerView.center = window.center;
                                          }
                                      } completion:nil];
@@ -273,7 +272,7 @@
         }
         else if (self.containerView)
         {
-            [self prepareForShow];
+            [self performSelector:@selector(prepareForShow)];
             self.containerView.center = window.center;
         }
     }
@@ -294,15 +293,14 @@
             weakSelf.containerView.transform = CGAffineTransformIdentity;
         }
     } completion:^(BOOL finished) {
-        NSLog(@"BACustomAlertView已经释放！");
-        [weakSelf removeSelf];
+        [weakSelf performSelector:@selector(removeSelf)];
     }];
 }
 
 #pragma mark - ***** 设置UI
 - (void)prepareForShow
 {
-    [self resetViews];
+    [self performSelector:@selector(resetViews)];
     _scrollBottom           = 0;
     CGFloat insetY          = kBAAlertPaddingV;
     _maxContentWidth        = kBAAlertWidth-2*kBAAlertPaddingH;
@@ -318,7 +316,7 @@
     _scrollView.frame       = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
     _scrollView.contentSize = CGSizeMake(_maxContentWidth, _scrollBottom);
     
-    [self loadButtons];
+    [self performSelector:@selector(loadButtons)];
 }
 
 #pragma mark - 重置subviews
@@ -506,7 +504,7 @@
 #pragma mark - 按钮事件
 - (void)buttonClicked:(UIButton *)button
 {
-    [self ba_dismissAlertView];
+    [self performSelector:@selector(ba_dismissAlertView)];
     if (self.buttonActionBlock)
     {
         self.buttonActionBlock(button.tag);
@@ -531,7 +529,8 @@
 #pragma mark - 清除所有视图
 - (void)removeSelf
 {
-    [self resetViews];
+    NSLog(@"【 %@ 】已经释放！",[self class]);
+    [self performSelector:@selector(resetViews)];
     [self.buttons removeAllObjects];
     [self.lines removeAllObjects];
     [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -576,7 +575,7 @@
     }
     else
     {
-        [self prepareForShow];
+        [self performSelector:@selector(prepareForShow)];
         self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
     }
 }
