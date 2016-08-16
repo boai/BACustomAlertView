@@ -222,7 +222,14 @@
 - (void)dismissTapAction:(UITapGestureRecognizer *)tapG
 {
     NSLog(@"触摸了边缘隐藏View！");
-    [self performSelector:@selector(ba_dismissAlertView)];
+    if (self.isTouchEdgeHide)
+    {
+        [self performSelector:@selector(ba_dismissAlertView)];
+    }
+    else
+    {
+        NSLog(@"触摸了View边缘，但您未开启触摸边缘隐藏方法，请设置后再使用！");
+    }
 }
 
 #pragma mark - **** 视图显示方法

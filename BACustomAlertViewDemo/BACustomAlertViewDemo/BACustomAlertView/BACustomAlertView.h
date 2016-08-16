@@ -70,16 +70,19 @@
 
 @interface BACustomAlertView : UIView
 
-/*! 背景颜色 */
+/*! 背景颜色 默认：白色*/
 @property (nonatomic, strong) UIColor   *bgColor;
 
-/*! 按钮字体颜色 */
+/*! 按钮字体颜色 默认：白色*/
 @property (nonatomic, strong) UIColor   *buttonTitleColor;
 
-/*! 是否有晃动动画 */
+/*! 是否有晃动动画 默认：关闭*/
 @property (nonatomic, assign) BOOL       isShowAnimate;
 
-/*! 背景图片名字 */
+/*! 是否开启边缘触摸隐藏 alert 默认：关闭*/
+@property (nonatomic, assign) BOOL       isTouchEdgeHide;
+
+/*! 背景图片名字 默认：没有图片*/
 @property (nonatomic, strong) NSString  *bgImageName;
 
 /*!
