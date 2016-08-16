@@ -85,6 +85,23 @@
 /*! 背景图片名字 默认：没有图片*/
 @property (nonatomic, strong) NSString  *bgImageName;
 
+
+
+#pragma mark - 封装后的
++(void )showCustomView:(UIView *)customView configuration:(void (^)(BACustomAlertView *)) configuration;
+
++(void )showTitle:(NSString *)title
+          message:(NSString *)message
+            image:(UIImage *)image
+     buttonTitles:(NSArray *)buttonTitles
+    configuration:(void (^)(BACustomAlertView *temp)) configuration
+      actionClick:(void (^)(NSInteger index)) action;
+
+
+
+
+
+#pragma mark - 拿到.m里面去
 /*!
  * 按钮点击事件回调
  */
@@ -94,7 +111,7 @@
  *  初始化自定义动画视图
  *  @return instancetype
  */
-- (instancetype)initWithCustomViewiew:(UIView *)customView;
+- (instancetype)initWithCustomView:(UIView *)customView;
 
 /*!
  *  创建一个类似系统的警告框
