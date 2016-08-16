@@ -218,6 +218,16 @@
     _containerView.contentMode     = UIViewContentModeScaleAspectFill;
 }
 
+- (void)setIsTouchEdgeHide:(BOOL)isTouchEdgeHide
+{
+    _isTouchEdgeHide = isTouchEdgeHide;
+}
+
+- (void)setIsShowAnimate:(BOOL)isShowAnimate
+{
+    _isShowAnimate = isShowAnimate;
+}
+
 #pragma mark - **** 手势消失方法
 - (void)dismissTapAction:(UITapGestureRecognizer *)tapG
 {

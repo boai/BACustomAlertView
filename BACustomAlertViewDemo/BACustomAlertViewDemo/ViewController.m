@@ -345,7 +345,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
     NSLog(@"点击了取消按钮！");
     /*! 隐藏alert */
-//    [_alertView5 ba_dismissAlertView];
+    [_alertView5 ba_dismissAlertView];
 }
 
 @end
