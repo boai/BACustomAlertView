@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C411A0AF1D62A1A300583E9D /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = C411A0AE1D62A1A300583E9D /* ViewController2.m */; };
 		C47B3B2E1D620639002C87E1 /* 背景.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C47B3B2D1D620639002C87E1 /* 背景.jpg */; };
 		C4D3FEFB1D5F6287009BC8A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FEFA1D5F6287009BC8A6 /* main.m */; };
 		C4D3FEFE1D5F6287009BC8A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FEFD1D5F6287009BC8A6 /* AppDelegate.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C411A0AD1D62A1A300583E9D /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
+		C411A0AE1D62A1A300583E9D /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		C47B3B2D1D620639002C87E1 /* 背景.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "背景.jpg"; sourceTree = "<group>"; };
 		C4D3FEF61D5F6287009BC8A6 /* BACustomAlertViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BACustomAlertViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D3FEFA1D5F6287009BC8A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -113,6 +116,8 @@
 				C4D3FEFD1D5F6287009BC8A6 /* AppDelegate.m */,
 				C4D3FEFF1D5F6287009BC8A6 /* ViewController.h */,
 				C4D3FF001D5F6287009BC8A6 /* ViewController.m */,
+				C411A0AD1D62A1A300583E9D /* ViewController2.h */,
+				C411A0AE1D62A1A300583E9D /* ViewController2.m */,
 				C4D3FF021D5F6287009BC8A6 /* Main.storyboard */,
 				C47B3B2D1D620639002C87E1 /* 背景.jpg */,
 				C4D3FF381D5F6AFB009BC8A6 /* 美女.jpg */,
@@ -293,6 +298,7 @@
 			files = (
 				C4D3FF011D5F6287009BC8A6 /* ViewController.m in Sources */,
 				C4D3FEFE1D5F6287009BC8A6 /* AppDelegate.m in Sources */,
+				C411A0AF1D62A1A300583E9D /* ViewController2.m in Sources */,
 				C4D3FEFB1D5F6287009BC8A6 /* main.m in Sources */,
 				C4D3FF361D5F63A6009BC8A6 /* BACustomAlertView.m in Sources */,
 			);

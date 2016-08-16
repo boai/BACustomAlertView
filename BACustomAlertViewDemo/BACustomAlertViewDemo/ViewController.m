@@ -62,6 +62,7 @@
 
 #import "ViewController.h"
 #import "BACustomAlertView.h"
+#import "ViewController2.h"
 
 static NSString * const titleMsg1 = @"欢迎使用 iPhone SE，迄今最高性能的 4 英寸 iPhone。在打造这款手机时，我们在深得人心的 4 英寸设计基础上，从里到外重新构想。它所采用的 A9 芯片，正是在 iPhone 6s 上使用的先进芯片。1200 万像素的摄像头能拍出令人叹为观止的精彩照片和 4K 视频，而 Live Photos 则会让你的照片栩栩如生。这一切，成就了一款外形小巧却异常强大的 iPhone。";
 static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了一个几乎不可能实现的目标：在有史以来最为轻盈纤薄的 Mac 笔记本电脑上，打造全尺寸的使用体验。这就要求每个元素都必须重新构想，不仅令其更为纤薄轻巧，还要更加出色。最终我们带来的，不仅是一部新款的笔记本电脑，更是一种对笔记本电脑的前瞻性思考。现在，有了第六代 Intel 处理器、提升的图形处理性能、高速闪存和最长可达 10 小时的电池使用时间*，MacBook 的强大更进一步。";
@@ -198,8 +199,11 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         else if (index == 1)
         {
             NSLog(@"点击了确定按钮！");
+            ViewController2 *vc2 = [ViewController2 new];
+            vc2.title = @"alert1";
+            [weakSelf.navigationController pushViewController:vc2 animated:YES];
             /*! 隐藏alert */
-            [weakSelf.alertView1 ba_dismissAlertView];
+//            [weakSelf.alertView1 ba_dismissAlertView];
         }
     };
 }
@@ -226,8 +230,11 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         else if (index == 1)
         {
             NSLog(@"点击了确定按钮！");
+            ViewController2 *vc2 = [ViewController2 new];
+            vc2.title = @"alert2";
+            [weakSelf.navigationController pushViewController:vc2 animated:YES];
             /*! 隐藏alert */
-            [weakSelf.alertView2 ba_dismissAlertView];
+//            [weakSelf.alertView2 ba_dismissAlertView];
         }
     };
 }
@@ -256,8 +263,11 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         else if (index == 1)
         {
             NSLog(@"点击了确定按钮！");
+            ViewController2 *vc2 = [ViewController2 new];
+            vc2.title = @"alert3";
+            [weakSelf.navigationController pushViewController:vc2 animated:YES];
             /*! 隐藏alert */
-            [weakSelf.alertView3 ba_dismissAlertView];
+//            [weakSelf.alertView3 ba_dismissAlertView];
         }
     };
 }
@@ -288,8 +298,11 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         else if (index == 1)
         {
             NSLog(@"点击了确定按钮！");
+            ViewController2 *vc2 = [ViewController2 new];
+            vc2.title = @"alert4";
+            [weakSelf.navigationController pushViewController:vc2 animated:YES];
             /*! 隐藏alert */
-            [weakSelf.alertView4 ba_dismissAlertView];
+//            [weakSelf.alertView4 ba_dismissAlertView];
         }
     };
 }
