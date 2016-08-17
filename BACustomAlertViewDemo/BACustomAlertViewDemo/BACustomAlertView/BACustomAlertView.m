@@ -223,14 +223,7 @@
 - (UIImageView *)blurImageView {
     if ( !_blurImageView ) {
         _blurImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        UIWindow *keyWindow =  [[UIApplication sharedApplication] keyWindow];
-        UIViewController *rootViewController = keyWindow.rootViewController;
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(rootViewController.view.bounds.size.width, rootViewController.view.bounds.size.height),YES,0);
-        [rootViewController.view drawViewHierarchyInRect:CGRectMake(0.f, 0.f, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) afterScreenUpdates:NO];
-        _blurImageView.image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        rootViewController = nil;
-        keyWindow = nil;
+        _blurImageView.image = [self screenShotImage];
         [self addSubview:_blurImageView];
         [self sendSubviewToBack:_blurImageView];
     }
@@ -681,6 +674,24 @@
     temp.buttonActionBlock = action;
 }
 
-
+- (UIImage *)screenShotImage {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(640, 960), YES, 0);
+    
+    //设置截屏大小
+    UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
+    [[window layer] renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    CGImageRef imageRef = viewImage.CGImage;
+    CGRect rect = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT);//这里可以设置想要截图的区域
+    
+    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, rect);
+    UIImage *image = [[UIImage alloc] initWithCGImage:imageRefRect];
+    
+    return image;
+}
 
 @end
