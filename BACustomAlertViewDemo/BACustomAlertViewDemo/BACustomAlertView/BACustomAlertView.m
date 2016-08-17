@@ -694,7 +694,6 @@
     
     return image;
 }
-<<<<<<< HEAD
 
 -(UIImage *)image111
 {
@@ -730,8 +729,5 @@
     
     return blurImage;
 }
-
-=======
->>>>>>> boai/master
 
 @end
