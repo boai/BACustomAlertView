@@ -271,6 +271,9 @@
     {
         self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyDarkEffect];
     }
+    
+#warning 我改了这里...setter方法改为getter方法比较好
+    self.blurImageView.image = [self image111];
 
 }
 
@@ -694,4 +697,36 @@
     return image;
 }
 
+
+#warning 我还改了这里......这里要优化，应该在子线程绘制好，再到主线程更新，所以这里会卡顿
+-(UIImage *)image111
+{
+    // CIImage
+    CIImage *ciImage = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
+    
+    // CIFilter,高斯模糊为-CIGaussianBlur
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+    
+    // 将图片导入到滤镜中
+    [filter setValue:ciImage forKey:kCIInputImageKey];
+    
+    // inputRadius参数:模糊的程度 默认为10, 范围为0-100
+    [filter setValue:@(5) forKey:@"inputRadius"];
+    
+    // 将处理好的图片导出
+    CIImage *outImage = [filter valueForKey:kCIOutputImageKey];
+    
+    // CIContext 上下文(参数nil，默认为CPU渲染, 如果想用GPU渲染来提高效率的话,则需要传参数)
+    CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer:@(YES)}];
+    
+    // 将处理好的图片拿出来
+    CGImageRef outputCGImage = [context createCGImage:outImage fromRect:[outImage extent]]; //这里图片大小视情况调整
+    
+    UIImage *blurImage = [UIImage imageWithCGImage:outputCGImage];
+    
+    //释放内存
+    CGImageRelease(outputCGImage);
+    
+    return blurImage;
+}
 @end

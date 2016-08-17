@@ -190,6 +190,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                    temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
         temp.bgColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         temp.isTouchEdgeHide = YES;
+                                   temp.blurEffectStyle = 1;
     }
                                  actionClick:^(NSInteger index) {
         if (index == 0)
