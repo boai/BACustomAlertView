@@ -111,10 +111,10 @@
         self.subView = customView;
         [self performSelector:@selector(setupUI)];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
     }
     return self;
 }
@@ -135,10 +135,10 @@
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
         
         [self performSelector:@selector(loadUI)];
     }
@@ -557,28 +557,28 @@
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self removeFromSuperview];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - 转屏通知处理
--(void)changeFrames:(NSNotification *)notification
-{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    
-    switch (orientation) {
-        case UIDeviceOrientationPortrait:
-            NSLog(@"UIDeviceOrientationPortrait");
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            NSLog(@"UIDeviceOrientationLandscapeLeft");
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            NSLog(@"UIDeviceOrientationLandscapeRight");
-            break;
-        default:
-            break;
-    }
-}
+//#pragma mark - 转屏通知处理
+//-(void)changeFrames:(NSNotification *)notification
+//{
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//    
+//    switch (orientation) {
+//        case UIDeviceOrientationPortrait:
+//            NSLog(@"UIDeviceOrientationPortrait");
+//            break;
+//        case UIDeviceOrientationLandscapeLeft:
+//            NSLog(@"UIDeviceOrientationLandscapeLeft");
+//            break;
+//        case UIDeviceOrientationLandscapeRight:
+//            NSLog(@"UIDeviceOrientationLandscapeRight");
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 - (void)layoutSubviews
 {
