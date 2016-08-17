@@ -187,7 +187,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                        image:nil
                                 buttonTitles:@[@"取消",@"确定"]
                                configuration:^(BACustomAlertView *temp) {
-        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleDark;
+        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleExtraLight;
         temp.bgColor         = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         temp.isTouchEdgeHide = YES;
     }
