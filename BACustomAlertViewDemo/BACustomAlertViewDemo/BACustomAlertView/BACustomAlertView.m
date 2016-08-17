@@ -62,6 +62,7 @@
 
 
 #import "BACustomAlertView.h"
+#import "UIImage+BAAlertImageEffects.h"
 
 #define kBAAlertWidth              self.viewWidth - 50
 #define kBAAlertPaddingV           11
@@ -89,6 +90,8 @@
 @property (strong, nonatomic        ) UILabel                 *messageLabel;
 @property (strong, nonatomic        ) NSMutableArray          *buttons;
 @property (strong, nonatomic        ) NSMutableArray          *lines;
+@property (strong, nonatomic        ) UIImageView             *blurImageView;
+
 
 @property (assign, nonatomic        ) CGFloat                  viewWidth;
 @property (assign, nonatomic        ) CGFloat                  viewHeight;
@@ -160,9 +163,8 @@
     _scrollView.           backgroundColor        = [UIColor whiteColor];
     [_containerView addSubview:_scrollView];
     
-    /*! 添加手势 */
-    [self addGestureRecognizer:self.dismissTap];
     [self addSubview:_containerView];
+    [self performSelector:@selector(setupCommonUI)];
 }
 
 #pragma mark - ***** 加载自定义View
@@ -181,10 +183,22 @@
     self.subView.layer.borderWidth   = 0.5f;
     self.subView.layer.borderColor   = BA_COLOR(110, 115, 120, 1).CGColor;
     
+
+    [self addSubview:self.subView];
+    
+    [self performSelector:@selector(setupCommonUI)];
+}
+
+#pragma mark - ***** 公共方法
+- (void)setupCommonUI
+{
+    /*! 设置默认的模糊背景样式为：BACustomAlertViewBlurEffectStyleLight */
+    _blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
+
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     
-    [self addSubview:self.subView];
+    
 }
 
 #pragma mark - ***** setter / getter
@@ -204,6 +218,23 @@
         _bgColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
     }
     return _bgColor;
+}
+
+- (UIImageView *)blurImageView {
+    if ( !_blurImageView ) {
+        _blurImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        UIWindow *keyWindow =  [[UIApplication sharedApplication] keyWindow];
+        UIViewController *rootViewController = keyWindow.rootViewController;
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(rootViewController.view.bounds.size.width, rootViewController.view.bounds.size.height),YES,0);
+        [rootViewController.view drawViewHierarchyInRect:CGRectMake(0.f, 0.f, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) afterScreenUpdates:NO];
+        _blurImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        rootViewController = nil;
+        keyWindow = nil;
+        [self addSubview:_blurImageView];
+        [self sendSubviewToBack:_blurImageView];
+    }
+    return _blurImageView;
 }
 
 - (void)setButtonTitleColor:(UIColor *)buttonTitleColor
@@ -229,6 +260,25 @@
 - (void)setIsShowAnimate:(BOOL)isShowAnimate
 {
     _isShowAnimate = isShowAnimate;
+}
+
+- (void)setBlurEffectStyle:(BACustomAlertViewBlurEffectStyle)blurEffectStyle
+{
+    _blurEffectStyle = blurEffectStyle;
+    
+    if (self.blurEffectStyle == BACustomAlertViewBlurEffectStyleLight)
+    {
+        self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyLightEffect];
+    }
+    else if (self.blurEffectStyle == BACustomAlertViewBlurEffectStyleExtraLight)
+    {
+        self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyExtraLightEffect];
+    }
+    else if (self.blurEffectStyle == BACustomAlertViewBlurEffectStyleDark)
+    {
+        self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyDarkEffect];
+    }
+
 }
 
 #pragma mark - **** 手势消失方法
@@ -534,7 +584,7 @@
 #pragma mark - 纯颜色转图片
 - (UIImage *)imageWithColor:(UIColor *)color
 {
-    CGRect rect          = CGRectMake(0, 0, 1, 1);
+    CGRect rect          = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [color CGColor]);
@@ -630,4 +680,7 @@
     
     temp.buttonActionBlock = action;
 }
+
+
+
 @end
