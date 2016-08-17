@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6154C41B1D63FE5200FCCD3D /* UIImage+BAAlertImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6154C41A1D63FE5200FCCD3D /* UIImage+BAAlertImageEffects.m */; };
 		C411A0AF1D62A1A300583E9D /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = C411A0AE1D62A1A300583E9D /* ViewController2.m */; };
 		C47B3B2E1D620639002C87E1 /* 背景.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C47B3B2D1D620639002C87E1 /* 背景.jpg */; };
 		C4D3FEFB1D5F6287009BC8A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FEFA1D5F6287009BC8A6 /* main.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6154C4191D63FE5200FCCD3D /* UIImage+BAAlertImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BAAlertImageEffects.h"; sourceTree = "<group>"; };
+		6154C41A1D63FE5200FCCD3D /* UIImage+BAAlertImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BAAlertImageEffects.m"; sourceTree = "<group>"; };
 		C411A0AD1D62A1A300583E9D /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		C411A0AE1D62A1A300583E9D /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		C47B3B2D1D620639002C87E1 /* 背景.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "背景.jpg"; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 			children = (
 				C4D3FF331D5F63A6009BC8A6 /* BACustomAlertView.h */,
 				C4D3FF341D5F63A6009BC8A6 /* BACustomAlertView.m */,
+				6154C4191D63FE5200FCCD3D /* UIImage+BAAlertImageEffects.h */,
+				6154C41A1D63FE5200FCCD3D /* UIImage+BAAlertImageEffects.m */,
 			);
 			path = BACustomAlertView;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6154C41B1D63FE5200FCCD3D /* UIImage+BAAlertImageEffects.m in Sources */,
 				C4D3FF011D5F6287009BC8A6 /* ViewController.m in Sources */,
 				C4D3FEFE1D5F6287009BC8A6 /* AppDelegate.m in Sources */,
 				C411A0AF1D62A1A300583E9D /* ViewController2.m in Sources */,
