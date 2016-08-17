@@ -94,7 +94,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                                  @"3、自定义背景图片",
                                                  @"4、内置图片和文字，可滑动查看",
                                                  @"5、完全自定义alert"],
-                                               @[@"BACustomAlertView特点：\n1、手势触摸隐藏\n2、可以自定义背景图片、按钮颜色\n3、可以添加文字和图片，且可以滑动查看！\n4、横竖屏适配完美\n5、理论完全兼容现有所有 iOS 系统版本"
+                                               @[@"BACustomAlertView特点：\n1、手势触摸隐藏开关，可随时开关\n2、可以自定义背景图片、背景颜色、按钮颜色\n3、可以添加文字和图片，且可以滑动查看！\n4、横竖屏适配完美\n5、有各种炫酷动画展示你的alert\n6、理论完全兼容现有所有 iOS 系统版本"
                         ], nil];
     }
     return _dataArray;
@@ -109,7 +109,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     self.title = @"博爱的BACustomAlertView";
 }
 
-#pragma mark - UITableView
+#pragma mark - UITableViewDataSource / UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.dataArray.count;
@@ -180,18 +180,17 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 
 - (void)alert1
 {
-    /*! 1、类似系统alert【加边缘手势消失】 */
-    _alertView1 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
-                                                  message:titleMsg1
-                                                    image:nil
-                                             buttonTitles:@[@"取消", @"确定"]];
-    /*! 是否开启边缘触摸隐藏 alert */
-    _alertView1.isTouchEdgeHide = YES;
-    /*! 显示alert */
-    [_alertView1 ba_showAlertView];
-    
     BAWeak;
-    _alertView1.buttonActionBlock = ^(NSInteger index){
+    /*! 第一种封装使用示例 */
+    [BACustomAlertView ba_showAlertWithTitle:@"博爱温馨提示："
+                                     message:titleMsg1
+                                       image:nil
+                                buttonTitles:@[@"取消",@"确定"]
+                               configuration:^(BACustomAlertView *temp) {
+        temp.bgColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
+        temp.isTouchEdgeHide = YES;
+    }
+                                 actionClick:^(NSInteger index) {
         if (index == 0)
         {
             NSLog(@"点击了取消按钮！");
@@ -207,7 +206,39 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
             /*! 隐藏alert */
 //            [weakSelf.alertView1 ba_dismissAlertView];
         }
-    };
+    }];
+    
+    /*! 第二种常用方法使用示例 */
+
+    //    /*! 1、类似系统alert【加边缘手势消失】 */
+    //    _alertView1 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
+    //
+    //                                                    image:nil
+    //                                             buttonTitles:@[@"取消", @"确定"]];
+    //    _alertView1.bgColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
+    //    /*! 是否开启边缘触摸隐藏 alert */
+    //    _alertView1.isTouchEdgeHide = YES;
+    //    /*! 显示alert */
+    //    [_alertView1 ba_showAlertView];
+    //
+    //    BAWeak;
+    //    _alertView1.buttonActionBlock = ^(NSInteger index){
+    //        if (index == 0)
+    //        {
+    //            NSLog(@"点击了取消按钮！");
+    //            /*! 隐藏alert */
+    ////            [weakSelf.alertView1 ba_dismissAlertView];
+    //        }
+    //        else if (index == 1)
+    //        {
+    //            NSLog(@"点击了确定按钮！");
+    //            ViewController2 *vc2 = [ViewController2 new];
+    //            vc2.title = @"alert1";
+    //            [weakSelf.navigationController pushViewController:vc2 animated:YES];
+    //            /*! 隐藏alert */
+    ////            [weakSelf.alertView1 ba_dismissAlertView];
+    //        }
+    //    };
 }
 
 - (void)alert2
@@ -216,9 +247,11 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     _alertView2                  = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                   message:titleMsg2
                                                     image:nil
-                                             buttonTitles:@[@"取消", @"确定"]];
+                                             buttonTitles:@[@"取消", @"跳转VC2"]];
     /*! 自定义按钮文字颜色 */
     _alertView2.buttonTitleColor = [UIColor orangeColor];
+    _alertView2.bgColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.3];
+
     /*! 显示alert */
     [_alertView2 ba_showAlertView];
     BAWeak;
@@ -280,7 +313,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     _alertView4                  = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
                                                   message:titleMsg1
                                                     image:[UIImage imageNamed:@"美女.jpg"]
-                                             buttonTitles:@[@"取消", @"确定"]];
+                                             buttonTitles:@[@"取消", @"跳转VC2"]];
     /*! 自定义按钮文字颜色 */
     _alertView4.buttonTitleColor = [UIColor orangeColor];
     /*! 自定义alert的背景图片 */
@@ -337,7 +370,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     [view1 addSubview:_chooseBtn];
     _chooseBtn.autoresizingMask  = UIViewAutoresizingFlexibleWidth;
     
-    _alertView5                  = [[BACustomAlertView alloc] initWithCustomViewiew:view1];
+    _alertView5                  = [[BACustomAlertView alloc] initWithCustomView:view1];
     [_alertView5 ba_showAlertView];
 }
 
