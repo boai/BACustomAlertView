@@ -104,13 +104,13 @@
 }
 
 #pragma mark - ***** 初始化自定义View
-- (instancetype)initWithCustomViewiew:(UIView *)customView
+- (instancetype)initWithCustomView:(UIView *)customView
 {
     if (self = [super initWithFrame:CGRectZero])
     {
         self.subView = customView;
-        [self setupUI];
-        
+        [self performSelector:@selector(setupUI)];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeFrames:)
                                                      name:UIDeviceOrientationDidChangeNotification
@@ -140,16 +140,15 @@
                                                      name:UIDeviceOrientationDidChangeNotification
                                                    object:nil];
         
-        [self loadUI];
-        
+        [self performSelector:@selector(loadUI)];
     }
     return self;
 }
 
 - (void)loadUI
 {
-    _buttons                                      = [NSMutableArray new];
-    _lines                                        = [NSMutableArray new];
+    _buttons                                      = @[].mutableCopy;
+    _lines                                        = @[].mutableCopy;
 
     _containerView                                = [UIImageView new];
     _containerView.        userInteractionEnabled = YES;
@@ -164,7 +163,6 @@
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     [self addSubview:_containerView];
-
 }
 
 #pragma mark - ***** 加载自定义View
@@ -174,7 +172,7 @@
     self.viewHeight                  = SCREENHEIGHT;
     
     self.frame                       = [UIScreen mainScreen].bounds;
-    self.backgroundColor             = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    self.backgroundColor             = self.bgColor;
 
     self.subView.layer.shadowColor   = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
     self.subView.layer.shadowOffset  = CGSizeZero;
@@ -199,10 +197,13 @@
     return _dismissTap;
 }
 
-- (void)setBgColor:(UIColor *)bgColor
+- (UIColor *)bgColor
 {
-    _bgColor             = bgColor;
-    self.backgroundColor = bgColor;
+    if (_bgColor == nil)
+    {
+        _bgColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    }
+    return _bgColor;
 }
 
 - (void)setButtonTitleColor:(UIColor *)buttonTitleColor
@@ -220,11 +221,28 @@
     _containerView.contentMode     = UIViewContentModeScaleAspectFill;
 }
 
+- (void)setIsTouchEdgeHide:(BOOL)isTouchEdgeHide
+{
+    _isTouchEdgeHide = isTouchEdgeHide;
+}
+
+- (void)setIsShowAnimate:(BOOL)isShowAnimate
+{
+    _isShowAnimate = isShowAnimate;
+}
+
 #pragma mark - **** 手势消失方法
 - (void)dismissTapAction:(UITapGestureRecognizer *)tapG
 {
     NSLog(@"触摸了边缘隐藏View！");
-    [self ba_dismissAlertView];
+    if (self.isTouchEdgeHide)
+    {
+        [self performSelector:@selector(ba_dismissAlertView)];
+    }
+    else
+    {
+        NSLog(@"触摸了View边缘，但您未开启触摸边缘隐藏方法，请设置 isTouchEdgeHide 属性为 YES 后再使用！");
+    }
 }
 
 #pragma mark - **** 视图显示方法
@@ -255,6 +273,7 @@
                                          else if (weakSelf.containerView)
                                          {
                                              [weakSelf prepareForShow];
+                                             [weakSelf performSelector:@selector(prepareForShow)];
                                              weakSelf.containerView.center = window.center;
                                          }
                                      } completion:nil];
@@ -273,7 +292,7 @@
         }
         else if (self.containerView)
         {
-            [self prepareForShow];
+            [self performSelector:@selector(prepareForShow)];
             self.containerView.center = window.center;
         }
     }
@@ -294,15 +313,14 @@
             weakSelf.containerView.transform = CGAffineTransformIdentity;
         }
     } completion:^(BOOL finished) {
-        NSLog(@"BACustomAlertView已经释放！");
-        [weakSelf removeSelf];
+        [weakSelf performSelector:@selector(removeSelf)];
     }];
 }
 
 #pragma mark - ***** 设置UI
 - (void)prepareForShow
 {
-    [self resetViews];
+    [self performSelector:@selector(resetViews)];
     _scrollBottom           = 0;
     CGFloat insetY          = kBAAlertPaddingV;
     _maxContentWidth        = kBAAlertWidth-2*kBAAlertPaddingH;
@@ -313,14 +331,15 @@
     _buttonsHeight          = kBAAlertButtonHeight*((_buttonTitles.count>2||_buttonTitles.count==0)?_buttonTitles.count:1);
     
     self.frame              = self.window.bounds;
-    self.backgroundColor    = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.3f];
+    self.backgroundColor    = self.bgColor;
     _containerView.frame    = CGRectMake(0, 0, kBAAlertWidth, MIN(MAX(_scrollBottom+2*insetY+_buttonsHeight, 2*kBAAlertRadius+kBAAlertPaddingV), _maxAlertViewHeight));
     _scrollView.frame       = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
     _scrollView.contentSize = CGSizeMake(_maxContentWidth, _scrollBottom);
     
-    [self loadButtons];
+    [self performSelector:@selector(loadButtons)];
 }
 
+#pragma mark - 重置subviews
 - (void)resetViews
 {
     if (_titleLabel)
@@ -350,23 +369,7 @@
     }
 }
 
-- (void)addLabel:(UILabel *)label maxHeight:(CGFloat)maxHeight
-{
-    CGSize size   = [label sizeThatFits:CGSizeMake(_maxContentWidth, maxHeight)];
-    label.frame   = CGRectMake(kBAAlertPaddingH, _scrollBottom, _maxContentWidth, size.height);
-    [_scrollView addSubview:label];
-    
-    _scrollBottom = CGRectGetMaxY(label.frame)+kBAAlertPaddingV;
-}
-
-- (void)addLine:(CGRect)frame toView:(UIView *)view
-{
-    UIView *line         = [[UIView alloc] initWithFrame:frame];
-    line.backgroundColor = BA_COLOR(160, 170, 160, 0.5);
-    [view addSubview:line];
-    [_lines addObject:line];
-}
-
+#pragma mark - 初始化标题
 - (void)loadTitle
 {
     if (!_title)
@@ -387,6 +390,7 @@
     _scrollBottom += kBAAlertPaddingV;
 }
 
+#pragma mark - 初始化图片
 - (void)loadImage
 {
     if (!_image)
@@ -409,6 +413,7 @@
     _scrollBottom    = CGRectGetMaxY(_imageView.frame)+kBAAlertPaddingV;
 }
 
+#pragma mark - 初始化内容标签
 - (void)loadMessage
 {
     if (!_message)
@@ -427,6 +432,7 @@
     [self addLabel:_messageLabel maxHeight:100000];
 }
 
+#pragma mark - 初始化按钮
 - (void)loadButtons
 {
     if (!_buttonTitles || _buttonTitles.count == 0)
@@ -464,7 +470,8 @@
     }
 }
 
-- (UIButton *)addButton:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag
+#pragma mark - 添加按钮方法
+- (void)addButton:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag
 {
     UIButton *button       = [[UIButton alloc] initWithFrame:frame];
     [button setTitle:title forState:UIControlStateNormal];
@@ -493,22 +500,38 @@
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_containerView addSubview:button];
     [_buttons addObject:button];
-    return button;
-    button = nil;
 }
 
+#pragma mark - 添加标签方法
+- (void)addLabel:(UILabel *)label maxHeight:(CGFloat)maxHeight
+{
+    CGSize size   = [label sizeThatFits:CGSizeMake(_maxContentWidth, maxHeight)];
+    label.frame   = CGRectMake(kBAAlertPaddingH, _scrollBottom, _maxContentWidth, size.height);
+    [_scrollView addSubview:label];
+    
+    _scrollBottom = CGRectGetMaxY(label.frame)+kBAAlertPaddingV;
+}
 
+#pragma mark - 添加底部横线方法
+- (void)addLine:(CGRect)frame toView:(UIView *)view
+{
+    UIView *line         = [[UIView alloc] initWithFrame:frame];
+    line.backgroundColor = BA_COLOR(160, 170, 160, 0.5);
+    [view addSubview:line];
+    [_lines addObject:line];
+}
 
 #pragma mark - 按钮事件
 - (void)buttonClicked:(UIButton *)button
 {
-    [self ba_dismissAlertView];
+    [self performSelector:@selector(ba_dismissAlertView)];
     if (self.buttonActionBlock)
     {
         self.buttonActionBlock(button.tag);
     }
 }
 
+#pragma mark - 纯颜色转图片
 - (UIImage *)imageWithColor:(UIColor *)color
 {
     CGRect rect          = CGRectMake(0, 0, 1, 1);
@@ -523,10 +546,11 @@
     return image;
 }
 
-#pragma mark - 清楚所有视图
+#pragma mark - 清除所有视图
 - (void)removeSelf
 {
-    [self resetViews];
+    NSLog(@"【 %@ 】已经释放！",[self class]);
+    [self performSelector:@selector(resetViews)];
     [self.buttons removeAllObjects];
     [self.lines removeAllObjects];
     [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -571,8 +595,39 @@
     }
     else
     {
-        [self prepareForShow];
+        [self performSelector:@selector(prepareForShow)];
         self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
     }
+}
+
+
+
+#pragma mark - class method
++ (void)ba_showCustomView:(UIView *)customView
+            configuration:(void (^)(BACustomAlertView *tempView)) configuration
+{
+    BACustomAlertView *temp = [[BACustomAlertView alloc] initWithCustomView:customView];
+    if (configuration)
+    {
+        configuration(temp);
+    }
+    [temp ba_showAlertView];
+}
+
++ (void)ba_showAlertWithTitle:(NSString *)title
+                      message:(NSString *)message
+                        image:(UIImage *)image
+                 buttonTitles:(NSArray *)buttonTitles
+                configuration:(void (^)(BACustomAlertView *tempView)) configuration
+                  actionClick:(void (^)(NSInteger index)) action
+{
+    BACustomAlertView *temp = [[BACustomAlertView alloc] ba_showTitle:title message:message image:image buttonTitles:buttonTitles];
+    if (configuration)
+    {
+        configuration(temp);
+    }
+    [temp ba_showAlertView];
+    
+    temp.buttonActionBlock = action;
 }
 @end
