@@ -68,6 +68,13 @@
 
 #define BAWeak         __weak __typeof(self) weakSelf = self
 
+
+typedef NS_ENUM(NSInteger, BACustomAlertViewBlurEffectStyle) {
+    BACustomAlertViewBlurEffectStyleExtraLight,
+    BACustomAlertViewBlurEffectStyleLight,
+    BACustomAlertViewBlurEffectStyleDark
+} NS_ENUM_AVAILABLE_IOS(8_0);
+
 @interface BACustomAlertView : UIView
 
 /*! 背景颜色 默认：白色*/
@@ -84,6 +91,9 @@
 
 /*! 背景图片名字 默认：没有图片*/
 @property (nonatomic, strong) NSString  *bgImageName;
+
+/*! 背景高斯模糊 */
+@property (nonatomic, assign) BACustomAlertViewBlurEffectStyle blurEffectStyle;
 
 /*!
  * 按钮点击事件回调
