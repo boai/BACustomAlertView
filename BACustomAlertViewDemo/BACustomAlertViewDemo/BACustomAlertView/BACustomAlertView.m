@@ -114,10 +114,10 @@
         self.subView = customView;
         [self performSelector:@selector(setupUI)];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
     }
     return self;
 }
@@ -138,10 +138,10 @@
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
         
         [self performSelector:@selector(loadUI)];
     }
@@ -275,6 +275,7 @@
 #warning 我改了这里...setter方法改为getter方法比较好
     self.blurImageView.image = [self image111];
 
+    self.blurImageView.image = [self image111];
 }
 
 #pragma mark - **** 手势消失方法
@@ -318,7 +319,6 @@
                                          }
                                          else if (weakSelf.containerView)
                                          {
-                                             [weakSelf prepareForShow];
                                              [weakSelf performSelector:@selector(prepareForShow)];
                                              weakSelf.containerView.center = window.center;
                                          }
@@ -603,28 +603,28 @@
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self removeFromSuperview];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - 转屏通知处理
--(void)changeFrames:(NSNotification *)notification
-{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    
-    switch (orientation) {
-        case UIDeviceOrientationPortrait:
-            NSLog(@"UIDeviceOrientationPortrait");
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            NSLog(@"UIDeviceOrientationLandscapeLeft");
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            NSLog(@"UIDeviceOrientationLandscapeRight");
-            break;
-        default:
-            break;
-    }
-}
+//#pragma mark - 转屏通知处理
+//-(void)changeFrames:(NSNotification *)notification
+//{
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//    
+//    switch (orientation) {
+//        case UIDeviceOrientationPortrait:
+//            NSLog(@"UIDeviceOrientationPortrait");
+//            break;
+//        case UIDeviceOrientationLandscapeLeft:
+//            NSLog(@"UIDeviceOrientationLandscapeLeft");
+//            break;
+//        case UIDeviceOrientationLandscapeRight:
+//            NSLog(@"UIDeviceOrientationLandscapeRight");
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 - (void)layoutSubviews
 {
@@ -697,6 +697,7 @@
     return image;
 }
 
+<<<<<<< HEAD
 
 #warning 我还改了这里......这里要优化，应该在子线程绘制好，再到主线程更新，所以这里会卡顿
 -(UIImage *)image111
@@ -725,8 +726,45 @@
     UIImage *blurImage = [UIImage imageWithCGImage:outputCGImage];
     
     //释放内存
+=======
+/*! 待优化 */
+- (UIImage *)image111
+{
+    // CIImage，不能用UIImage的CIImage属性
+    CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
+    
+    // CIFilter(滤镜的名字)
+    CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
+//    CIColor *color = [CIColor colorWithRed:1.0 green:0 blue:0];
+    // 将图片放到滤镜中
+//    [blurFilter setValue:color forKey:kCIInputColorKey];
+    [blurFilter setValue:ciImage forKey:kCIInputImageKey];
+    
+    // inputRadius参数: 模糊的程度 默认为10, 范围为0-100, 接收的参数为NSNumber类型
+    
+    // 设置模糊的程度
+    [blurFilter setValue:@(3) forKey:@"inputRadius"];
+    
+    // 将处理好的图片导出
+    CIImage *outImage        = [blurFilter valueForKey:kCIOutputImageKey];
+    
+    //理论上这些东西需要放到子线程去渲染，待优化
+    // CIContext 上下文(参数nil，默认为CPU渲染, 如果想用GPU渲染来提高效率的话,则需要传参数)
+    CIContext *context       = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer:@(YES)}];
+    
+    // 将处理好的图片创建出来
+    CGImageRef outputCGImage = [context createCGImage:outImage fromRect:[outImage extent]];
+    
+    UIImage *blurImage       = [UIImage imageWithCGImage:outputCGImage];
+    
+    // 释放CGImageRef
+>>>>>>> boai/master
     CGImageRelease(outputCGImage);
     
     return blurImage;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> boai/master
 @end

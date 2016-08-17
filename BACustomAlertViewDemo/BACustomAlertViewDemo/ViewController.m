@@ -181,6 +181,23 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (void)alert1
 {
     BAWeak;
+//    _alertView1.buttonActionBlock = ^(NSInteger index){
+//        if (index == 0)
+//        {
+//            NSLog(@"点击了取消按钮！");
+//            /*! 隐藏alert */
+////            [weakSelf.alertView1 ba_dismissAlertView];
+//        }
+//        else if (index == 1)
+//        {
+//            NSLog(@"点击了确定按钮！");
+//            ViewController2 *vc2 = [ViewController2 new];
+//            vc2.title = @"alert1";
+//            [weakSelf.navigationController pushViewController:vc2 animated:YES];
+//            /*! 隐藏alert */
+////            [weakSelf.alertView1 ba_dismissAlertView];
+//        }
+//    };
     /*! 第一种封装使用示例 */
     [BACustomAlertView ba_showAlertWithTitle:@"博爱温馨提示："
                                      message:titleMsg1
@@ -190,7 +207,11 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                    temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
         temp.bgColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         temp.isTouchEdgeHide = YES;
+<<<<<<< HEAD
                                    temp.blurEffectStyle = 1;
+=======
+//                                   temp.blurEffectStyle = 0;
+>>>>>>> boai/master
     }
                                  actionClick:^(NSInteger index) {
         if (index == 0)
