@@ -85,28 +85,40 @@
 /*! 背景图片名字 默认：没有图片*/
 @property (nonatomic, strong) NSString  *bgImageName;
 
-
-
-#pragma mark - 封装后的
-+(void )showCustomView:(UIView *)customView configuration:(void (^)(BACustomAlertView *)) configuration;
-
-+(void )showTitle:(NSString *)title
-          message:(NSString *)message
-            image:(UIImage *)image
-     buttonTitles:(NSArray *)buttonTitles
-    configuration:(void (^)(BACustomAlertView *temp)) configuration
-      actionClick:(void (^)(NSInteger index)) action;
-
-
-
-
-
-#pragma mark - 拿到.m里面去
 /*!
  * 按钮点击事件回调
  */
 @property (strong, nonatomic) void (^buttonActionBlock)(NSInteger index);
 
+
+#pragma mark - 1、高度封装一行即可完全配置alert，如不习惯，可使用第二种常用方法
+/*!
+ *  创建一个完全自定义的 alertView
+ *
+ *  @param customView    自定义 View
+ *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...
+ */
++ (void)ba_showCustomView:(UIView *)customView
+            configuration:(void (^)(BACustomAlertView *tempView)) configuration;
+
+/*!
+ *  创建一个类似于系统的alert
+ *
+ *  @param title         标题：可空
+ *  @param message       消息内容：可空
+ *  @param image         图片：可空
+ *  @param buttonTitles  按钮标题：不可空
+ *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...
+ *  @param action        按钮的点击事件处理
+ */
++ (void)ba_showAlertWithTitle:(NSString *)title
+                      message:(NSString *)message
+                        image:(UIImage *)image
+                 buttonTitles:(NSArray *)buttonTitles
+                configuration:(void (^)(BACustomAlertView *tempView)) configuration
+                  actionClick:(void (^)(NSInteger index)) action;
+
+#pragma mark - 2、常用方法
 /*!
  *  初始化自定义动画视图
  *  @return instancetype
@@ -137,5 +149,6 @@
  *  视图消失
  */
 - (void)ba_dismissAlertView;
+
 
 @end

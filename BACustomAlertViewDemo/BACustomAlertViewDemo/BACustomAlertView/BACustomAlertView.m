@@ -197,7 +197,7 @@
     return _dismissTap;
 }
 
--(UIColor *)bgColor
+- (UIColor *)bgColor
 {
     if (_bgColor == nil)
     {
@@ -241,7 +241,7 @@
     }
     else
     {
-        NSLog(@"触摸了View边缘，但您未开启触摸边缘隐藏方法，请设置后再使用！");
+        NSLog(@"触摸了View边缘，但您未开启触摸边缘隐藏方法，请设置 isTouchEdgeHide 属性为 YES 后再使用！");
     }
 }
 
@@ -603,7 +603,8 @@
 
 
 #pragma mark - class method
-+(void )showCustomView:(UIView *)customView configuration:(void (^)(BACustomAlertView *)) configuration
++ (void)ba_showCustomView:(UIView *)customView
+            configuration:(void (^)(BACustomAlertView *tempView)) configuration
 {
     BACustomAlertView *temp = [[BACustomAlertView alloc] initWithCustomView:customView];
     if (configuration)
@@ -613,12 +614,12 @@
     [temp ba_showAlertView];
 }
 
-+(void )showTitle:(NSString *)title
-          message:(NSString *)message
-            image:(UIImage *)image
-     buttonTitles:(NSArray *)buttonTitles
-    configuration:(void (^)(BACustomAlertView *)) configuration
-      actionClick:(void (^)(NSInteger index)) action
++ (void)ba_showAlertWithTitle:(NSString *)title
+                      message:(NSString *)message
+                        image:(UIImage *)image
+                 buttonTitles:(NSArray *)buttonTitles
+                configuration:(void (^)(BACustomAlertView *tempView)) configuration
+                  actionClick:(void (^)(NSInteger index)) action
 {
     BACustomAlertView *temp = [[BACustomAlertView alloc] ba_showTitle:title message:message image:image buttonTitles:buttonTitles];
     if (configuration)
