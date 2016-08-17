@@ -23,4 +23,5 @@
                   saturationDeltaFactor:(CGFloat)saturationDeltaFactor
                               maskImage:(UIImage*)maskImage;
 
+
 @end
