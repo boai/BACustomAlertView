@@ -316,7 +316,6 @@
                                          }
                                          else if (weakSelf.containerView)
                                          {
-                                             [weakSelf prepareForShow];
                                              [weakSelf performSelector:@selector(prepareForShow)];
                                              weakSelf.containerView.center = window.center;
                                          }
@@ -695,7 +694,8 @@
     return image;
 }
 
--(UIImage *)image111
+/*! 待优化 */
+- (UIImage *)image111
 {
     // CIImage，不能用UIImage的CIImage属性
     CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
