@@ -70,7 +70,7 @@
 
 
 typedef NS_ENUM(NSInteger, BACustomAlertViewBlurEffectStyle) {
-    BACustomAlertViewBlurEffectStyleExtraLight,
+    BACustomAlertViewBlurEffectStyleExtraLight = 1,
     BACustomAlertViewBlurEffectStyleLight,
     BACustomAlertViewBlurEffectStyleDark
 } NS_ENUM_AVAILABLE_IOS(8_0);
