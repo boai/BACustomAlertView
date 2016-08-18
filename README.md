@@ -242,8 +242,8 @@ iOS 10技术开发群       | `479663605`        |
 
 ## 6、开发人员
 
-孙博岩：[『https://github.com/boai』](https://github.com/boai)
-陆晓峰：[『https://github.com/zeR0Lu』](https://github.com/zeR0Lu)
+孙博岩：[『https://github.com/boai』](https://github.com/boai)<br>
+陆晓峰：[『https://github.com/zeR0Lu』](https://github.com/zeR0Lu)<br>
 陈集  ：[『https://github.com/chenjipdc』](https://github.com/chenjipdc)
 
 ---
