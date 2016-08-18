@@ -874,7 +874,7 @@
 }
 
 - (UIImage *)screenShotImage {
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(640, 960), YES, 1);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREENWIDTH, SCREENHEIGHT), YES, 1);
     
     //设置截屏大小
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
@@ -884,13 +884,7 @@
     
     UIGraphicsEndImageContext();
     
-    CGImageRef imageRef = viewImage.CGImage;
-    CGRect rect = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT);//这里可以设置想要截图的区域
-    
-    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, rect);
-    UIImage *image = [[UIImage alloc] initWithCGImage:imageRefRect];
-    
-    return image;
+    return viewImage;
 }
 
 /*! 待优化 */
