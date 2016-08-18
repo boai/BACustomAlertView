@@ -293,14 +293,15 @@
 
 
 @property (nonatomic, assign, getter=isAnimating) BOOL animating;
+
 @end
 
 @implementation BACustomAlertView
 {
-    CGFloat   _scrollBottom;
-    CGFloat   _buttonsHeight;
-    CGFloat   _maxContentWidth;
-    CGFloat   _maxAlertViewHeight;
+    CGFloat  _scrollBottom;
+    CGFloat  _buttonsHeight;
+    CGFloat  _maxContentWidth;
+    CGFloat  _maxAlertViewHeight;
 }
 
 #pragma mark - ***** 初始化自定义View
@@ -310,11 +311,6 @@
     {
         self.subView = customView;
         [self performSelector:@selector(setupUI)];
-
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:@selector(changeFrames:)
-//                                                     name:UIDeviceOrientationDidChangeNotification
-//                                                   object:nil];
     }
     return self;
 }
@@ -334,11 +330,6 @@
         _image        = image;
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:@selector(changeFrames:)
-//                                                     name:UIDeviceOrientationDidChangeNotification
-//                                                   object:nil];
         
         [self performSelector:@selector(loadUI)];
     }
@@ -395,6 +386,10 @@
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
     
 }
 
@@ -417,8 +412,10 @@
     return _bgColor;
 }
 
-- (UIImageView *)blurImageView {
-    if ( !_blurImageView ) {
+- (UIImageView *)blurImageView
+{
+    if ( !_blurImageView )
+    {
         _blurImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _blurImageView.image = [self screenShotImage];
 //        _blurImageView.image = [UIImage imageNamed:@"123.png"];
@@ -541,7 +538,7 @@
 }
 
 #pragma mark - 动画
--(void )showAnimationWithView:(UIView *)animationView
+- (void )showAnimationWithView:(UIView *)animationView
 {
     self.animating = YES;
 
@@ -554,8 +551,9 @@
 //        self.animating = NO;
 //    }];
     
+    BAWeak;
     [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
-        self.animating = NO;
+        weakSelf.animating = NO;
     }];
 }
 
@@ -913,10 +911,11 @@
     temp.buttonActionBlock = action;
 }
 
-- (UIImage *)screenShotImage {
+- (UIImage *)screenShotImage
+{
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREENWIDTH, SCREENHEIGHT), YES, 1);
     
-    //设置截屏大小
+    /*! 设置截屏大小 */
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
     [[window layer] renderInContext:UIGraphicsGetCurrentContext()];
     
@@ -932,7 +931,7 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        // CIImage，不能用UIImage的CIImage属性
+        /*! CIImage，不能用UIImage的CIImage属性 */
         CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"123.png"]];
 //        UIImage *tempImage = [self imageWithColor:[UIColor grayColor] andSize:[UIScreen mainScreen].bounds.size];
 //        CIImage *ciImage         = [[CIImage alloc] initWithImage:tempImage];
