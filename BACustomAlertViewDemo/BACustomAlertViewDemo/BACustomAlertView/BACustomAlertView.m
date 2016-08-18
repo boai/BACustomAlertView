@@ -418,6 +418,8 @@
     if ( !_blurImageView ) {
         _blurImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _blurImageView.image = [self screenShotImage];
+//        _blurImageView.image = [UIImage imageNamed:@"123.png"];
+        _blurImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self addSubview:_blurImageView];
         [self sendSubviewToBack:_blurImageView];
     }
@@ -568,7 +570,9 @@
     _buttonsHeight          = kBAAlertButtonHeight*((_buttonTitles.count>2||_buttonTitles.count==0)?_buttonTitles.count:1);
     
     self.frame              = self.window.bounds;
+    
     self.backgroundColor    = self.bgColor;
+    
     _containerView.frame    = CGRectMake(0, 0, kBAAlertWidth, MIN(MAX(_scrollBottom+2*insetY+_buttonsHeight, 2*kBAAlertRadius+kBAAlertPaddingV), _maxAlertViewHeight));
     _scrollView.frame       = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
     _scrollView.contentSize = CGSizeMake(_maxContentWidth, _scrollBottom);
@@ -791,6 +795,7 @@
     [self.buttons removeAllObjects];
     [self.lines removeAllObjects];
     [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.blurEffectStyle = 0;
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self removeFromSuperview];
@@ -869,7 +874,7 @@
 }
 
 - (UIImage *)screenShotImage {
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(640, 960), YES, 0);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(640, 960), YES, 1);
     
     //设置截屏大小
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
@@ -892,7 +897,7 @@
 - (UIImage *)image111
 {
     // CIImage，不能用UIImage的CIImage属性
-    CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
+    CIImage *ciImage         = [[CIImage alloc] initWithImage:[self screenShotImage]];
     
     // CIFilter(滤镜的名字)
     CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
