@@ -386,6 +386,10 @@
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     
+    /*! 设置默认样式为： */
+    _animatingStyle = BACustomAlertViewAnimatingStyleScale;
+    
+    /*! 旋转屏幕通知 */
 //        [[NSNotificationCenter defaultCenter] addObserver:self
 //                                                 selector:@selector(changeFrames:)
 //                                                     name:UIDeviceOrientationDidChangeNotification
@@ -475,6 +479,25 @@
     }];
 }
 
+- (void)setAnimatingStyle:(BACustomAlertViewAnimatingStyle)animatingStyle
+{
+    _animatingStyle = animatingStyle;
+    
+    if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
+    {
+
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleShake)
+    {
+
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleFall)
+    {
+
+    }
+    
+}
+
 #pragma mark - **** 手势消失方法
 - (void)dismissTapAction:(UITapGestureRecognizer *)tapG
 {
@@ -504,7 +527,7 @@
         {
             [weakSelf showAnimationWithView:weakSelf.subView];
         }
-        else
+        else if (self.containerView)
         {
             [weakSelf showAnimationWithView:weakSelf.containerView];
         }
@@ -537,40 +560,59 @@
     }
 }
 
-#pragma mark - 动画
+#pragma mark - 进场动画
 - (void )showAnimationWithView:(UIView *)animationView
 {
     self.animating = YES;
 
-    
-//    [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
-//        self.animating = NO;
-//    }];
-    
-//    [animationView scaleAnimationShowFinishAnimation:^{
-//        self.animating = NO;
-//    }];
-    
     BAWeak;
-    [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
-        weakSelf.animating = NO;
-    }];
+    if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
+    {
+        [animationView scaleAnimationShowFinishAnimation:^{
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleShake)
+    {
+        [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleFall)
+    {
+        [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
+            weakSelf.animating = NO;
+        }];
+    }
 }
 
--(void )dismissAnimationView:(UIView *)animationView
+#pragma mark - 出场动画
+- (void )dismissAnimationView:(UIView *)animationView
 {
     BAWeak;
     self.animating = YES;
-    
-//    [animationView scaleAnimationDismissFinishAnimation:^{
-//        [weakSelf performSelector:@selector(removeSelf)];
-//        self.animating = NO;
-//    }];
 
-    [animationView.layer floatAnimationWithDuration:0.35 finishAnimation:^{
-        [weakSelf performSelector:@selector(removeSelf)];
-        self.animating = NO;
-    }];
+    if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
+    {
+        [animationView scaleAnimationDismissFinishAnimation:^{
+            [weakSelf performSelector:@selector(removeSelf)];
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleShake)
+    {
+        [animationView.layer floatAnimationWithDuration:0.35f finishAnimation:^{
+            [weakSelf performSelector:@selector(removeSelf)];
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleFall)
+    {
+        [animationView.layer floatAnimationWithDuration:0.35f finishAnimation:^{
+            [weakSelf performSelector:@selector(removeSelf)];
+            weakSelf.animating = NO;
+        }];
+    }
 }
 
 #pragma mark - ***** 设置UI

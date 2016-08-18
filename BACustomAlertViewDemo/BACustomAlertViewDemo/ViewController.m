@@ -192,6 +192,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         temp.blurEffectStyle = 1;
         /*! 开启动画 */
         temp.isShowAnimate   = YES;
+        temp.animatingStyle  = 1;
     }actionClick:^(NSInteger index) {
         if (index == 0)
         {

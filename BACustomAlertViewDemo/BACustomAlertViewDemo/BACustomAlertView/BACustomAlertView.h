@@ -69,11 +69,25 @@
 #define BAWeak         __weak __typeof(self) weakSelf = self
 
 
+/*! 背景高斯模糊枚举 默认：1 */
 typedef NS_ENUM(NSInteger, BACustomAlertViewBlurEffectStyle) {
+    /*! 较亮的白色模糊 */
     BACustomAlertViewBlurEffectStyleExtraLight = 1,
+    /*! 一般亮的白色模糊 */
     BACustomAlertViewBlurEffectStyleLight,
+    /*! 深色背景模糊 */
     BACustomAlertViewBlurEffectStyleDark
 } NS_ENUM_AVAILABLE_IOS(8_0);
+
+/*! 进出场动画枚举 默认：1 */
+typedef NS_ENUM(NSUInteger, BACustomAlertViewAnimatingStyle) {
+    /*! 缩放显示动画 */
+    BACustomAlertViewAnimatingStyleScale = 1,
+    /*! 晃动动画 */
+    BACustomAlertViewAnimatingStyleShake,
+    /*! 天上掉下动画 / 上升动画 */
+    BACustomAlertViewAnimatingStyleFall,
+};
 
 @interface BACustomAlertView : UIView
 
@@ -92,8 +106,11 @@ typedef NS_ENUM(NSInteger, BACustomAlertViewBlurEffectStyle) {
 /*! 背景图片名字 默认：没有图片*/
 @property (nonatomic, strong) NSString  *bgImageName;
 
-/*! 背景高斯模糊 */
+/*! 背景高斯模糊枚举 默认：1 */
 @property (nonatomic, assign) BACustomAlertViewBlurEffectStyle blurEffectStyle;
+
+/*! 进出场动画枚举 默认：1 */
+@property (nonatomic, assign) BACustomAlertViewAnimatingStyle animatingStyle;
 
 /*!
  * 按钮点击事件回调

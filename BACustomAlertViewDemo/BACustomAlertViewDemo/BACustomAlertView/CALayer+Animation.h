@@ -116,4 +116,5 @@
  *  @param finish 动画完成
  */
 - (void )scaleAnimationDismissFinishAnimation:(void(^)()) finish;
+
 @end
