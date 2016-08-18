@@ -184,7 +184,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     /*! 第一种封装使用示例 */
     [BACustomAlertView ba_showAlertWithTitle:@"博爱温馨提示：" message:titleMsg1 image:nil buttonTitles:@[@"取消",@"确定"] configuration:^(BACustomAlertView *temp) {
         temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
-        temp.bgColor         = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
+//        temp.bgColor         = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         temp.isTouchEdgeHide = YES;
                                    temp.blurEffectStyle = 1;
                                    temp.isShowAnimate = YES;
