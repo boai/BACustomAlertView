@@ -272,7 +272,9 @@
         self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyDarkEffect];
     }
     
-    self.blurImageView.image = [self image111];
+    [self imageOutPut:^(UIImage *image) {
+        self.blurImageView.image = image;
+    }];
 }
 
 #pragma mark - **** 手势消失方法
@@ -633,6 +635,20 @@
     return image;
 }
 
+- (UIImage *)imageWithColor:(UIColor *)color andSize:(CGSize )size
+{
+    CGRect rect          = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    
+    CGContextFillRect(context, rect);
+    UIImage *image       = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 #pragma mark - 清除所有视图
 - (void)removeSelf
 {
@@ -743,38 +759,50 @@
 }
 
 /*! 待优化 */
-- (UIImage *)image111
+- (void )imageOutPut:(void(^)(UIImage *image)) outPutImage
 {
-    // CIImage，不能用UIImage的CIImage属性
-    CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        // CIImage，不能用UIImage的CIImage属性
+//        CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
+        UIImage *tempImage = [self imageWithColor:[UIColor grayColor] andSize:[UIScreen mainScreen].bounds.size];
+        CIImage *ciImage         = [[CIImage alloc] initWithImage:tempImage];
+        
+        // CIFilter(滤镜的名字)
+        CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
+        //    CIColor *color = [CIColor colorWithRed:1.0 green:0 blue:0];
+        // 将图片放到滤镜中
+        //    [blurFilter setValue:color forKey:kCIInputColorKey];
+        [blurFilter setValue:ciImage forKey:kCIInputImageKey];
+        
+        // inputRadius参数: 模糊的程度 默认为10, 范围为0-100, 接收的参数为NSNumber类型
+        
+        // 设置模糊的程度
+        [blurFilter setValue:@(50) forKey:kCIInputRadiusKey];
+//        [blurFilter setValue:@(10) forKey:kCIInputSharpnessKey];
+        
+        // 将处理好的图片导出
+        CIImage *outImage        = [blurFilter valueForKey:kCIOutputImageKey];
+        
+        //理论上这些东西需要放到子线程去渲染，待优化
+        // CIContext 上下文(参数nil，默认为CPU渲染, 如果想用GPU渲染来提高效率的话,则需要传参数)
+        CIContext *context       = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer:@(YES)}];
+        
+        // 将处理好的图片创建出来
+        CGImageRef outputCGImage = [context createCGImage:outImage fromRect:[UIScreen mainScreen].bounds];
+        
+        UIImage *blurImage       = [UIImage imageWithCGImage:outputCGImage];
+        
+        // 释放CGImageRef
+        CGImageRelease(outputCGImage);
+        
+        if (outPutImage) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                outPutImage(blurImage);
+            });
+        }
+        
+    });
     
-    // CIFilter(滤镜的名字)
-    CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
-//    CIColor *color = [CIColor colorWithRed:1.0 green:0 blue:0];
-    // 将图片放到滤镜中
-//    [blurFilter setValue:color forKey:kCIInputColorKey];
-    [blurFilter setValue:ciImage forKey:kCIInputImageKey];
-    
-    // inputRadius参数: 模糊的程度 默认为10, 范围为0-100, 接收的参数为NSNumber类型
-    
-    // 设置模糊的程度
-    [blurFilter setValue:@(3) forKey:@"inputRadius"];
-    
-    // 将处理好的图片导出
-    CIImage *outImage        = [blurFilter valueForKey:kCIOutputImageKey];
-    
-    //理论上这些东西需要放到子线程去渲染，待优化
-    // CIContext 上下文(参数nil，默认为CPU渲染, 如果想用GPU渲染来提高效率的话,则需要传参数)
-    CIContext *context       = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer:@(YES)}];
-    
-    // 将处理好的图片创建出来
-    CGImageRef outputCGImage = [context createCGImage:outImage fromRect:[outImage extent]];
-    
-    UIImage *blurImage       = [UIImage imageWithCGImage:outputCGImage];
-    
-    // 释放CGImageRef
-    CGImageRelease(outputCGImage);
-    
-    return blurImage;
 }
 @end
