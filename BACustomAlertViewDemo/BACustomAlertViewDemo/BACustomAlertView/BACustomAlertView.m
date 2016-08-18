@@ -104,7 +104,7 @@
 {
     const CGFloat EffectColorAlpha = 0.6;
     UIColor *effectColor = tintColor;
-    int componentCount = CGColorGetNumberOfComponents(tintColor.CGColor);
+    size_t componentCount = CGColorGetNumberOfComponents(tintColor.CGColor);
     if (componentCount == 2) {
         CGFloat b;
         if ([tintColor getWhite:&b alpha:NULL]) {
@@ -290,6 +290,8 @@
 @property (assign, nonatomic        ) CGFloat                  viewWidth;
 @property (assign, nonatomic        ) CGFloat                  viewHeight;
 
+
+@property (nonatomic, assign, getter=isAnimating) BOOL animating;
 @end
 
 @implementation BACustomAlertView
@@ -308,10 +310,10 @@
         self.subView = customView;
         [self performSelector:@selector(setupUI)];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
     }
     return self;
 }
@@ -332,10 +334,10 @@
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
         
         [self performSelector:@selector(loadUI)];
     }
@@ -490,62 +492,21 @@
 #pragma mark - **** 视图显示方法
 - (void)ba_showAlertView
 {
+    BAWeak;
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
     [window addSubview:self];
+    
     [self layoutMySubViews];
     
-    BAWeak;
     if (self.isShowAnimate)
     {
         if (weakSelf.subView)
         {
-            weakSelf.subView.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
-            [UIView animateWithDuration:0.35f animations:^{
-                weakSelf.subView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
-            } completion:^(BOOL finished) {
-                //            NSLog(@"BACustomAlertView动画执行完毕！");
-                [UIView animateWithDuration:0.25f animations:^{
-                    weakSelf.subView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-                } completion:^(BOOL finished) {
-                    NSLog(@"BACustomAlertView动画执行完毕！");
-                }];
-            }];
+            [weakSelf showAnimationWithView:weakSelf.subView];
         }
         else
         {
-            weakSelf.containerView.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
-            [UIView animateWithDuration:0.35f animations:^{
-    //            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    //            
-    //            for (int i = 0; i < 7; i ++)
-    //            {
-    //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i*0.03f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //                    [UIView animateWithDuration:0.f
-    //                                          delay:0.f
-    //                         usingSpringWithDamping:0.5f
-    //                          initialSpringVelocity:0.8
-    //                                        options:UIViewAnimationOptionCurveEaseOut
-    //                                     animations:^{
-    //                                         if (weakSelf.subView)
-    //                                         {
-    //                                             weakSelf.subView.center = window.center;
-    //                                         }
-    //                                         else if (weakSelf.containerView)
-    //                                         {
-    //                                             [weakSelf performSelector:@selector(prepareForShow)];
-    //                                             weakSelf.containerView.center = window.center;
-    //                                         }
-    //                                     } completion:nil];
-    //                });
-    //            }
-                weakSelf.containerView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.25f animations:^{
-                    weakSelf.containerView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-                } completion:^(BOOL finished) {
-                    NSLog(@"BACustomAlertView动画执行完毕！");
-                }];
-            }];
+            [weakSelf showAnimationWithView:weakSelf.containerView];
         }
     }
     else
@@ -566,40 +527,48 @@
 - (void)ba_dismissAlertView
 {
     BAWeak;
-//    [UIView animateWithDuration:0 animations:^{
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        if (weakSelf.subView)
-        {
-//            weakSelf.subView.transform = CGAffineTransformIdentity;
-            [UIView animateWithDuration:0.25f animations:^{
-                weakSelf.subView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
-            } completion:^(BOOL finished) {
-                //            NSLog(@"BACustomAlertView动画执行完毕！");
-                [UIView animateWithDuration:0.15f animations:^{
-                    weakSelf.subView.transform = CGAffineTransformMakeScale(0.0001f, 0.0001f);
-                } completion:^(BOOL finished) {
-                    NSLog(@"BACustomAlertView动画执行完毕！");
-                    [weakSelf performSelector:@selector(removeSelf)];
-                }];
-            }];
-        }
-        else if (weakSelf.containerView)
-        {
-            [UIView animateWithDuration:0.15f animations:^{
-                weakSelf.containerView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
-            } completion:^(BOOL finished) {
-                //            NSLog(@"BACustomAlertView动画执行完毕！");
-                [UIView animateWithDuration:0.25f animations:^{
-                    weakSelf.containerView.transform = CGAffineTransformMakeScale(0.0001f, 0.0001f);
-                } completion:^(BOOL finished) {
-                    NSLog(@"BACustomAlertView动画执行完毕！");
-                    [weakSelf performSelector:@selector(removeSelf)];
-                }];
-            }];
-        }
-//    } completion:^(BOOL finished) {
-//        
-//    }];
+    if (weakSelf.subView)
+    {
+        [weakSelf dismissAnimationView:weakSelf.subView];
+    }
+    else if (weakSelf.containerView)
+    {
+        [weakSelf dismissAnimationView:weakSelf.containerView];
+    }
+}
+
+#pragma mark - 动画
+-(void )showAnimationWithView:(UIView *)animationView
+{
+    self.animating = YES;
+    animationView.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
+    [UIView animateWithDuration:0.35f animations:^{
+        animationView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.25f animations:^{
+            animationView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        } completion:^(BOOL finished) {
+            NSLog(@"show BACustomAlertView动画执行完毕！");
+            self.animating = NO;
+        }];
+    }];
+}
+
+-(void )dismissAnimationView:(UIView *)animationView
+{
+    BAWeak;
+    self.animating = YES;
+    [UIView animateWithDuration:0.15f animations:^{
+        animationView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.25f animations:^{
+            animationView.transform = CGAffineTransformMakeScale(0.0001f, 0.0001f);
+        } completion:^(BOOL finished) {
+            NSLog(@"dismiss BACustomAlertView动画执行完毕！");
+            [weakSelf performSelector:@selector(removeSelf)];
+            self.animating = NO;
+        }];
+    }];
 }
 
 #pragma mark - ***** 设置UI
@@ -861,31 +830,35 @@
     [self removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-#pragma mark - 转屏通知处理
--(void)changeFrames:(NSNotification *)notification
-{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    [self layoutMySubViews];
-    switch (orientation) {
-        case UIDeviceOrientationPortrait:
-            NSLog(@"UIDeviceOrientationPortrait");
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            NSLog(@"UIDeviceOrientationLandscapeLeft");
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            NSLog(@"UIDeviceOrientationLandscapeRight");
-            break;
-        default:
-            break;
-    }
-}
+//
+//#pragma mark - 转屏通知处理
+//-(void)changeFrames:(NSNotification *)notification
+//{
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//    [self layoutMySubViews];
+//    switch (orientation) {
+//        case UIDeviceOrientationPortrait:
+//            NSLog(@"UIDeviceOrientationPortrait");
+//            break;
+//        case UIDeviceOrientationLandscapeLeft:
+//            NSLog(@"UIDeviceOrientationLandscapeLeft");
+//            break;
+//        case UIDeviceOrientationLandscapeRight:
+//            NSLog(@"UIDeviceOrientationLandscapeRight");
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    if (!self.animating)
+    {
+        [self layoutMySubViews];
+    }
+    
 }
 
 -(void )layoutMySubViews
@@ -904,9 +877,8 @@
         [self performSelector:@selector(prepareForShow)];
         self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
     }
+    NSLog(@"111111");
 }
-
-
 
 #pragma mark - class method
 + (void)ba_showCustomView:(UIView *)customView
@@ -954,12 +926,12 @@
 /*! 待优化 */
 - (void )imageOutPut:(void(^)(UIImage *image)) outPutImage
 {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         // CIImage，不能用UIImage的CIImage属性
-//        CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
-        UIImage *tempImage = [self imageWithColor:[UIColor grayColor] andSize:[UIScreen mainScreen].bounds.size];
-        CIImage *ciImage         = [[CIImage alloc] initWithImage:tempImage];
+        CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"123"]];
+//        UIImage *tempImage = [self imageWithColor:[UIColor grayColor] andSize:[UIScreen mainScreen].bounds.size];
+//        CIImage *ciImage         = [[CIImage alloc] initWithImage:tempImage];
         
         // CIFilter(滤镜的名字)
         CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
@@ -971,7 +943,7 @@
         // inputRadius参数: 模糊的程度 默认为10, 范围为0-100, 接收的参数为NSNumber类型
         
         // 设置模糊的程度
-        [blurFilter setValue:@(50) forKey:kCIInputRadiusKey];
+        [blurFilter setValue:@(10) forKey:kCIInputRadiusKey];
 //        [blurFilter setValue:@(10) forKey:kCIInputSharpnessKey];
         
         // 将处理好的图片导出
