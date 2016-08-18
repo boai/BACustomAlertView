@@ -60,9 +60,203 @@
  
  */
 
-
 #import "BACustomAlertView.h"
-#import "UIImage+BAAlertImageEffects.h"
+#import <Accelerate/Accelerate.h>
+#import <float.h>
+
+@interface UIImage (BAAlertImageEffects)
+
+- (UIImage*)BAAlert_ApplyLightEffect;
+
+- (UIImage*)BAAlert_ApplyExtraLightEffect;
+
+- (UIImage*)BAAlert_ApplyDarkEffect;
+
+- (UIImage*)BAAlert_ApplyTintEffectWithColor:(UIColor*)tintColor;
+
+- (UIImage*)BAAlert_ApplyBlurWithRadius:(CGFloat)blurRadius
+                              tintColor:(UIColor*)tintColor
+                  saturationDeltaFactor:(CGFloat)saturationDeltaFactor
+                              maskImage:(UIImage*)maskImage;
+@end
+
+@implementation UIImage (BAAlertImageEffects)
+
+- (UIImage *)BAAlert_ApplyLightEffect
+{
+    UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.3];
+    return [self BAAlert_ApplyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+}
+
+- (UIImage *)BAAlert_ApplyExtraLightEffect
+{
+    UIColor *tintColor = [UIColor colorWithWhite:0.97 alpha:0.82];
+    return [self BAAlert_ApplyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+}
+
+- (UIImage *)BAAlert_ApplyDarkEffect
+{
+    UIColor *tintColor = [UIColor colorWithWhite:0.11 alpha:0.73];
+    return [self BAAlert_ApplyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+}
+
+- (UIImage *)BAAlert_ApplyTintEffectWithColor:(UIColor *)tintColor
+{
+    const CGFloat EffectColorAlpha = 0.6;
+    UIColor *effectColor = tintColor;
+    int componentCount = CGColorGetNumberOfComponents(tintColor.CGColor);
+    if (componentCount == 2) {
+        CGFloat b;
+        if ([tintColor getWhite:&b alpha:NULL]) {
+            effectColor = [UIColor colorWithWhite:b alpha:EffectColorAlpha];
+        }
+    }
+    else {
+        CGFloat r, g, b;
+        if ([tintColor getRed:&r green:&g blue:&b alpha:NULL]) {
+            effectColor = [UIColor colorWithRed:r green:g blue:b alpha:EffectColorAlpha];
+        }
+    }
+    return [self BAAlert_ApplyBlurWithRadius:10 tintColor:effectColor saturationDeltaFactor:-1.0 maskImage:nil];
+}
+
+
+- (UIImage *)BAAlert_ApplyBlurWithRadius:(CGFloat)blurRadius
+                               tintColor:(UIColor *)tintColor
+                   saturationDeltaFactor:(CGFloat)saturationDeltaFactor
+                               maskImage:(UIImage *)maskImage
+{
+    // Check pre-conditions.
+    if (self.size.width < 1 || self.size.height < 1) {
+        NSLog (@"*** error: invalid size: (%.2f x %.2f). Both dimensions must be >= 1: %@", self.size.width, self.size.height, self);
+        return nil;
+    }
+    if (!self.CGImage) {
+        NSLog (@"*** error: image must be backed by a CGImage: %@", self);
+        return nil;
+    }
+    if (maskImage && !maskImage.CGImage) {
+        NSLog (@"*** error: maskImage must be backed by a CGImage: %@", maskImage);
+        return nil;
+    }
+    
+    CGRect imageRect = { CGPointZero, self.size };
+    UIImage *effectImage = self;
+    
+    BOOL hasBlur = blurRadius > __FLT_EPSILON__;
+    BOOL hasSaturationChange = fabs(saturationDeltaFactor - 1.) > __FLT_EPSILON__;
+    if (hasBlur || hasSaturationChange) {
+        UIGraphicsBeginImageContextWithOptions(self.size, NO, [[UIScreen mainScreen] scale]);
+        CGContextRef effectInContext = UIGraphicsGetCurrentContext();
+        CGContextScaleCTM(effectInContext, 1.0, -1.0);
+        CGContextTranslateCTM(effectInContext, 0, -self.size.height);
+        CGContextDrawImage(effectInContext, imageRect, self.CGImage);
+        
+        vImage_Buffer effectInBuffer;
+        effectInBuffer.data     = CGBitmapContextGetData(effectInContext);
+        effectInBuffer.width    = CGBitmapContextGetWidth(effectInContext);
+        effectInBuffer.height   = CGBitmapContextGetHeight(effectInContext);
+        effectInBuffer.rowBytes = CGBitmapContextGetBytesPerRow(effectInContext);
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, NO, [[UIScreen mainScreen] scale]);
+        CGContextRef effectOutContext = UIGraphicsGetCurrentContext();
+        vImage_Buffer effectOutBuffer;
+        effectOutBuffer.data     = CGBitmapContextGetData(effectOutContext);
+        effectOutBuffer.width    = CGBitmapContextGetWidth(effectOutContext);
+        effectOutBuffer.height   = CGBitmapContextGetHeight(effectOutContext);
+        effectOutBuffer.rowBytes = CGBitmapContextGetBytesPerRow(effectOutContext);
+        
+        if (hasBlur) {
+            // A description of how to compute the box kernel width from the Gaussian
+            // radius (aka standard deviation) appears in the SVG spec:
+            // http://www.w3.org/TR/SVG/filters.html#feGaussianBlurElement
+            //
+            // For larger values of 's' (s >= 2.0), an approximation can be used: Three
+            // successive box-blurs build a piece-wise quadratic convolution kernel, which
+            // approximates the Gaussian kernel to within roughly 3%.
+            //
+            // let d = floor(s * 3*sqrt(2*pi)/4 + 0.5)
+            //
+            // ... if d is odd, use three box-blurs of size 'd', centered on the output pixel.
+            //
+            CGFloat inputRadius = blurRadius * [[UIScreen mainScreen] scale];
+            NSUInteger radius = floor(inputRadius * 3. * sqrt(2 * M_PI) / 4 + 0.5);
+            if (radius % 2 != 1) {
+                radius += 1; // force radius to be odd so that the three box-blur methodology works.
+            }
+            vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, (int)radius, (int)radius, 0, kvImageEdgeExtend);
+            vImageBoxConvolve_ARGB8888(&effectOutBuffer, &effectInBuffer, NULL, 0, 0, (int)radius, (int)radius, 0, kvImageEdgeExtend);
+            vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, (int)radius, (int)radius, 0, kvImageEdgeExtend);
+        }
+        BOOL effectImageBuffersAreSwapped = NO;
+        if (hasSaturationChange) {
+            CGFloat s = saturationDeltaFactor;
+            CGFloat floatingPointSaturationMatrix[] = {
+                0.0722 + 0.9278 * s,  0.0722 - 0.0722 * s,  0.0722 - 0.0722 * s,  0,
+                0.7152 - 0.7152 * s,  0.7152 + 0.2848 * s,  0.7152 - 0.7152 * s,  0,
+                0.2126 - 0.2126 * s,  0.2126 - 0.2126 * s,  0.2126 + 0.7873 * s,  0,
+                0,                    0,                    0,  1,
+            };
+            const int32_t divisor = 256;
+            NSUInteger matrixSize = sizeof(floatingPointSaturationMatrix)/sizeof(floatingPointSaturationMatrix[0]);
+            int16_t saturationMatrix[matrixSize];
+            for (NSUInteger i = 0; i < matrixSize; ++i) {
+                saturationMatrix[i] = (int16_t)roundf(floatingPointSaturationMatrix[i] * divisor);
+            }
+            if (hasBlur) {
+                vImageMatrixMultiply_ARGB8888(&effectOutBuffer, &effectInBuffer, saturationMatrix, divisor, NULL, NULL, kvImageNoFlags);
+                effectImageBuffersAreSwapped = YES;
+            }
+            else {
+                vImageMatrixMultiply_ARGB8888(&effectInBuffer, &effectOutBuffer, saturationMatrix, divisor, NULL, NULL, kvImageNoFlags);
+            }
+        }
+        if (!effectImageBuffersAreSwapped)
+            effectImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        if (effectImageBuffersAreSwapped)
+            effectImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
+    // Set up output context.
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, [[UIScreen mainScreen] scale]);
+    CGContextRef outputContext = UIGraphicsGetCurrentContext();
+    CGContextScaleCTM(outputContext, 1.0, -1.0);
+    CGContextTranslateCTM(outputContext, 0, -self.size.height);
+    
+    // Draw base image.
+    CGContextDrawImage(outputContext, imageRect, self.CGImage);
+    
+    // Draw effect image.
+    if (hasBlur) {
+        CGContextSaveGState(outputContext);
+        if (maskImage) {
+            CGContextClipToMask(outputContext, imageRect, maskImage.CGImage);
+        }
+        CGContextDrawImage(outputContext, imageRect, effectImage.CGImage);
+        CGContextRestoreGState(outputContext);
+    }
+    
+    // Add in color tint.
+    if (tintColor) {
+        CGContextSaveGState(outputContext);
+        CGContextSetFillColorWithColor(outputContext, tintColor.CGColor);
+        CGContextFillRect(outputContext, imageRect);
+        CGContextRestoreGState(outputContext);
+    }
+    
+    // Output image is ready.
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return outputImage;
+}
+
+@end
+
+//#import "UIImage+BAAlertImageEffects.h"
 
 #define kBAAlertWidth              self.viewWidth - 50
 #define kBAAlertPaddingV           11
@@ -114,10 +308,10 @@
         self.subView = customView;
         [self performSelector:@selector(setupUI)];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
     }
     return self;
 }
@@ -138,10 +332,10 @@
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFrames:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
         
         [self performSelector:@selector(loadUI)];
     }
@@ -272,6 +466,7 @@
         self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyDarkEffect];
     }
 
+//    self.blurImageView.image = [self image111];
 }
 
 #pragma mark - **** 手势消失方法
@@ -315,7 +510,6 @@
                                          }
                                          else if (weakSelf.containerView)
                                          {
-                                             [weakSelf prepareForShow];
                                              [weakSelf performSelector:@selector(prepareForShow)];
                                              weakSelf.containerView.center = window.center;
                                          }
@@ -600,28 +794,28 @@
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self removeFromSuperview];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - 转屏通知处理
--(void)changeFrames:(NSNotification *)notification
-{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    
-    switch (orientation) {
-        case UIDeviceOrientationPortrait:
-            NSLog(@"UIDeviceOrientationPortrait");
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            NSLog(@"UIDeviceOrientationLandscapeLeft");
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            NSLog(@"UIDeviceOrientationLandscapeRight");
-            break;
-        default:
-            break;
-    }
-}
+//#pragma mark - 转屏通知处理
+//-(void)changeFrames:(NSNotification *)notification
+//{
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//    
+//    switch (orientation) {
+//        case UIDeviceOrientationPortrait:
+//            NSLog(@"UIDeviceOrientationPortrait");
+//            break;
+//        case UIDeviceOrientationLandscapeLeft:
+//            NSLog(@"UIDeviceOrientationLandscapeLeft");
+//            break;
+//        case UIDeviceOrientationLandscapeRight:
+//            NSLog(@"UIDeviceOrientationLandscapeRight");
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 - (void)layoutSubviews
 {
@@ -692,6 +886,42 @@
     UIImage *image = [[UIImage alloc] initWithCGImage:imageRefRect];
     
     return image;
+}
+
+/*! 待优化 */
+- (UIImage *)image111
+{
+    // CIImage，不能用UIImage的CIImage属性
+    CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
+    
+    // CIFilter(滤镜的名字)
+    CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
+//    CIColor *color = [CIColor colorWithRed:1.0 green:0 blue:0];
+    // 将图片放到滤镜中
+//    [blurFilter setValue:color forKey:kCIInputColorKey];
+    [blurFilter setValue:ciImage forKey:kCIInputImageKey];
+    
+    // inputRadius参数: 模糊的程度 默认为10, 范围为0-100, 接收的参数为NSNumber类型
+    
+    // 设置模糊的程度
+    [blurFilter setValue:@(3) forKey:@"inputRadius"];
+    
+    // 将处理好的图片导出
+    CIImage *outImage        = [blurFilter valueForKey:kCIOutputImageKey];
+    
+    //理论上这些东西需要放到子线程去渲染，待优化
+    // CIContext 上下文(参数nil，默认为CPU渲染, 如果想用GPU渲染来提高效率的话,则需要传参数)
+    CIContext *context       = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer:@(YES)}];
+    
+    // 将处理好的图片创建出来
+    CGImageRef outputCGImage = [context createCGImage:outImage fromRect:[outImage extent]];
+    
+    UIImage *blurImage       = [UIImage imageWithCGImage:outputCGImage];
+    
+    // 释放CGImageRef
+    CGImageRelease(outputCGImage);
+    
+    return blurImage;
 }
 
 @end
