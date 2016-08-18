@@ -164,10 +164,10 @@
 		C4D3FF321D5F63A6009BC8A6 /* BACustomAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				23BFBB9A1D65B71500ABDD15 /* CALayer+Animation.h */,
-				23BFBB9B1D65B71500ABDD15 /* CALayer+Animation.m */,
 				C4D3FF331D5F63A6009BC8A6 /* BACustomAlertView.h */,
 				C4D3FF341D5F63A6009BC8A6 /* BACustomAlertView.m */,
+				23BFBB9A1D65B71500ABDD15 /* CALayer+Animation.h */,
+				23BFBB9B1D65B71500ABDD15 /* CALayer+Animation.m */,
 			);
 			path = BACustomAlertView;
 			sourceTree = "<group>";

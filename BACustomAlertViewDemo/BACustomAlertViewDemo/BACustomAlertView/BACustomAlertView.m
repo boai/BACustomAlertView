@@ -387,7 +387,10 @@
     [self addGestureRecognizer:self.dismissTap];
     
     /*! 设置默认样式为： */
-    _animatingStyle = BACustomAlertViewAnimatingStyleScale;
+    if (self.isShowAnimate)
+    {
+        _animatingStyle = BACustomAlertViewAnimatingStyleScale;
+    }
     
     /*! 旋转屏幕通知 */
 //        [[NSNotificationCenter defaultCenter] addObserver:self
@@ -482,20 +485,6 @@
 - (void)setAnimatingStyle:(BACustomAlertViewAnimatingStyle)animatingStyle
 {
     _animatingStyle = animatingStyle;
-    
-    if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
-    {
-
-    }
-    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleShake)
-    {
-
-    }
-    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleFall)
-    {
-
-    }
-    
 }
 
 #pragma mark - **** 手势消失方法
@@ -549,15 +538,24 @@
 #pragma mark - **** 视图消失方法
 - (void)ba_dismissAlertView
 {
-    BAWeak;
-    if (weakSelf.subView)
+
+    if (self.isShowAnimate)
     {
-        [weakSelf dismissAnimationView:weakSelf.subView];
+        if (self.subView)
+        {
+            [self dismissAnimationView:self.subView];
+        }
+        else if (self.containerView)
+        {
+            [self dismissAnimationView:self.containerView];
+        }
     }
-    else if (weakSelf.containerView)
+    else
     {
-        [weakSelf dismissAnimationView:weakSelf.containerView];
+        [self performSelector:@selector(removeSelf)];
+        self.animating = NO;
     }
+
 }
 
 #pragma mark - 进场动画
@@ -613,6 +611,13 @@
             weakSelf.animating = NO;
         }];
     }
+    else
+    {
+        NSLog(@"您没有选择出场动画样式：animatingStyle，默认为没有动画样式！");
+        [self performSelector:@selector(removeSelf)];
+        self.animating = NO;
+    }
+    
 }
 
 #pragma mark - ***** 设置UI

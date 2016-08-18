@@ -91,7 +91,7 @@ typedef NS_ENUM(NSUInteger, BACustomAlertViewAnimatingStyle) {
 
 @interface BACustomAlertView : UIView
 
-/*! 背景颜色 默认：白色*/
+/*! 背景颜色 默认：半透明*/
 @property (nonatomic, strong) UIColor   *bgColor;
 
 /*! 按钮字体颜色 默认：白色*/

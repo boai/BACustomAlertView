@@ -264,7 +264,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         {
             NSLog(@"点击了取消按钮！");
             /*! 隐藏alert */
-//            [weakSelf.alertView2 ba_dismissAlertView];
+            [weakSelf.alertView2 ba_dismissAlertView];
         }
         else if (index == 1)
         {
@@ -289,7 +289,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     _alertView3.buttonTitleColor = [UIColor orangeColor];
     /*! 自定义alert的背景图片 */
     _alertView3.bgImageName      = @"背景.jpg";
-    _alertView3.isShowAnimate = YES;
+//    _alertView3.isShowAnimate = YES;
     /*! 显示alert */
     [_alertView3 ba_showAlertView];
     BAWeak;
