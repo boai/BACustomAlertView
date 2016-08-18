@@ -63,6 +63,7 @@
 #import "BACustomAlertView.h"
 #import <Accelerate/Accelerate.h>
 #import <float.h>
+#import "CALayer+Animation.h"
 
 @interface UIImage (BAAlertImageEffects)
 
@@ -543,16 +544,18 @@
 -(void )showAnimationWithView:(UIView *)animationView
 {
     self.animating = YES;
-    animationView.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
-    [UIView animateWithDuration:0.35f animations:^{
-        animationView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.25f animations:^{
-            animationView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-        } completion:^(BOOL finished) {
-            NSLog(@"show BACustomAlertView动画执行完毕！");
-            self.animating = NO;
-        }];
+
+    
+//    [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
+//        self.animating = NO;
+//    }];
+    
+//    [animationView scaleAnimationShowFinishAnimation:^{
+//        self.animating = NO;
+//    }];
+    
+    [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
+        self.animating = NO;
     }];
 }
 
@@ -560,16 +563,15 @@
 {
     BAWeak;
     self.animating = YES;
-    [UIView animateWithDuration:0.15f animations:^{
-        animationView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.25f animations:^{
-            animationView.transform = CGAffineTransformMakeScale(0.0001f, 0.0001f);
-        } completion:^(BOOL finished) {
-            NSLog(@"dismiss BACustomAlertView动画执行完毕！");
-            [weakSelf performSelector:@selector(removeSelf)];
-            self.animating = NO;
-        }];
+    
+//    [animationView scaleAnimationDismissFinishAnimation:^{
+//        [weakSelf performSelector:@selector(removeSelf)];
+//        self.animating = NO;
+//    }];
+
+    [animationView.layer floatAnimationWithDuration:0.35 finishAnimation:^{
+        [weakSelf performSelector:@selector(removeSelf)];
+        self.animating = NO;
     }];
 }
 
