@@ -192,6 +192,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         temp.blurEffectStyle = 1;
         /*! 开启动画 */
         temp.isShowAnimate   = YES;
+        /*! 进出场动画样式 默认为：1 */
         temp.animatingStyle  = 1;
     }actionClick:^(NSInteger index) {
         if (index == 0)
@@ -289,7 +290,12 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     _alertView3.buttonTitleColor = [UIColor orangeColor];
     /*! 自定义alert的背景图片 */
     _alertView3.bgImageName      = @"背景.jpg";
+    /*! 开启动画，并且设置动画样式，默认：1 */
 //    _alertView3.isShowAnimate = YES;
+    
+    /*! 没有开启动画，直接进出场动画样式，默认开启动画 */
+    _alertView3.animatingStyle  = 2;
+    
     /*! 显示alert */
     [_alertView3 ba_showAlertView];
     BAWeak;

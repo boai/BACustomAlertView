@@ -386,12 +386,6 @@
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     
-    /*! 设置默认样式为： */
-    if (self.isShowAnimate)
-    {
-        _animatingStyle = BACustomAlertViewAnimatingStyleScale;
-    }
-    
     /*! 旋转屏幕通知 */
 //        [[NSNotificationCenter defaultCenter] addObserver:self
 //                                                 selector:@selector(changeFrames:)
@@ -509,6 +503,22 @@
     [window addSubview:self];
     
     [self layoutMySubViews];
+    
+    /*! 设置默认样式为： */
+    if (self.isShowAnimate)
+    {
+        _animatingStyle = BACustomAlertViewAnimatingStyleScale;
+    }
+    /*! 如果没有开启动画，就直接单独写了一个动画样式 */
+    else if (!self.isShowAnimate && self.animatingStyle)
+    {
+        self.isShowAnimate = YES;
+//        _animatingStyle = BACustomAlertViewAnimatingStyleScale;
+    }
+    else
+    {
+        NSLog(@"您没有开启动画，也没有设置动画样式，默认为没有动画！");
+    }
     
     if (self.isShowAnimate)
     {

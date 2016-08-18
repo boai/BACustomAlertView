@@ -97,20 +97,20 @@ typedef NS_ENUM(NSUInteger, BACustomAlertViewAnimatingStyle) {
 /*! 按钮字体颜色 默认：白色*/
 @property (nonatomic, strong) UIColor   *buttonTitleColor;
 
-/*! 是否有晃动动画 默认：关闭*/
-@property (nonatomic, assign) BOOL       isShowAnimate;
-
 /*! 是否开启边缘触摸隐藏 alert 默认：关闭*/
 @property (nonatomic, assign) BOOL       isTouchEdgeHide;
 
 /*! 背景图片名字 默认：没有图片*/
 @property (nonatomic, strong) NSString  *bgImageName;
 
+/*! 是否有进出场动画 默认：NO，如果 YES ，并且同步设置进出场动画枚举为默认值：1 */
+@property (nonatomic, assign) BOOL       isShowAnimate;
+
+/*! 进出场动画枚举 默认：1 ，并且默认开启动画开关 */
+@property (nonatomic, assign) BACustomAlertViewAnimatingStyle animatingStyle;
+
 /*! 背景高斯模糊枚举 默认：1 */
 @property (nonatomic, assign) BACustomAlertViewBlurEffectStyle blurEffectStyle;
-
-/*! 进出场动画枚举 默认：1 */
-@property (nonatomic, assign) BACustomAlertViewAnimatingStyle animatingStyle;
 
 /*!
  * 按钮点击事件回调
