@@ -126,7 +126,6 @@
     }
 }
 
-
 - (void )fallAnimationWithDuration:(NSTimeInterval )duration
                    finishAnimation:(void(^)()) finish
 {

@@ -119,7 +119,7 @@
 @end
 
 
-@interface UIView(MyAnimation)
+@interface UIView (MyAnimation)
 /*!
  *  缩放显示动画
  *
