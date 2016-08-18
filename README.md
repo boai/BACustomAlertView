@@ -239,9 +239,17 @@ iOS 10技术开发群       | `479663605`        |
 
 
 ---
-## 6、感谢
 
-感谢[『陆晓峰』](https://github.com/zeR0Lu)大神的鼎力相助，得以完成如此完美的[『BACustomAlertView』](https://github.com/boai/BACustomAlertView)！<br>
+## 6、开发人员
+
+孙博岩：[『https://github.com/boai』](https://github.com/boai)<br>
+陆晓峰：[『https://github.com/zeR0Lu』](https://github.com/zeR0Lu)<br>
+陈集  ：[『https://github.com/chenjipdc』](https://github.com/chenjipdc)
+
+---
+## 7、感谢
+
+感谢[『陆晓峰』](https://github.com/zeR0Lu) 和 [『陈集』](https://github.com/chenjipdc) 两位大神的鼎力相助，得以完成如此完美的[『BACustomAlertView』](https://github.com/boai/BACustomAlertView)！<br>
     你们的使用就是对博爱最大的鼓励，博爱将继续一如既往的为大家提供最简单的开放源码！
     再次感谢大家对博爱的支持！<br>
     谢谢！
