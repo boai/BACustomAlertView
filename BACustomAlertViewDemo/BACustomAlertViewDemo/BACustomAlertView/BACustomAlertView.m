@@ -422,6 +422,8 @@
         _blurImageView.image = [self screenShotImage];
 //        _blurImageView.image = [UIImage imageNamed:@"123.png"];
         _blurImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        _blurImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _blurImageView.clipsToBounds = true;
         [self addSubview:_blurImageView];
         [self sendSubviewToBack:_blurImageView];
     }
@@ -835,7 +837,7 @@
 //-(void)changeFrames:(NSNotification *)notification
 //{
 //    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-//    [self layoutMySubViews];
+//    
 //    switch (orientation) {
 //        case UIDeviceOrientationPortrait:
 //            NSLog(@"UIDeviceOrientationPortrait");
@@ -877,7 +879,7 @@
         [self performSelector:@selector(prepareForShow)];
         self.containerView.center = CGPointMake(self.viewWidth/2.f, self.viewHeight/2.f);
     }
-    NSLog(@"111111");
+    
 }
 
 #pragma mark - class method
@@ -929,7 +931,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         // CIImage，不能用UIImage的CIImage属性
-        CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"123"]];
+        CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"123.png"]];
 //        UIImage *tempImage = [self imageWithColor:[UIColor grayColor] andSize:[UIScreen mainScreen].bounds.size];
 //        CIImage *ciImage         = [[CIImage alloc] initWithImage:tempImage];
         
@@ -969,4 +971,6 @@
         
     });
 }
+
+
 @end
