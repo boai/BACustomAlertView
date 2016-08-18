@@ -58,7 +58,8 @@
  
  *********************************************************************************
  
- BACustomAlertView项目简介：
+ ***************************   BACustomAlertView 项目简介：  **********************
+ 
  1、开发人员：
  孙博岩：[『https://github.com/boai』](https://github.com/boai)<br>
  陆晓峰：[『https://github.com/zeR0Lu』](https://github.com/zeR0Lu)<br>
@@ -119,7 +120,7 @@ typedef NS_ENUM(NSUInteger, BACustomAlertViewAnimatingStyle) {
 /*! 背景图片名字 默认：没有图片*/
 @property (nonatomic, strong) NSString  *bgImageName;
 
-/*! 是否有进出场动画 默认：NO，如果 YES ，并且同步设置进出场动画枚举为默认值：1 */
+/*! 是否开启进出场动画 默认：NO，如果 YES ，并且同步设置进出场动画枚举为默认值：1 */
 @property (nonatomic, assign) BOOL       isShowAnimate;
 
 /*! 进出场动画枚举 默认：1 ，并且默认开启动画开关 */

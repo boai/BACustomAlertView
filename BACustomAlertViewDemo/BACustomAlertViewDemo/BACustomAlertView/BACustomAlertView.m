@@ -58,7 +58,8 @@
  
  *********************************************************************************
  
- BACustomAlertView项目简介：
+ ***************************   BACustomAlertView 项目简介：  **********************
+
  1、开发人员：
  孙博岩：[『https://github.com/boai』](https://github.com/boai)<br>
  陆晓峰：[『https://github.com/zeR0Lu』](https://github.com/zeR0Lu)<br>
