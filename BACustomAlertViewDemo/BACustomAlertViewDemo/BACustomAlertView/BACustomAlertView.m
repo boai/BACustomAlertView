@@ -308,10 +308,10 @@
         self.subView = customView;
         [self performSelector:@selector(setupUI)];
 
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:@selector(changeFrames:)
-//                                                     name:UIDeviceOrientationDidChangeNotification
-//                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeFrames:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -332,10 +332,10 @@
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:@selector(changeFrames:)
-//                                                     name:UIDeviceOrientationDidChangeNotification
-//                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeFrames:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
         
         [self performSelector:@selector(loadUI)];
     }
@@ -467,8 +467,10 @@
     {
         self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyDarkEffect];
     }
-
-//    self.blurImageView.image = [self image111];
+    
+    [self imageOutPut:^(UIImage *image) {
+        self.blurImageView.image = image;
+    }];
 }
 
 #pragma mark - **** 手势消失方法
@@ -490,38 +492,61 @@
 {
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
     [window addSubview:self];
-
+    [self layoutMySubViews];
+    
     BAWeak;
     if (self.isShowAnimate)
     {
-        [UIView animateWithDuration:0.f animations:^{
-            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-            
-            for (int i = 0; i < 7; i ++)
-            {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i*0.03f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [UIView animateWithDuration:1.0f
-                                          delay:0.f
-                         usingSpringWithDamping:0.5f
-                          initialSpringVelocity:0.8
-                                        options:UIViewAnimationOptionCurveEaseOut
-                                     animations:^{
-                                         if (weakSelf.subView)
-                                         {
-                                             weakSelf.subView.center = window.center;
-                                         }
-                                         else if (weakSelf.containerView)
-                                         {
-                                             [weakSelf performSelector:@selector(prepareForShow)];
-                                             weakSelf.containerView.center = window.center;
-                                         }
-                                     } completion:nil];
-                });
-            }
-            
-        } completion:^(BOOL finished) {
-            NSLog(@"BACustomAlertView动画执行完毕！");
-        }];
+        if (weakSelf.subView)
+        {
+            weakSelf.subView.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
+            [UIView animateWithDuration:0.35f animations:^{
+                weakSelf.subView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
+            } completion:^(BOOL finished) {
+                //            NSLog(@"BACustomAlertView动画执行完毕！");
+                [UIView animateWithDuration:0.25f animations:^{
+                    weakSelf.subView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+                } completion:^(BOOL finished) {
+                    NSLog(@"BACustomAlertView动画执行完毕！");
+                }];
+            }];
+        }
+        else
+        {
+            weakSelf.containerView.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
+            [UIView animateWithDuration:0.35f animations:^{
+    //            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    //            
+    //            for (int i = 0; i < 7; i ++)
+    //            {
+    //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i*0.03f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //                    [UIView animateWithDuration:0.f
+    //                                          delay:0.f
+    //                         usingSpringWithDamping:0.5f
+    //                          initialSpringVelocity:0.8
+    //                                        options:UIViewAnimationOptionCurveEaseOut
+    //                                     animations:^{
+    //                                         if (weakSelf.subView)
+    //                                         {
+    //                                             weakSelf.subView.center = window.center;
+    //                                         }
+    //                                         else if (weakSelf.containerView)
+    //                                         {
+    //                                             [weakSelf performSelector:@selector(prepareForShow)];
+    //                                             weakSelf.containerView.center = window.center;
+    //                                         }
+    //                                     } completion:nil];
+    //                });
+    //            }
+                weakSelf.containerView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.25f animations:^{
+                    weakSelf.containerView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+                } completion:^(BOOL finished) {
+                    NSLog(@"BACustomAlertView动画执行完毕！");
+                }];
+            }];
+        }
     }
     else
     {
@@ -541,19 +566,40 @@
 - (void)ba_dismissAlertView
 {
     BAWeak;
-    [UIView animateWithDuration:0 animations:^{
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+//    [UIView animateWithDuration:0 animations:^{
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         if (weakSelf.subView)
         {
-            weakSelf.subView.transform = CGAffineTransformIdentity;
+//            weakSelf.subView.transform = CGAffineTransformIdentity;
+            [UIView animateWithDuration:0.25f animations:^{
+                weakSelf.subView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
+            } completion:^(BOOL finished) {
+                //            NSLog(@"BACustomAlertView动画执行完毕！");
+                [UIView animateWithDuration:0.15f animations:^{
+                    weakSelf.subView.transform = CGAffineTransformMakeScale(0.0001f, 0.0001f);
+                } completion:^(BOOL finished) {
+                    NSLog(@"BACustomAlertView动画执行完毕！");
+                    [weakSelf performSelector:@selector(removeSelf)];
+                }];
+            }];
         }
         else if (weakSelf.containerView)
         {
-            weakSelf.containerView.transform = CGAffineTransformIdentity;
+            [UIView animateWithDuration:0.15f animations:^{
+                weakSelf.containerView.transform = CGAffineTransformMakeScale(1.18f, 1.18f);
+            } completion:^(BOOL finished) {
+                //            NSLog(@"BACustomAlertView动画执行完毕！");
+                [UIView animateWithDuration:0.25f animations:^{
+                    weakSelf.containerView.transform = CGAffineTransformMakeScale(0.0001f, 0.0001f);
+                } completion:^(BOOL finished) {
+                    NSLog(@"BACustomAlertView动画执行完毕！");
+                    [weakSelf performSelector:@selector(removeSelf)];
+                }];
+            }];
         }
-    } completion:^(BOOL finished) {
-        [weakSelf performSelector:@selector(removeSelf)];
-    }];
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 
 #pragma mark - ***** 设置UI
@@ -787,6 +833,20 @@
     return image;
 }
 
+- (UIImage *)imageWithColor:(UIColor *)color andSize:(CGSize )size
+{
+    CGRect rect          = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    
+    CGContextFillRect(context, rect);
+    UIImage *image       = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 #pragma mark - 清除所有视图
 - (void)removeSelf
 {
@@ -799,33 +859,37 @@
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self removeFromSuperview];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-//#pragma mark - 转屏通知处理
-//-(void)changeFrames:(NSNotification *)notification
-//{
-//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-//    
-//    switch (orientation) {
-//        case UIDeviceOrientationPortrait:
-//            NSLog(@"UIDeviceOrientationPortrait");
-//            break;
-//        case UIDeviceOrientationLandscapeLeft:
-//            NSLog(@"UIDeviceOrientationLandscapeLeft");
-//            break;
-//        case UIDeviceOrientationLandscapeRight:
-//            NSLog(@"UIDeviceOrientationLandscapeRight");
-//            break;
-//        default:
-//            break;
-//    }
-//}
+#pragma mark - 转屏通知处理
+-(void)changeFrames:(NSNotification *)notification
+{
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    [self layoutMySubViews];
+    switch (orientation) {
+        case UIDeviceOrientationPortrait:
+            NSLog(@"UIDeviceOrientationPortrait");
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            NSLog(@"UIDeviceOrientationLandscapeLeft");
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            NSLog(@"UIDeviceOrientationLandscapeRight");
+            break;
+        default:
+            break;
+    }
+}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
 
+}
+
+-(void )layoutMySubViews
+{
     self.viewWidth                = [UIScreen mainScreen].bounds.size.width;
     self.viewHeight               = [UIScreen mainScreen].bounds.size.height;
     
@@ -888,39 +952,49 @@
 }
 
 /*! 待优化 */
-- (UIImage *)image111
+- (void )imageOutPut:(void(^)(UIImage *image)) outPutImage
 {
-    // CIImage，不能用UIImage的CIImage属性
-    CIImage *ciImage         = [[CIImage alloc] initWithImage:[self screenShotImage]];
-    
-    // CIFilter(滤镜的名字)
-    CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
-//    CIColor *color = [CIColor colorWithRed:1.0 green:0 blue:0];
-    // 将图片放到滤镜中
-//    [blurFilter setValue:color forKey:kCIInputColorKey];
-    [blurFilter setValue:ciImage forKey:kCIInputImageKey];
-    
-    // inputRadius参数: 模糊的程度 默认为10, 范围为0-100, 接收的参数为NSNumber类型
-    
-    // 设置模糊的程度
-    [blurFilter setValue:@(3) forKey:@"inputRadius"];
-    
-    // 将处理好的图片导出
-    CIImage *outImage        = [blurFilter valueForKey:kCIOutputImageKey];
-    
-    //理论上这些东西需要放到子线程去渲染，待优化
-    // CIContext 上下文(参数nil，默认为CPU渲染, 如果想用GPU渲染来提高效率的话,则需要传参数)
-    CIContext *context       = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer:@(YES)}];
-    
-    // 将处理好的图片创建出来
-    CGImageRef outputCGImage = [context createCGImage:outImage fromRect:[outImage extent]];
-    
-    UIImage *blurImage       = [UIImage imageWithCGImage:outputCGImage];
-    
-    // 释放CGImageRef
-    CGImageRelease(outputCGImage);
-    
-    return blurImage;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        // CIImage，不能用UIImage的CIImage属性
+//        CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"美女.jpg"]];
+        UIImage *tempImage = [self imageWithColor:[UIColor grayColor] andSize:[UIScreen mainScreen].bounds.size];
+        CIImage *ciImage         = [[CIImage alloc] initWithImage:tempImage];
+        
+        // CIFilter(滤镜的名字)
+        CIFilter *blurFilter     = [CIFilter filterWithName:@"CIGaussianBlur"];
+        //    CIColor *color = [CIColor colorWithRed:1.0 green:0 blue:0];
+        // 将图片放到滤镜中
+        //    [blurFilter setValue:color forKey:kCIInputColorKey];
+        [blurFilter setValue:ciImage forKey:kCIInputImageKey];
+        
+        // inputRadius参数: 模糊的程度 默认为10, 范围为0-100, 接收的参数为NSNumber类型
+        
+        // 设置模糊的程度
+        [blurFilter setValue:@(50) forKey:kCIInputRadiusKey];
+//        [blurFilter setValue:@(10) forKey:kCIInputSharpnessKey];
+        
+        // 将处理好的图片导出
+        CIImage *outImage        = [blurFilter valueForKey:kCIOutputImageKey];
+        
+        //理论上这些东西需要放到子线程去渲染，待优化
+        // CIContext 上下文(参数nil，默认为CPU渲染, 如果想用GPU渲染来提高效率的话,则需要传参数)
+        CIContext *context       = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer:@(YES)}];
+        
+        // 将处理好的图片创建出来
+        CGImageRef outputCGImage = [context createCGImage:outImage fromRect:[UIScreen mainScreen].bounds];
+        
+        UIImage *blurImage       = [UIImage imageWithCGImage:outputCGImage];
+        
+        // 释放CGImageRef
+        CGImageRelease(outputCGImage);
+        
+        if (outPutImage) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                outPutImage(blurImage);
+            });
+        }
+        
+    });
 }
-
 @end

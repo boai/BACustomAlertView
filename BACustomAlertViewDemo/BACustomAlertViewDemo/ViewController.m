@@ -186,6 +186,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
         temp.bgColor         = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         temp.isTouchEdgeHide = YES;
+                                   temp.blurEffectStyle = 1;
+                                   temp.isShowAnimate = YES;
     }actionClick:^(NSInteger index) {
         if (index == 0)
         {
@@ -248,6 +250,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     _alertView2.buttonTitleColor = [UIColor orangeColor];
     _alertView2.bgColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.3];
 
+    _alertView2.isShowAnimate = YES;
     /*! 显示alert */
     [_alertView2 ba_showAlertView];
     BAWeak;
@@ -281,6 +284,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     _alertView3.buttonTitleColor = [UIColor orangeColor];
     /*! 自定义alert的背景图片 */
     _alertView3.bgImageName      = @"背景.jpg";
+    _alertView3.isShowAnimate = YES;
     /*! 显示alert */
     [_alertView3 ba_showAlertView];
     BAWeak;
@@ -367,6 +371,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     _chooseBtn.autoresizingMask  = UIViewAutoresizingFlexibleWidth;
     
     _alertView5                  = [[BACustomAlertView alloc] initWithCustomView:view1];
+    _alertView5.isShowAnimate = YES;
     [_alertView5 ba_showAlertView];
 }
 
