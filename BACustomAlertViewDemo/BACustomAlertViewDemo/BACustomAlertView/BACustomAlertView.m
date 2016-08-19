@@ -58,7 +58,25 @@
  
  *********************************************************************************
  
+ ***************************   BACustomAlertView 项目简介：  **********************
+
+ 1、开发人员：
+ 孙博岩：[『https://github.com/boai』](https://github.com/boai)<br>
+ 陆晓峰：[『https://github.com/zeR0Lu』](https://github.com/zeR0Lu)<br>
+ 陈集  ：[『https://github.com/chenjipdc』](https://github.com/chenjipdc)
+ 2、项目源码地址：
+ https://github.com/boai/BACustomAlertView
+ 3、安装及使用方式：
+ * 3.1、pod 导入【当前最新版本：1.0.4】：
+ pod 'BACustomAlertView'
+ 导入头文件：#import <BACustomAlertView.h>
+ * 3.2、下载demo，把 BACustomAlertView 文件夹拖入项目即可，
+ 导入头文件：#import "BACustomAlertView.h"
+ 4、如果开发中遇到特殊情况或者bug，请及时反馈给我们，谢谢！
+ 5、也可以加入我们的大家庭：QQ群 【 479663605 】，希望广大小白和大神能够积极加入！
+ 
  */
+
 
 #import "BACustomAlertView.h"
 #import <Accelerate/Accelerate.h>
@@ -293,14 +311,15 @@
 
 
 @property (nonatomic, assign, getter=isAnimating) BOOL animating;
+
 @end
 
 @implementation BACustomAlertView
 {
-    CGFloat   _scrollBottom;
-    CGFloat   _buttonsHeight;
-    CGFloat   _maxContentWidth;
-    CGFloat   _maxAlertViewHeight;
+    CGFloat  _scrollBottom;
+    CGFloat  _buttonsHeight;
+    CGFloat  _maxContentWidth;
+    CGFloat  _maxAlertViewHeight;
 }
 
 #pragma mark - ***** 初始化自定义View
@@ -310,11 +329,6 @@
     {
         self.subView = customView;
         [self performSelector:@selector(setupUI)];
-
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:@selector(changeFrames:)
-//                                                     name:UIDeviceOrientationDidChangeNotification
-//                                                   object:nil];
     }
     return self;
 }
@@ -334,11 +348,6 @@
         _image        = image;
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:@selector(changeFrames:)
-//                                                     name:UIDeviceOrientationDidChangeNotification
-//                                                   object:nil];
         
         [self performSelector:@selector(loadUI)];
     }
@@ -395,6 +404,11 @@
     /*! 添加手势 */
     [self addGestureRecognizer:self.dismissTap];
     
+    /*! 旋转屏幕通知 */
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(changeFrames:)
+//                                                     name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
     
 }
 
@@ -417,8 +431,10 @@
     return _bgColor;
 }
 
-- (UIImageView *)blurImageView {
-    if ( !_blurImageView ) {
+- (UIImageView *)blurImageView
+{
+    if ( !_blurImageView )
+    {
         _blurImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _blurImageView.image = [self screenShotImage];
 //        _blurImageView.image = [UIImage imageNamed:@"123.png"];
@@ -478,6 +494,11 @@
     }];
 }
 
+- (void)setAnimatingStyle:(BACustomAlertViewAnimatingStyle)animatingStyle
+{
+    _animatingStyle = animatingStyle;
+}
+
 #pragma mark - **** 手势消失方法
 - (void)dismissTapAction:(UITapGestureRecognizer *)tapG
 {
@@ -501,13 +522,29 @@
     
     [self layoutMySubViews];
     
+    /*! 设置默认样式为： */
+    if (self.isShowAnimate)
+    {
+        _animatingStyle = BACustomAlertViewAnimatingStyleScale;
+    }
+    /*! 如果没有开启动画，就直接单独写了一个动画样式 */
+    else if (!self.isShowAnimate && self.animatingStyle)
+    {
+        self.isShowAnimate = YES;
+//        _animatingStyle = BACustomAlertViewAnimatingStyleScale;
+    }
+    else
+    {
+        NSLog(@"您没有开启动画，也没有设置动画样式，默认为没有动画！");
+    }
+    
     if (self.isShowAnimate)
     {
         if (weakSelf.subView)
         {
             [weakSelf showAnimationWithView:weakSelf.subView];
         }
-        else
+        else if (self.containerView)
         {
             [weakSelf showAnimationWithView:weakSelf.containerView];
         }
@@ -529,22 +566,32 @@
 #pragma mark - **** 视图消失方法
 - (void)ba_dismissAlertView
 {
-    BAWeak;
-    if (weakSelf.subView)
+
+    if (self.isShowAnimate)
     {
-        [weakSelf dismissAnimationView:weakSelf.subView];
+        if (self.subView)
+        {
+            [self dismissAnimationView:self.subView];
+        }
+        else if (self.containerView)
+        {
+            [self dismissAnimationView:self.containerView];
+        }
     }
-    else if (weakSelf.containerView)
+    else
     {
-        [weakSelf dismissAnimationView:weakSelf.containerView];
+        [self performSelector:@selector(removeSelf)];
+        self.animating = NO;
     }
+
 }
 
-#pragma mark - 动画
--(void )showAnimationWithView:(UIView *)animationView
+#pragma mark - 进场动画
+- (void )showAnimationWithView:(UIView *)animationView
 {
     self.animating = YES;
 
+<<<<<<< HEAD
     
     [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
         self.animating = NO;
@@ -557,12 +604,35 @@
 //    [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
 //        self.animating = NO;
 //    }];
+=======
+    BAWeak;
+    if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
+    {
+        [animationView scaleAnimationShowFinishAnimation:^{
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleShake)
+    {
+        [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleFall)
+    {
+        [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
+            weakSelf.animating = NO;
+        }];
+    }
+>>>>>>> boai/master
 }
 
--(void )dismissAnimationView:(UIView *)animationView
+#pragma mark - 出场动画
+- (void )dismissAnimationView:(UIView *)animationView
 {
     BAWeak;
     self.animating = YES;
+<<<<<<< HEAD
     
     [animationView scaleAnimationDismissFinishAnimation:^{
         [weakSelf performSelector:@selector(removeSelf)];
@@ -573,6 +643,37 @@
 //        [weakSelf performSelector:@selector(removeSelf)];
 //        self.animating = NO;
 //    }];
+=======
+
+    if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
+    {
+        [animationView scaleAnimationDismissFinishAnimation:^{
+            [weakSelf performSelector:@selector(removeSelf)];
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleShake)
+    {
+        [animationView.layer floatAnimationWithDuration:0.35f finishAnimation:^{
+            [weakSelf performSelector:@selector(removeSelf)];
+            weakSelf.animating = NO;
+        }];
+    }
+    else if (self.animatingStyle == BACustomAlertViewAnimatingStyleFall)
+    {
+        [animationView.layer floatAnimationWithDuration:0.35f finishAnimation:^{
+            [weakSelf performSelector:@selector(removeSelf)];
+            weakSelf.animating = NO;
+        }];
+    }
+    else
+    {
+        NSLog(@"您没有选择出场动画样式：animatingStyle，默认为没有动画样式！");
+        [self performSelector:@selector(removeSelf)];
+        self.animating = NO;
+    }
+    
+>>>>>>> boai/master
 }
 
 #pragma mark - ***** 设置UI
@@ -913,10 +1014,11 @@
     temp.buttonActionBlock = action;
 }
 
-- (UIImage *)screenShotImage {
+- (UIImage *)screenShotImage
+{
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREENWIDTH, SCREENHEIGHT), YES, 1);
     
-    //设置截屏大小
+    /*! 设置截屏大小 */
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
     [[window layer] renderInContext:UIGraphicsGetCurrentContext()];
     
@@ -932,7 +1034,7 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        // CIImage，不能用UIImage的CIImage属性
+        /*! CIImage，不能用UIImage的CIImage属性 */
         CIImage *ciImage         = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"123.png"]];
 //        UIImage *tempImage = [self imageWithColor:[UIColor grayColor] andSize:[UIScreen mainScreen].bounds.size];
 //        CIImage *ciImage         = [[CIImage alloc] initWithImage:tempImage];
