@@ -591,20 +591,6 @@
 {
     self.animating = YES;
 
-<<<<<<< HEAD
-    
-    [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
-        self.animating = NO;
-    }];
-    
-//    [animationView scaleAnimationShowFinishAnimation:^{
-//        self.animating = NO;
-//    }];
-    
-//    [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
-//        self.animating = NO;
-//    }];
-=======
     BAWeak;
     if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
     {
@@ -624,7 +610,6 @@
             weakSelf.animating = NO;
         }];
     }
->>>>>>> boai/master
 }
 
 #pragma mark - 出场动画
@@ -632,18 +617,6 @@
 {
     BAWeak;
     self.animating = YES;
-<<<<<<< HEAD
-    
-    [animationView scaleAnimationDismissFinishAnimation:^{
-        [weakSelf performSelector:@selector(removeSelf)];
-        self.animating = NO;
-    }];
-
-//    [animationView.layer floatAnimationWithDuration:0.5 finishAnimation:^{
-//        [weakSelf performSelector:@selector(removeSelf)];
-//        self.animating = NO;
-//    }];
-=======
 
     if (self.animatingStyle == BACustomAlertViewAnimatingStyleScale)
     {
@@ -673,7 +646,6 @@
         self.animating = NO;
     }
     
->>>>>>> boai/master
 }
 
 #pragma mark - ***** 设置UI
