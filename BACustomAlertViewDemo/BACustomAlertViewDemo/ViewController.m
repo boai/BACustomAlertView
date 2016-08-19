@@ -207,7 +207,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         /*! 开启边缘触摸隐藏alertView */
         temp.isTouchEdgeHide = YES;
         /*! 添加高斯模糊的样式 */
-        temp.blurEffectStyle = 1;
+        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleDark;
         /*! 开启动画 */
         temp.isShowAnimate   = YES;
         /*! 进出场动画样式 默认为：1 */
