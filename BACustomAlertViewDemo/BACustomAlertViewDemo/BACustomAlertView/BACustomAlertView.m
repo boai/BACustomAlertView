@@ -546,17 +546,17 @@
     self.animating = YES;
 
     
-//    [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
-//        self.animating = NO;
-//    }];
+    [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
+        self.animating = NO;
+    }];
     
 //    [animationView scaleAnimationShowFinishAnimation:^{
 //        self.animating = NO;
 //    }];
     
-    [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
-        self.animating = NO;
-    }];
+//    [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
+//        self.animating = NO;
+//    }];
 }
 
 -(void )dismissAnimationView:(UIView *)animationView
@@ -564,15 +564,15 @@
     BAWeak;
     self.animating = YES;
     
-//    [animationView scaleAnimationDismissFinishAnimation:^{
-//        [weakSelf performSelector:@selector(removeSelf)];
-//        self.animating = NO;
-//    }];
-
-    [animationView.layer floatAnimationWithDuration:0.35 finishAnimation:^{
+    [animationView scaleAnimationDismissFinishAnimation:^{
         [weakSelf performSelector:@selector(removeSelf)];
         self.animating = NO;
     }];
+
+//    [animationView.layer floatAnimationWithDuration:0.5 finishAnimation:^{
+//        [weakSelf performSelector:@selector(removeSelf)];
+//        self.animating = NO;
+//    }];
 }
 
 #pragma mark - ***** 设置UI
