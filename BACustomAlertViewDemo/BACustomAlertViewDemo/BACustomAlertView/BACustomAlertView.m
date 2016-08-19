@@ -352,6 +352,8 @@
         _message      = [message copy];
         _buttonTitles = [NSArray arrayWithArray:buttonTitles];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrames:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        
         [self performSelector:@selector(loadUI)];
     }
     return self;
@@ -912,24 +914,28 @@
 }
 //
 //#pragma mark - 转屏通知处理
-//-(void)changeFrames:(NSNotification *)notification
-//{
-//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-//    
-//    switch (orientation) {
-//        case UIDeviceOrientationPortrait:
-//            NSLog(@"UIDeviceOrientationPortrait");
-//            break;
-//        case UIDeviceOrientationLandscapeLeft:
-//            NSLog(@"UIDeviceOrientationLandscapeLeft");
-//            break;
-//        case UIDeviceOrientationLandscapeRight:
-//            NSLog(@"UIDeviceOrientationLandscapeRight");
-//            break;
-//        default:
-//            break;
-//    }
-//}
+-(void)changeFrames:(NSNotification *)notification
+{
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    
+    switch (orientation) {
+        case UIDeviceOrientationPortrait:
+            NSLog(@"UIDeviceOrientationPortrait");
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            NSLog(@"UIDeviceOrientationLandscapeLeft");
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            NSLog(@"UIDeviceOrientationLandscapeRight");
+            break;
+        default:
+            break;
+    }
+    
+    [self.containerView.layer removeAllAnimations];
+    self.animating = false;
+    [self layoutMySubViews];
+}
 
 - (void)layoutSubviews
 {
@@ -937,6 +943,8 @@
     if (!self.animating)
     {
         [self layoutMySubViews];
+    }else {
+        
     }
     
 }
