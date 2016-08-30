@@ -205,11 +205,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [UIView new];
-    if (0 == section) { headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 40); }
-    else if (1 == section) { headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 20); }
     
     UILabel *headerTitle = [UILabel new];
-    headerTitle.frame = headerView.bounds;
     headerTitle.font = [UIFont systemFontOfSize:13];
     headerTitle.textColor = [UIColor redColor];
     headerTitle.numberOfLines = 0;
@@ -217,12 +214,12 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     
     if (0 == section)
     {
-        headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 40);
+        headerTitle.frame = CGRectMake(12, 20, SCREENWIDTH - 40, 20);
         headerTitle.text = @"alert 的几种日常用法，高斯模糊、炫酷动画，应有尽有！";
     }
     else if (1 == section)
     {
-        headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 20);
+        headerTitle.frame = CGRectMake(12, 0, SCREENWIDTH - 40, 20);
         headerTitle.text = @"测试 ActionSheet，开发 ing 慎点！";
     }
     
