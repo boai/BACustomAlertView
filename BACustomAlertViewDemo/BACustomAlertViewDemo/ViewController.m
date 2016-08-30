@@ -125,6 +125,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     self.title = @"博爱的BACustomAlertView";
+    
+    
 }
 
 #pragma mark - UITableViewDataSource / UITableViewDelegate
@@ -202,12 +204,12 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     /*! 第一种封装使用示例 */
     [BACustomAlertView ba_showAlertWithTitle:@"博爱温馨提示：" message:titleMsg1 image:nil buttonTitles:@[@"取消",@"确定"] configuration:^(BACustomAlertView *temp) {
         /*! 添加高斯模糊的样式 */
-//        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
+        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
 //        temp.bgColor       = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         /*! 开启边缘触摸隐藏alertView */
         temp.isTouchEdgeHide = YES;
         /*! 添加高斯模糊的样式 */
-        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleDark;
+//        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleDark;
         /*! 开启动画 */
         temp.isShowAnimate   = YES;
         /*! 进出场动画样式 默认为：1 */

@@ -103,8 +103,8 @@
 
 - (UIImage *)BAAlert_ApplyLightEffect
 {
-    UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.2];
-    return [self BAAlert_ApplyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.4];
+    return [self BAAlert_ApplyBlurWithRadius:1.3 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 - (UIImage *)BAAlert_ApplyExtraLightEffect
@@ -138,7 +138,6 @@
     }
     return [self BAAlert_ApplyBlurWithRadius:10 tintColor:effectColor saturationDeltaFactor:-1.0 maskImage:nil];
 }
-
 
 - (UIImage *)BAAlert_ApplyBlurWithRadius:(CGFloat)blurRadius
                                tintColor:(UIColor *)tintColor
@@ -242,16 +241,16 @@
         UIGraphicsEndImageContext();
     }
     
-    // Set up output context.
+    // 开启上下文 用于输出图像
     UIGraphicsBeginImageContextWithOptions(self.size, NO, [[UIScreen mainScreen] scale]);
     CGContextRef outputContext = UIGraphicsGetCurrentContext();
     CGContextScaleCTM(outputContext, 1.0, -1.0);
     CGContextTranslateCTM(outputContext, 0, -self.size.height);
     
-    // Draw base image.
+    // 开始画底图
     CGContextDrawImage(outputContext, imageRect, self.CGImage);
     
-    // Draw effect image.
+    // 开始画模糊效果
     if (hasBlur) {
         CGContextSaveGState(outputContext);
         if (maskImage) {
@@ -261,7 +260,7 @@
         CGContextRestoreGState(outputContext);
     }
     
-    // Add in color tint.
+    // 添加颜色渲染
     if (tintColor) {
         CGContextSaveGState(outputContext);
         CGContextSetFillColorWithColor(outputContext, tintColor.CGColor);
@@ -269,7 +268,7 @@
         CGContextRestoreGState(outputContext);
     }
     
-    // Output image is ready.
+    // 输出成品,并关闭上下文
     UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -442,10 +441,10 @@
     {
         _blurImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _blurImageView.image = [self screenShotImage];
-//        _blurImageView.image = [UIImage imageNamed:@"123.png"];
         _blurImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _blurImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _blurImageView.contentMode = UIViewContentModeScaleAspectFit;
         _blurImageView.clipsToBounds = true;
+        _blurImageView.backgroundColor = [UIColor clearColor];
         [self addSubview:_blurImageView];
         [self sendSubviewToBack:_blurImageView];
     }
@@ -494,9 +493,9 @@
         self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyDarkEffect];
     }
     
-    [self imageOutPut:^(UIImage *image) {
-        self.blurImageView.image = image;
-    }];
+//    [self imageOutPut:^(UIImage *image) {
+//        self.blurImageView.image = image;
+//    }];
 }
 
 - (void)setAnimatingStyle:(BACustomAlertViewAnimatingStyle)animatingStyle
@@ -523,6 +522,7 @@
 {
     BAWeak;
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
+    
     [window addSubview:self];
     
     [self layoutMySubViews];
@@ -999,11 +999,11 @@
 
 - (UIImage *)screenShotImage
 {
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREENWIDTH, SCREENHEIGHT), YES, 1);
-    
-    /*! 设置截屏大小 */
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREENWIDTH + 50, SCREENHEIGHT * 2), YES, 1.f);
+//
+//    /*! 设置截屏大小 */
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
-    [[window layer] renderInContext:UIGraphicsGetCurrentContext()];
+    [[window layer] renderInContext:UIGraphicsGetCurrentContext() ];
     
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
     
