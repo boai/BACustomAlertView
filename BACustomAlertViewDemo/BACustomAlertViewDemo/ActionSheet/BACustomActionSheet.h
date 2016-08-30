@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define SCREENWIDTH    [UIScreen mainScreen].bounds.size.width
+#define SCREENHEIGHT   [UIScreen mainScreen].bounds.size.height
+
+#define BAWeak         __weak __typeof(self) weakSelf = self
+
 typedef void(^ButtonActionBlock)(NSInteger index);
 
 @interface BACustomActionSheet : UIView 
