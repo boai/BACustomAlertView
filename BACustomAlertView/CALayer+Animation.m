@@ -88,13 +88,8 @@
 {
     CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animation];
     keyAnimation.duration = duration;
-    keyAnimation.keyPath = @"transform";
-    NSValue *value1 =  [NSValue valueWithCATransform3D:CATransform3DMakeRotation((0) / 180.0 * M_PI, 0, 0, 1)];
-    NSValue *value2 =  [NSValue valueWithCATransform3D:CATransform3DMakeRotation((-radius) / 180.0 * M_PI, 0, 0, 1)];
-    NSValue *value3 =  [NSValue valueWithCATransform3D:CATransform3DMakeRotation((radius) / 180.0 * M_PI, 0, 0, 1)];
-    NSValue *value4 =  [NSValue valueWithCATransform3D:CATransform3DMakeRotation((-radius) / 180.0 * M_PI, 0, 0, 1)];
-    NSValue *value5 =  [NSValue valueWithCATransform3D:CATransform3DMakeRotation((0) / 180.0 * M_PI, 0, 0, 1)];
-    keyAnimation.values = @[value1,value2,value3,value4,value5];
+    keyAnimation.keyPath = @"transform.rotation.z";
+    keyAnimation.values = @[@((0) / 180.0 * M_PI),@((-radius) / 180.0 * M_PI),@((radius) / 180.0 * M_PI),@((-radius) / 180.0 * M_PI),@((0) / 180.0 * M_PI)];
     keyAnimation.repeatCount = repeat;
     [self addAnimation:keyAnimation forKey:nil];
     if (finish)
@@ -114,18 +109,16 @@
     keyAnimation.keyPath = @"position";
     keyAnimation.duration = duration;
     keyAnimation.repeatCount = repeat;
-    keyAnimation.removedOnCompletion = NO;
     keyAnimation.fillMode = kCAFillModeForwards;
     keyAnimation.path = path;
     [self addAnimation:keyAnimation forKey:nil];
     if (finish)
     {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * (CGFloat )repeat * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((duration * (CGFloat )repeat - 0.1) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             finish();
         });
     }
 }
-
 
 - (void )fallAnimationWithDuration:(NSTimeInterval )duration
                    finishAnimation:(void(^)()) finish
