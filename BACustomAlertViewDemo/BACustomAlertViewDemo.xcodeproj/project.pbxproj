@@ -462,11 +462,7 @@
 					"$(PROJECT_DIR)/BACustomAlertViewDemo",
 				);
 				INFOPLIST_FILE = BACustomAlertViewDemo/Info.plist;
-<<<<<<< HEAD
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-=======
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
->>>>>>> boai/master
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boai.BACustomAlertViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -483,11 +479,7 @@
 					"$(PROJECT_DIR)/BACustomAlertViewDemo",
 				);
 				INFOPLIST_FILE = BACustomAlertViewDemo/Info.plist;
-<<<<<<< HEAD
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-=======
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
->>>>>>> boai/master
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boai.BACustomAlertViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
