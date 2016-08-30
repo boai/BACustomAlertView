@@ -11,15 +11,19 @@
 #define SCREENWIDTH    [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT   [UIScreen mainScreen].bounds.size.height
 
-@interface BACustomActionSheet () <UITableViewDelegate,UITableViewDataSource>
+@interface BACustomActionSheet ()
+<
+    UITableViewDelegate,
+    UITableViewDataSource
+>
 
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UITableView  *tableView;
 
-@property (strong, nonatomic) UIControl *overlayView;
+@property (strong, nonatomic) UIControl    *overlayView;
 
-@property (strong, nonatomic) NSArray *dataArray;
+@property (strong, nonatomic) NSArray      *dataArray;
 
-@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic  ) NSString     *title;
 
 @property (copy, nonatomic) void(^callback)(NSInteger index);
 
@@ -38,19 +42,35 @@
     return actionSheet;
 }
 
-+ (void)ba_showActionSheetHaveTitleWithList:(NSArray *)list title:(NSString *)title ClikckButtonIndex:(ButtonActionBlock)clikckButtonIndex
+/*!
+ *  创建一个带标题的ActionSheet
+ *
+ *  @param list              ActionSheet的各个选项
+ *  @param title             标题
+ *  @param clikckButtonIndex 按钮的点击事件
+ */
++ (void)ba_showActionSheetHaveTitleWithList:(NSArray *)list
+                                      title:(NSString *)title
+                          ClikckButtonIndex:(ButtonActionBlock)clikckButtonIndex
 {
     BACustomActionSheet *actionSheet = [self shareActionSheet];
-    actionSheet.dataArray = list;
-    actionSheet.title = title;
+    actionSheet.dataArray            = list;
+    actionSheet.title                = title;
     [actionSheet.tableView reloadData];
     [actionSheet show];
 }
 
-+ (void)ba_showActionSheetWithList:(NSArray *)list ClikckButtonIndex:(ButtonActionBlock)clikckButtonIndex
+/*!
+ *  创建一个不带标题的ActionSheet
+ *
+ *  @param list              ActionSheet的各个选项
+ *  @param clikckButtonIndex 按钮的点击事件
+ */
++ (void)ba_showActionSheetWithList:(NSArray *)list
+                 ClikckButtonIndex:(ButtonActionBlock)clikckButtonIndex
 {
     BACustomActionSheet *actionSheet = [self shareActionSheet];
-    actionSheet.dataArray = list;
+    actionSheet.dataArray            = list;
     [actionSheet.tableView reloadData];
     [actionSheet show];
 }
@@ -109,7 +129,8 @@
     if ( 0 == indexPath.section )
     {
         self.callback(indexPath.row);
-    }else
+    }
+    else
     {
         [self dismiss];
     }
@@ -119,7 +140,6 @@
 #pragma mark - UpdateFrame
 - (void)fadeIn
 {
-    
     CGFloat tableViewHeight = self.tableView.contentSize.height;
     self.tableView.frame = CGRectMake(0.f, 0.f, SCREENWIDTH, tableViewHeight);
     
@@ -153,7 +173,6 @@
 {
     [self fadeOut];
 }
-
 
 #pragma mark - lazy
 - (UITableView *)tableView {
