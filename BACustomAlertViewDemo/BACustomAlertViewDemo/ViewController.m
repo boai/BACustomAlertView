@@ -181,15 +181,18 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         switch ( indexPath.row ) {
             case 0:
             {
-                [BACustomActionSheet ba_showActionSheetWithList:@[@"测试1",@"测试2",@"测试3"] ClikckButtonIndex:^(NSInteger index) {
-                    NSLog(@"%ld",(long)index);
+                [BACustomActionSheet ba_showActionSheetWithList:@[@"测试1",@"测试2",@"测试3"]
+                                              ClikckButtonIndex:^(NSInteger index) {
+                    NSLog(@"你点击了第 %ld 行！",(long)index);
                 }];
             }
                 break;
             case 1:
             {
-                [BACustomActionSheet ba_showActionSheetHaveTitleWithList:@[@"测试1",@"测试2",@"测试3"] title:@"测试带标题的ActionSheet" ClikckButtonIndex:^(NSInteger index) {
-                    NSLog(@"%ld",(long)index);
+                [BACustomActionSheet ba_showActionSheetHaveTitleWithList:@[@"测试1",@"测试2",@"测试3"]
+                                                                   title:@"测试带标题的ActionSheet"
+                                                       ClikckButtonIndex:^(NSInteger index) {
+                    NSLog(@"你点击了第 %ld 行！",(long)index);
                 }];
             }
             default:
