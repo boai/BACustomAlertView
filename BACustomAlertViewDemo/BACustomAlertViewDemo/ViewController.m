@@ -181,15 +181,18 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         switch ( indexPath.row ) {
             case 0:
             {
-                [BACustomActionSheet ba_showActionSheetWithList:@[@"测试1",@"测试2",@"测试3"] ClikckButtonIndex:^(NSInteger index) {
-                    NSLog(@"%ld",(long)index);
+                [BACustomActionSheet ba_showActionSheetWithList:@[@"测试1",@"测试2",@"测试3"]
+                                              ClikckButtonIndex:^(NSInteger index) {
+                    NSLog(@"你点击了第 %ld 行！",(long)index);
                 }];
             }
                 break;
             case 1:
             {
-                [BACustomActionSheet ba_showActionSheetHaveTitleWithList:@[@"测试1",@"测试2",@"测试3"] title:@"测试带标题的ActionSheet" ClikckButtonIndex:^(NSInteger index) {
-                    NSLog(@"%ld",(long)index);
+                [BACustomActionSheet ba_showActionSheetHaveTitleWithList:@[@"测试1",@"测试2",@"测试3"]
+                                                                   title:@"测试带标题的ActionSheet"
+                                                       ClikckButtonIndex:^(NSInteger index) {
+                    NSLog(@"你点击了第 %ld 行！",(long)index);
                 }];
             }
             default:
@@ -202,16 +205,24 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [UIView new];
-    headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 20);
+    if (0 == section) { headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 40); }
+    else if (1 == section) { headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 20); }
     
     UILabel *headerTitle = [UILabel new];
     headerTitle.frame = headerView.bounds;
-    headerTitle.font = [UIFont systemFontOfSize:14];
+    headerTitle.font = [UIFont systemFontOfSize:13];
     headerTitle.textColor = [UIColor redColor];
+    headerTitle.numberOfLines = 0;
     [headerView addSubview:headerTitle];
     
-    if (1 == section)
+    if (0 == section)
     {
+        headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 40);
+        headerTitle.text = @"alert 的几种日常用法，高斯模糊、炫酷动画，应有尽有！";
+    }
+    else if (1 == section)
+    {
+        headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 20);
         headerTitle.text = @"测试 ActionSheet，开发 ing 慎点！";
     }
     
@@ -220,7 +231,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20;
+    return (0 == section) ? 40 : 20;
 }
 
 - (void)didReceiveMemoryWarning
