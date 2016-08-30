@@ -103,14 +103,19 @@
 
 - (UIImage *)BAAlert_ApplyLightEffect
 {
+<<<<<<< HEAD
     UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.4];
     return [self BAAlert_ApplyBlurWithRadius:1.3 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+=======
+    UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.2];
+    return [self BAAlert_ApplyBlurWithRadius:5 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+>>>>>>> boai/master
 }
 
 - (UIImage *)BAAlert_ApplyExtraLightEffect
 {
     UIColor *tintColor = [UIColor colorWithWhite:0.97 alpha:0.82];
-    return [self BAAlert_ApplyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [self BAAlert_ApplyBlurWithRadius:2 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 - (UIImage *)BAAlert_ApplyDarkEffect

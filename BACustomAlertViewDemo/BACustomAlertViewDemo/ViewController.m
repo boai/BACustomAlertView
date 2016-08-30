@@ -79,8 +79,18 @@
 
 
 #import "ViewController.h"
+
+/*! 使用方法一：文件夹拖入 */
 #import "BACustomAlertView.h"
 #import "ViewController2.h"
+
+
+///*! 使用方法二：pod */
+//#import <BACustomAlertView.h>
+//
+///*! 使用方法三：frameWork */
+//#import <BACustomAlertView/BACustomAlertView.h>
+
 
 static NSString * const titleMsg1 = @"欢迎使用 iPhone SE，迄今最高性能的 4 英寸 iPhone。在打造这款手机时，我们在深得人心的 4 英寸设计基础上，从里到外重新构想。它所采用的 A9 芯片，正是在 iPhone 6s 上使用的先进芯片。1200 万像素的摄像头能拍出令人叹为观止的精彩照片和 4K 视频，而 Live Photos 则会让你的照片栩栩如生。这一切，成就了一款外形小巧却异常强大的 iPhone。";
 static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了一个几乎不可能实现的目标：在有史以来最为轻盈纤薄的 Mac 笔记本电脑上，打造全尺寸的使用体验。这就要求每个元素都必须重新构想，不仅令其更为纤薄轻巧，还要更加出色。最终我们带来的，不仅是一部新款的笔记本电脑，更是一种对笔记本电脑的前瞻性思考。现在，有了第六代 Intel 处理器、提升的图形处理性能、高速闪存和最长可达 10 小时的电池使用时间*，MacBook 的强大更进一步。";
@@ -203,17 +213,25 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     BAWeak;
     /*! 第一种封装使用示例 */
     [BACustomAlertView ba_showAlertWithTitle:@"博爱温馨提示：" message:titleMsg1 image:nil buttonTitles:@[@"取消",@"确定"] configuration:^(BACustomAlertView *temp) {
+<<<<<<< HEAD
         /*! 添加高斯模糊的样式 */
         temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
+=======
+        
+>>>>>>> boai/master
 //        temp.bgColor       = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         /*! 开启边缘触摸隐藏alertView */
         temp.isTouchEdgeHide = YES;
         /*! 添加高斯模糊的样式 */
+<<<<<<< HEAD
 //        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleDark;
+=======
+        temp.blurEffectStyle = BACustomAlertViewBlurEffectStyleLight;
+>>>>>>> boai/master
         /*! 开启动画 */
-        temp.isShowAnimate   = YES;
-        /*! 进出场动画样式 默认为：1 */
-        temp.animatingStyle  = 1;
+//        temp.isShowAnimate   = YES;
+//        /*! 进出场动画样式 默认为：1 */
+//        temp.animatingStyle  = 1;
     }actionClick:^(NSInteger index) {
         if (index == 0)
         {

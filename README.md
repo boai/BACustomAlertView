@@ -12,6 +12,11 @@
 * 如果你有更好的建议，可以给博爱提 issue 哦！
 * 也可以加入我们的大家庭：QQ群 `479663605`，希望广大小白和大神能够积极加入！
  
+#### version 1.0.6 【2016.08.25 未上架，可下demo使用】
+* 3、再次设计结构，新增frameWork静态库文件封装，喜欢简洁的你可以直接导入frameWork即可，！
+* 2、多种炫酷入场、退出动画，让你的APP各种叼！
+* 1、新增高斯模糊，枚举选择，简单明了！
+ 
 #### version 1.0.5 【2016.08.16 已上架】
 * 4、重新设计了demo，使得新用户更快上手！
 * 3、再次设计结构，两种封装方法创建 alert ，无论大神还是小白都能够运用自如！
@@ -31,8 +36,10 @@
 ---
 
 ## 0、安装和导入示例：
-* 0.1、pod 导入【当前最新版本：1.0.4】：<br> ` pod 'BACustomAlertView' ` <br>导入头文件：<br>`  #import <BACustomAlertView.h> `
-* 0.2、下载demo，把 BACustomAlertView 文件夹拖入项目即可，<br>导入头文件：<br>`  #import "BACustomAlertView.h" `
+* 0.1、使用方法1：pod 导入【当前最新版本：1.0.4】：<br> ` pod 'BACustomAlertView' ` <br>导入头文件：<br>`  #import <BACustomAlertView.h> `
+* 0.2、使用方法2：下载demo，把 BACustomAlertView 文件夹拖入项目即可，<br>导入头文件：<br>`  #import "BACustomAlertView.h" `
+* 0.3、使用方法3：frameWork ，把demo中的frameWork直接拖入项目即可<br>
+`#import <BACustomAlertView/BACustomAlertView.h>`
 
 ---
 

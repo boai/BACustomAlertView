@@ -10,6 +10,7 @@
 		237E192A1D645A71004045ED /* 123.png in Resources */ = {isa = PBXBuildFile; fileRef = 237E19291D645A71004045ED /* 123.png */; };
 		23BFBB9C1D65B71500ABDD15 /* CALayer+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BFBB9B1D65B71500ABDD15 /* CALayer+Animation.m */; };
 		C411A0AF1D62A1A300583E9D /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = C411A0AE1D62A1A300583E9D /* ViewController2.m */; };
+		C419B58C1D7534D500E5BA21 /* BACustomAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C419B58B1D7534D500E5BA21 /* BACustomAlertView.framework */; };
 		C47B3B2E1D620639002C87E1 /* 背景.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C47B3B2D1D620639002C87E1 /* 背景.jpg */; };
 		C4D3FEFB1D5F6287009BC8A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FEFA1D5F6287009BC8A6 /* main.m */; };
 		C4D3FEFE1D5F6287009BC8A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D3FEFD1D5F6287009BC8A6 /* AppDelegate.m */; };
@@ -46,6 +47,7 @@
 		23BFBB9B1D65B71500ABDD15 /* CALayer+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Animation.m"; sourceTree = "<group>"; };
 		C411A0AD1D62A1A300583E9D /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		C411A0AE1D62A1A300583E9D /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
+		C419B58B1D7534D500E5BA21 /* BACustomAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BACustomAlertView.framework; sourceTree = "<group>"; };
 		C47B3B2D1D620639002C87E1 /* 背景.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "背景.jpg"; sourceTree = "<group>"; };
 		C4D3FEF61D5F6287009BC8A6 /* BACustomAlertViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BACustomAlertViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D3FEFA1D5F6287009BC8A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C419B58C1D7534D500E5BA21 /* BACustomAlertView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +119,7 @@
 		C4D3FEF81D5F6287009BC8A6 /* BACustomAlertViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C419B58B1D7534D500E5BA21 /* BACustomAlertView.framework */,
 				C4D3FF321D5F63A6009BC8A6 /* BACustomAlertView */,
 				C4D3FEFC1D5F6287009BC8A6 /* AppDelegate.h */,
 				C4D3FEFD1D5F6287009BC8A6 /* AppDelegate.m */,
@@ -239,6 +243,7 @@
 				TargetAttributes = {
 					C4D3FEF51D5F6287009BC8A6 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = TRVB83KBJJ;
 					};
 					C4D3FF0E1D5F6287009BC8A6 = {
 						CreatedOnToolsVersion = 7.2;
@@ -451,10 +456,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BACustomAlertViewDemo",
+				);
 				INFOPLIST_FILE = BACustomAlertViewDemo/Info.plist;
+<<<<<<< HEAD
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+=======
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+>>>>>>> boai/master
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartboche.BACustomAlertViewDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boai.BACustomAlertViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -463,10 +477,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BACustomAlertViewDemo",
+				);
 				INFOPLIST_FILE = BACustomAlertViewDemo/Info.plist;
+<<<<<<< HEAD
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+=======
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+>>>>>>> boai/master
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartboche.BACustomAlertViewDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boai.BACustomAlertViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
