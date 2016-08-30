@@ -83,7 +83,7 @@
 /*! 使用方法一：文件夹拖入 */
 #import "BACustomAlertView.h"
 #import "ViewController2.h"
-
+#import "BACustomActionSheet.h"
 
 ///*! 使用方法二：pod */
 //#import <BACustomAlertView.h>
@@ -121,7 +121,10 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                                  @"2、自定义按钮颜色",
                                                  @"3、自定义背景图片",
                                                  @"4、内置图片和文字，可滑动查看",
-                                                 @"5、完全自定义alert"],
+                                                 @"5、完全自定义alert"
+                                                 ],
+                                               @[@"6、actionsheet",
+                                                 @"7、actionsheet带标题"],
                                                @[@"BACustomAlertView特点：\n1、手势触摸隐藏开关，可随时开关\n2、可以自定义背景图片、背景颜色、按钮颜色\n3、可以添加文字和图片，且可以滑动查看！\n4、横竖屏适配完美\n5、有各种炫酷动画展示你的alert\n6、理论完全兼容现有所有 iOS 系统版本"
                         ], nil];
     }
@@ -173,6 +176,25 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     if ( 0 == indexPath.section )
     {
         [self showAlertAction:indexPath.row + 1];
+    }else if ( 1 == indexPath.section )
+    {
+        switch ( indexPath.row ) {
+            case 0:
+            {
+                [BACustomActionSheet ba_showActionSheetWithList:@[@"测试1",@"测试2",@"测试3"] ClikckButtonIndex:^(NSInteger index) {
+                    NSLog(@"%ld",(long)index);
+                }];
+            }
+                break;
+            case 1:
+            {
+                [BACustomActionSheet ba_showActionSheetHaveTitleWithList:@[@"测试1",@"测试2",@"测试3"] title:@"测试带标题的ActionSheet" ClikckButtonIndex:^(NSInteger index) {
+                    NSLog(@"%ld",(long)index);
+                }];
+            }
+            default:
+                break;
+        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -361,7 +383,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     /*! 自定义alert的背景图片 */
     _alertView4.bgImageName      = @"背景.jpg";
     /*! 是否显示动画效果 */
-//    _alertView4.isShowAnimate    = YES;
+    _alertView4.isShowAnimate    = YES;
     /*! 显示alert */
     [_alertView4 ba_showAlertView];
     BAWeak;
