@@ -99,12 +99,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		61D3AE721D75709D00C77801 /* ActionSheet */ = {
+		61D3AE721D75709D00C77801 /* BACustomActionSheet */ = {
 			isa = PBXGroup;
 			children = (
 				61D3AE731D7570B900C77801 /* BACustomActionSheet.h */,
 				61D3AE741D7570B900C77801 /* BACustomActionSheet.m */,
 			);
+			name = BACustomActionSheet;
 			path = ActionSheet;
 			sourceTree = "<group>";
 		};
@@ -133,7 +134,7 @@
 			children = (
 				C419B58B1D7534D500E5BA21 /* BACustomAlertView.framework */,
 				C4D3FF321D5F63A6009BC8A6 /* BACustomAlertView */,
-				61D3AE721D75709D00C77801 /* ActionSheet */,
+				61D3AE721D75709D00C77801 /* BACustomActionSheet */,
 				C4D3FEFC1D5F6287009BC8A6 /* AppDelegate.h */,
 				C4D3FEFD1D5F6287009BC8A6 /* AppDelegate.m */,
 				C4D3FEFF1D5F6287009BC8A6 /* ViewController.h */,

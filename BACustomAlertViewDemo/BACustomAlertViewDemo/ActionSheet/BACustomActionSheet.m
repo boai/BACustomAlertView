@@ -8,8 +8,6 @@
 
 #import "BACustomActionSheet.h"
 
-#define SCREENWIDTH    [UIScreen mainScreen].bounds.size.width
-#define SCREENHEIGHT   [UIScreen mainScreen].bounds.size.height
 
 @interface BACustomActionSheet ()
 <
@@ -56,6 +54,7 @@
     BACustomActionSheet *actionSheet = [self shareActionSheet];
     actionSheet.dataArray            = list;
     actionSheet.title                = title;
+    actionSheet.callback             = clikckButtonIndex;
     [actionSheet.tableView reloadData];
     [actionSheet show];
 }
@@ -71,6 +70,7 @@
 {
     BACustomActionSheet *actionSheet = [self shareActionSheet];
     actionSheet.dataArray            = list;
+    actionSheet.callback             = clikckButtonIndex;
     [actionSheet.tableView reloadData];
     [actionSheet show];
 }
@@ -144,19 +144,22 @@
     self.tableView.frame = CGRectMake(0.f, 0.f, SCREENWIDTH, tableViewHeight);
     
     self.frame = CGRectMake(0.f, SCREENHEIGHT, SCREENWIDTH, tableViewHeight);
+    BAWeak;
     [UIView animateWithDuration:.25f animations:^{
-        self.frame = CGRectMake(0.f, SCREENHEIGHT - CGRectGetHeight(self.frame), SCREENWIDTH, CGRectGetHeight(self.frame));
+        weakSelf.frame = CGRectMake(0.f, SCREENHEIGHT - CGRectGetHeight(weakSelf.frame), SCREENWIDTH, CGRectGetHeight(weakSelf.frame));
     }];
 }
 
 - (void)fadeOut
 {
+    BAWeak;
     [UIView animateWithDuration:.25f animations:^{
-        self.frame = CGRectMake(0.f, SCREENHEIGHT, SCREENWIDTH, CGRectGetHeight(self.frame));
+        weakSelf.frame = CGRectMake(0.f, SCREENHEIGHT, SCREENWIDTH, CGRectGetHeight(weakSelf.frame));
     } completion:^(BOOL finished) {
         if (finished) {
-            [self.overlayView removeFromSuperview];
-            [self removeFromSuperview];
+            [weakSelf.overlayView removeFromSuperview];
+            weakSelf.overlayView = nil;
+            [weakSelf removeFromSuperview];
         }
     }];
 }
