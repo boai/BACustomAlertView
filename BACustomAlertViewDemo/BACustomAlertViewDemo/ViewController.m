@@ -199,6 +199,30 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [UIView new];
+    headerView.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 20);
+    
+    UILabel *headerTitle = [UILabel new];
+    headerTitle.frame = headerView.bounds;
+    headerTitle.font = [UIFont systemFontOfSize:14];
+    headerTitle.textColor = [UIColor redColor];
+    [headerView addSubview:headerTitle];
+    
+    if (1 == section)
+    {
+        headerTitle.text = @"测试 ActionSheet，开发 ing 慎点！";
+    }
+    
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
