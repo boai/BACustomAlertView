@@ -361,7 +361,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     /*! 自定义alert的背景图片 */
     _alertView4.bgImageName      = @"背景.jpg";
     /*! 是否显示动画效果 */
-    _alertView4.isShowAnimate    = YES;
+//    _alertView4.isShowAnimate    = YES;
     /*! 显示alert */
     [_alertView4 ba_showAlertView];
     BAWeak;
