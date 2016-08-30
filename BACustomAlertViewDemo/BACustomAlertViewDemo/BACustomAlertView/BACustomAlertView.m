@@ -104,7 +104,7 @@
 - (UIImage *)BAAlert_ApplyLightEffect
 {
     UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.2];
-    return [self BAAlert_ApplyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [self BAAlert_ApplyBlurWithRadius:5 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 - (UIImage *)BAAlert_ApplyExtraLightEffect
