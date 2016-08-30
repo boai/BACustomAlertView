@@ -214,12 +214,12 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     
     if (0 == section)
     {
-        headerTitle.frame = CGRectMake(12, 20, SCREENWIDTH - 40, 20);
+        headerTitle.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 40);
         headerTitle.text = @"alert 的几种日常用法，高斯模糊、炫酷动画，应有尽有！";
     }
     else if (1 == section)
     {
-        headerTitle.frame = CGRectMake(12, 0, SCREENWIDTH - 40, 20);
+        headerTitle.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 20);
         headerTitle.text = @"测试 ActionSheet，开发 ing 慎点！";
     }
     
