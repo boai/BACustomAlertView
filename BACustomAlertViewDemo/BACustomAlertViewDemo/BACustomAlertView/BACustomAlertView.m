@@ -104,13 +104,13 @@
 - (UIImage *)BAAlert_ApplyLightEffect
 {
     UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.2];
-    return [self BAAlert_ApplyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [self BAAlert_ApplyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 - (UIImage *)BAAlert_ApplyExtraLightEffect
 {
     UIColor *tintColor = [UIColor colorWithWhite:0.97 alpha:0.82];
-    return [self BAAlert_ApplyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [self BAAlert_ApplyBlurWithRadius:2 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 - (UIImage *)BAAlert_ApplyDarkEffect
@@ -494,9 +494,9 @@
         self.blurImageView.image = [self.blurImageView.image BAAlert_ApplyDarkEffect];
     }
     
-    [self imageOutPut:^(UIImage *image) {
-        self.blurImageView.image = image;
-    }];
+//    [self imageOutPut:^(UIImage *image) {
+//        self.blurImageView.image = image;
+//    }];
 }
 
 - (void)setAnimatingStyle:(BACustomAlertViewAnimatingStyle)animatingStyle
