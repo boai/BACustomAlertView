@@ -183,6 +183,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.scrollEnabled = NO;
         _tableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.f];
         [self addSubview:_tableView];
     }
