@@ -7,7 +7,7 @@
 //
 
 #import "BACustomActionSheet.h"
-
+#import "BACustomASTableViewCell.h"
 
 @interface BACustomActionSheet ()
 <
@@ -21,9 +21,15 @@
 
 @property (strong, nonatomic) NSArray      *dataArray;
 
+@property (strong, nonatomic) NSArray      *imageArray;
+
+@property (assign, nonatomic) NSInteger    specialIndex;
+
 @property (copy, nonatomic  ) NSString     *title;
 
 @property (copy, nonatomic) void(^callback)(NSInteger index);
+
+@property (assign, nonatomic) BACustomActionSheetViewStyle viewStyle;
 
 @end
 
@@ -31,46 +37,19 @@
 
 + (instancetype)shareActionSheet
 {
-    static BACustomActionSheet *actionSheet = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        actionSheet = [[self alloc] init];
-        actionSheet.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
-    });
+    BACustomActionSheet *actionSheet = [[self alloc] init];
+    actionSheet.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
     return actionSheet;
 }
 
-/*!
- *  创建一个带标题的ActionSheet
- *
- *  @param list              ActionSheet的各个选项
- *  @param title             标题
- *  @param clikckButtonIndex 按钮的点击事件
- */
-+ (void)ba_showActionSheetHaveTitleWithList:(NSArray *)list
-                                      title:(NSString *)title
-                          ClikckButtonIndex:(ButtonActionBlock)clikckButtonIndex
-{
++ (void)ba_showActionSheetHaveTitleWithViewStyle:(BACustomActionSheetViewStyle)style List:(NSArray<NSString *> *)list ImageList:(NSArray<UIImage *> *)imagelist Special:(NSInteger)specialIndex title:(NSString *)title ClikckButtonIndex:(ButtonActionBlock)clikckButtonIndex {
     BACustomActionSheet *actionSheet = [self shareActionSheet];
     actionSheet.dataArray            = list;
+    actionSheet.callback             = clikckButtonIndex;
+    actionSheet.viewStyle            = style;
+    actionSheet.imageArray           = imagelist;
+    actionSheet.specialIndex         = specialIndex;
     actionSheet.title                = title;
-    actionSheet.callback             = clikckButtonIndex;
-    [actionSheet.tableView reloadData];
-    [actionSheet show];
-}
-
-/*!
- *  创建一个不带标题的ActionSheet
- *
- *  @param list              ActionSheet的各个选项
- *  @param clikckButtonIndex 按钮的点击事件
- */
-+ (void)ba_showActionSheetWithList:(NSArray *)list
-                 ClikckButtonIndex:(ButtonActionBlock)clikckButtonIndex
-{
-    BACustomActionSheet *actionSheet = [self shareActionSheet];
-    actionSheet.dataArray            = list;
-    actionSheet.callback             = clikckButtonIndex;
     [actionSheet.tableView reloadData];
     [actionSheet show];
 }
@@ -84,7 +63,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ( 0 == section ) {
-        return self.title?self.dataArray.count+1:self.dataArray.count;
+        if ( self.viewStyle == BACustomActionSheetNormal || self.viewStyle == BACustomActionSheetImage )
+        {
+            return self.dataArray.count;
+        }else
+        {
+            return self.dataArray.count + 1;
+        }
     }else {
         return 1;
     }
@@ -100,26 +85,33 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if ( !cell )
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    }
+    BACustomASTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CustomCellIdentifier forIndexPath:indexPath];
+    cell.selectionStyle = (self.title)?UITableViewCellSelectionStyleNone:UITableViewCellSelectionStyleDefault;
     if ( 0 == indexPath.section )
     {
-        if ( self.title )
+        if ( self.viewStyle == BACustomActionSheetNormal )
         {
-            cell.textLabel.text = (indexPath.row ==0)?self.title:self.dataArray[indexPath.row-1];
-        }else
+            cell.customTextLabel.text = self.dataArray[indexPath.row];
+            
+        }else if ( self.viewStyle == BACustomActionSheetTitle )
         {
-            cell.textLabel.text = self.dataArray[indexPath.row];
+            
+            cell.customTextLabel.text = (indexPath.row ==0)?self.title:self.dataArray[indexPath.row-1];
+        }else {
+            if ( indexPath.row == self.specialIndex ) {
+                cell.customTextLabel.textColor = [UIColor redColor];
+            }
+            NSInteger index = (self.title)?indexPath.row - 1:indexPath.row;
+            if ( index >= 0 ) {
+                cell.customImageView.image = self.imageArray[index];
+            }
+            
+            cell.customTextLabel.text = (indexPath.row ==0)?self.title:self.dataArray[indexPath.row-1];
         }
     }else
     {
-        cell.textLabel.text = @"取消";
+        cell.customTextLabel.text = @"取消";
     }
     return cell;
 }
@@ -128,7 +120,15 @@
 {
     if ( 0 == indexPath.section )
     {
-        self.callback(indexPath.row);
+        NSInteger index = 0;
+        if ( self.viewStyle == BACustomActionSheetNormal || self.viewStyle == BACustomActionSheetImage )
+        {
+            index = indexPath.row;
+            
+        }else {
+            index = indexPath.row - 1;
+        }
+        self.callback(index);
     }
     else
     {
@@ -140,13 +140,13 @@
 #pragma mark - UpdateFrame
 - (void)fadeIn
 {
-    CGFloat tableViewHeight = self.tableView.contentSize.height;
+    CGFloat tableViewHeight = MIN(SCREENHEIGHT - 64.f, self.tableView.contentSize.height);
     self.tableView.frame = CGRectMake(0.f, 0.f, SCREENWIDTH, tableViewHeight);
     
     self.frame = CGRectMake(0.f, SCREENHEIGHT, SCREENWIDTH, tableViewHeight);
     BAWeak;
     [UIView animateWithDuration:.25f animations:^{
-        weakSelf.frame = CGRectMake(0.f, SCREENHEIGHT - CGRectGetHeight(weakSelf.frame), SCREENWIDTH, CGRectGetHeight(weakSelf.frame));
+        weakSelf.frame = CGRectMake(0.f, SCREENHEIGHT - tableViewHeight, SCREENWIDTH, tableViewHeight);
     }];
 }
 
@@ -162,6 +162,14 @@
             [weakSelf removeFromSuperview];
         }
     }];
+}
+
+- (void)layoutSubviews {
+    CGFloat tableViewHeight = MIN(SCREENHEIGHT - 64.f, self.tableView.contentSize.height);
+    
+    self.tableView.frame = CGRectMake(0.f, 0.f, SCREENWIDTH, tableViewHeight);
+    
+    self.frame = CGRectMake(0.f, SCREENHEIGHT - tableViewHeight, SCREENWIDTH, tableViewHeight);
 }
 
 - (void)show
@@ -184,8 +192,10 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.scrollEnabled = NO;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.f];
         [self addSubview:_tableView];
+        [_tableView registerNib:[UINib nibWithNibName:CustomCellIdentifier bundle:nil] forCellReuseIdentifier:CustomCellIdentifier];
     }
     return _tableView;
 }

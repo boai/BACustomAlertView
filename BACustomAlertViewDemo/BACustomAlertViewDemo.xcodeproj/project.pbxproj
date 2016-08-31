@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		237E192A1D645A71004045ED /* 123.png in Resources */ = {isa = PBXBuildFile; fileRef = 237E19291D645A71004045ED /* 123.png */; };
 		23BFBB9C1D65B71500ABDD15 /* CALayer+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BFBB9B1D65B71500ABDD15 /* CALayer+Animation.m */; };
+		617A659E1D7671160002F6CB /* BACustomASTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A659C1D7671160002F6CB /* BACustomASTableViewCell.m */; };
+		617A659F1D7671160002F6CB /* BACustomASTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 617A659D1D7671160002F6CB /* BACustomASTableViewCell.xib */; };
 		61D3AE751D7570B900C77801 /* BACustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 61D3AE741D7570B900C77801 /* BACustomActionSheet.m */; };
 		C411A0AF1D62A1A300583E9D /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = C411A0AE1D62A1A300583E9D /* ViewController2.m */; };
 		C419B58C1D7534D500E5BA21 /* BACustomAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C419B58B1D7534D500E5BA21 /* BACustomAlertView.framework */; };
@@ -46,6 +48,9 @@
 		237E19291D645A71004045ED /* 123.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 123.png; sourceTree = "<group>"; };
 		23BFBB9A1D65B71500ABDD15 /* CALayer+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Animation.h"; sourceTree = "<group>"; };
 		23BFBB9B1D65B71500ABDD15 /* CALayer+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Animation.m"; sourceTree = "<group>"; };
+		617A659B1D7671160002F6CB /* BACustomASTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BACustomASTableViewCell.h; sourceTree = "<group>"; };
+		617A659C1D7671160002F6CB /* BACustomASTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BACustomASTableViewCell.m; sourceTree = "<group>"; };
+		617A659D1D7671160002F6CB /* BACustomASTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BACustomASTableViewCell.xib; sourceTree = "<group>"; };
 		61D3AE731D7570B900C77801 /* BACustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BACustomActionSheet.h; sourceTree = "<group>"; };
 		61D3AE741D7570B900C77801 /* BACustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BACustomActionSheet.m; sourceTree = "<group>"; };
 		C411A0AD1D62A1A300583E9D /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
@@ -104,6 +109,9 @@
 			children = (
 				61D3AE731D7570B900C77801 /* BACustomActionSheet.h */,
 				61D3AE741D7570B900C77801 /* BACustomActionSheet.m */,
+				617A659B1D7671160002F6CB /* BACustomASTableViewCell.h */,
+				617A659C1D7671160002F6CB /* BACustomASTableViewCell.m */,
+				617A659D1D7671160002F6CB /* BACustomASTableViewCell.xib */,
 			);
 			name = BACustomActionSheet;
 			path = ActionSheet;
@@ -296,6 +304,7 @@
 			files = (
 				237E192A1D645A71004045ED /* 123.png in Resources */,
 				C47B3B2E1D620639002C87E1 /* 背景.jpg in Resources */,
+				617A659F1D7671160002F6CB /* BACustomASTableViewCell.xib in Resources */,
 				C4D3FF391D5F6AFB009BC8A6 /* 美女.jpg in Resources */,
 				C4D3FF091D5F6287009BC8A6 /* LaunchScreen.storyboard in Resources */,
 				C4D3FF061D5F6287009BC8A6 /* Assets.xcassets in Resources */,
@@ -325,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23BFBB9C1D65B71500ABDD15 /* CALayer+Animation.m in Sources */,
+				617A659E1D7671160002F6CB /* BACustomASTableViewCell.m in Sources */,
 				C4D3FF011D5F6287009BC8A6 /* ViewController.m in Sources */,
 				C4D3FEFE1D5F6287009BC8A6 /* AppDelegate.m in Sources */,
 				61D3AE751D7570B900C77801 /* BACustomActionSheet.m in Sources */,

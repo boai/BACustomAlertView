@@ -124,7 +124,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
                                                  @"5、完全自定义alert"
                                                  ],
                                                @[@"6、actionsheet",
-                                                 @"7、actionsheet带标题"],
+                                                 @"7、actionsheet带标题",
+                                                 @"8、actionsheet带标题带图片"],
                                                @[@"BACustomAlertView特点：\n1、手势触摸隐藏开关，可随时开关\n2、可以自定义背景图片、背景颜色、按钮颜色\n3、可以添加文字和图片，且可以滑动查看！\n4、横竖屏适配完美\n5、有各种炫酷动画展示你的alert\n6、理论完全兼容现有所有 iOS 系统版本"
                         ], nil];
     }
@@ -181,20 +182,40 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
         switch ( indexPath.row ) {
             case 0:
             {
-                [BACustomActionSheet ba_showActionSheetWithList:@[@"测试1",@"测试2",@"测试3"]
-                                              ClikckButtonIndex:^(NSInteger index) {
-                    NSLog(@"你点击了第 %ld 行！",(long)index);
-                }];
+                [BACustomActionSheet ba_showActionSheetHaveTitleWithViewStyle:BACustomActionSheetNormal
+                                                                         List:@[@"测试1",@"测试2",@"测试3"]
+                                                                    ImageList:nil
+                                                                      Special:-1
+                                                                        title:nil
+                                                            ClikckButtonIndex:^(NSInteger index) {
+                                                                            NSLog(@"你点击了第 %ld 行！",(long)index);
+                                                                        }];
             }
                 break;
             case 1:
             {
-                [BACustomActionSheet ba_showActionSheetHaveTitleWithList:@[@"测试1",@"测试2",@"测试3"]
-                                                                   title:@"测试带标题的ActionSheet"
-                                                       ClikckButtonIndex:^(NSInteger index) {
-                    NSLog(@"你点击了第 %ld 行！",(long)index);
-                }];
+                [BACustomActionSheet ba_showActionSheetHaveTitleWithViewStyle:BACustomActionSheetTitle
+                                                                         List:@[@"测试1",@"测试2",@"测试3"]
+                                                                    ImageList:nil
+                                                                      Special:2
+                                                                        title:@"测试带标题的ActionSheet"
+                                                            ClikckButtonIndex:^(NSInteger index) {
+                                                                NSLog(@"你点击了第 %ld 行！",(long)index);
+                                                            }];
             }
+                break;
+            case 2:
+            {
+                [BACustomActionSheet ba_showActionSheetHaveTitleWithViewStyle:BACustomActionSheetImageAndTitle
+                                                                         List:@[@"测试1",@"测试2",@"测试3"]
+                                                                    ImageList:@[[UIImage imageNamed:@"123.png"],[UIImage imageNamed:@"背景.jpg"],[UIImage imageNamed:@"美女.jpg"]]
+                                                                      Special:2
+                                                                        title:@"测试带标题和图片的ActionSheet"
+                                                            ClikckButtonIndex:^(NSInteger index) {
+                                                                NSLog(@"你点击了第 %ld 行！",(long)index);
+                                                            }];
+            }
+                break;
             default:
                 break;
         }
