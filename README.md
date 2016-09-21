@@ -1,9 +1,13 @@
 # BACustomAlertView
-一个完全实现自定义的alertView！目前为止，最为精简的alert封装，以后alert就用博爱的[『BACustomAlertView』](https://github.com/boai/BACustomAlertView)了！
+
+一个完全实现自定义的alertView！目前为止，最为精简的alert封装，以后alert就用[『DSAlert-OC』](https://github.com/DS-Team/DSAlert-OC)了！
 
 ---
 
 ## 更新提示：【倒叙更新】
+
+## 注：此版本不再更新，后续更新全新版本 DSAlert，双语版，请前往：[『DSAlert-OC』](https://github.com/DS-Team/DSAlert-OC)
+
 
 #### version 1.0.* 【2016.开发 ing...】
 * 正在努力完善中...
@@ -133,7 +137,7 @@
 ```
 ![alert3.png](https://github.com/boai/BACustomAlertView/blob/master/images/alert3.png)
 
-* 1.4 自定义背景图片
+* 1.4 内置图片和文字，可滑动查看
 ```
         /*! 4、内置图片和文字，可滑动查看 */
         _alertView4 = [[BACustomAlertView alloc] ba_showTitle:@"博爱温馨提示："
@@ -166,7 +170,7 @@
 ```
 ![alert4.png](https://github.com/boai/BACustomAlertView/blob/master/images/alert4.png)
 
-* 1.5 自定义背景图片
+* 1.5 完全自定义alert
 ```
         /*! 5、完全自定义alert */
         UIView *view1 = [UIView new];
