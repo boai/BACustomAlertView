@@ -132,7 +132,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     headerTitle.numberOfLines = 0;
     [headerView addSubview:headerTitle];
     
-    headerTitle.frame = CGRectMake(20, 0, SCREENWIDTH - 40, 40);
+    headerTitle.frame = CGRectMake(20, 0, BAKit_SCREEN_WIDTH - 40, 40);
 
     if (0 == section)
     {
@@ -427,7 +427,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
     /*! 5、完全自定义alert */
     _customView = [CustomView new];
-    self.customView.frame = CGRectMake(50, SCREENHEIGHT - 300, SCREENWIDTH - 50 * 2, 162);
+    self.customView.frame = CGRectMake(50, BAKit_SCREEN_HEIGHT - 300, BAKit_SCREEN_WIDTH - 50 * 2, 162);
 
     BAKit_WeakSelf
     [BAAlert ba_alertShowCustomView:self.customView configuration:^(BAAlert *tempView) {

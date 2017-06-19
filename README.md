@@ -18,7 +18,8 @@
 ![BAAlert2.gif](https://github.com/BAHome/BAAlert/blob/master/Images/BAAlert2.gif)
 
 ## 3、安装、导入示例和源码地址
-* 1、pod 导入【最新版本：version 1.1.9】： <br>
+* 1、pod 导入【最新版本：![](https://img.shields.io/cocoapods/v/BAAlert.svg?style=flat) ![](https://img.shields.io/cocoapods/dt/BAAlert.svg
+)】： <br>
  `pod 'BAAlert'` ` pod 'BAAlert-Swift'`  <br>
 如果发现 `pod search BAAlert` 搜索出来的不是最新版本，需要在终端执行 cd 转换文件路径命令退回到 desktop，然后执行 `pod setup` 命令更新本地spec缓存（可能需要几分钟），然后再搜索就可以了。<br>
 具体步骤：
@@ -33,7 +34,7 @@
  swift 版 ：[https://github.com/BAHome/BAAlert-Swift](https://github.com/BAHome/BAAlert-Swift)<br>
 
 ## 4、BAAlert 的类结构及 demo 示例
-![BAAlert3.png](https://github.com/BAHome/BAAlert/blob/master/Images/BAAlert3.png)
+![BAAlert.png](https://github.com/BAHome/BAAlert/blob/master/Images/BAAlert.png)
 
 ### BAAlert_OC.h
 ```
@@ -42,25 +43,29 @@
 
 #import "BAAlert.h"
 #import "BAActionSheet.h"
+#import "BAKit_ConfigurationDefine.h"
 
 /*!
  *********************************************************************************
  ************************************ 更新说明 ************************************
  *********************************************************************************
  
+ 最新更新时间：2017-06-19 【倒叙】 <br>
+ 最新Version：【Version：1.2.0】 <br>
+ 更新内容： <br>
+ 1.2.0.1、统一全局宏定义文件，优化代码规范  <br>
+ 
  最新更新时间：2017-05-20 【倒叙】 <br>
  最新Version：【Version：1.1.9】 <br>
  更新内容： <br>
  1.1.9.1、修复动画过度白屏问题  <br>
 
- 
  最新更新时间：2017-05-15 【倒叙】 <br>
  最新Version：【Version：1.1.8】 <br>
  更新内容： <br>
  1.1.8.1、精简代码结构，删除多余或者重复代码  <br>
  1.1.8.2、规范代码属性和方法命名，原有方法名和属性名有较大改动，忘见谅  <br>
  1.1.8.3、重构 actionSheet，新增多种样式  <br>
-
  
  最新更新时间：2017-05-13 【倒叙】 <br>
  最新Version：【Version：1.1.7】 <br>
@@ -70,19 +75,16 @@
  1.1.7.3、优化部分动画  <br>
  1.1.7.4、subView 布局优化  <br>
  1.1.7.5、actionSheet 新增自定义文字颜色、title 字体颜色  <br>
-
  
  最新更新时间：2017-05-10 【倒叙】 <br>
  最新Version：【Version：1.1.5】 <br>
  更新内容： <br>
  1.1.5.1、删除原有封装内部按钮点击事件中 ba_dismissAlertView 方法，此方法可在外部自由调用  <br>
  
- 
  最新更新时间：2017-05-09 【倒叙】 <br>
  最新Version：【Version：1.1.4】 <br>
  更新内容： <br>
  1.1.4.1、pod 更新xib 文件 <br>
- 
  
  最新更新时间：2017-05-08 【倒叙】
  最新Version：【Version：1.1.0】
@@ -95,7 +97,6 @@
  1.1.0.6、删除了部分代码和属性，具体见源码 和 demo
  
  */
-
 
 #endif /* BAAlert_OC_h */
 ```
@@ -494,11 +495,15 @@ typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetM
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
-最新更新时间：2017-05-20 【倒叙】 <br>
+ 最新更新时间：2017-06-19 【倒叙】 <br>
+ 最新Version：【Version：1.2.0】 <br>
+ 更新内容： <br>
+ 1.2.0.1、统一全局宏定义文件，优化代码规范  <br>
+ 
+ 最新更新时间：2017-05-20 【倒叙】 <br>
  最新Version：【Version：1.1.9】 <br>
  更新内容： <br>
  1.1.9.1、修复动画过度白屏问题  <br>
-
  
  最新更新时间：2017-05-15 【倒叙】 <br>
  最新Version：【Version：1.1.8】 <br>
@@ -506,7 +511,6 @@ typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetM
  1.1.8.1、精简代码结构，删除多余或者重复代码  <br>
  1.1.8.2、规范代码属性和方法命名，原有方法名和属性名有较大改动，忘见谅  <br>
  1.1.8.3、重构 actionSheet，新增多种样式  <br>
-
  
  最新更新时间：2017-05-13 【倒叙】 <br>
  最新Version：【Version：1.1.7】 <br>
@@ -516,19 +520,16 @@ typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetM
  1.1.7.3、优化部分动画  <br>
  1.1.7.4、subView 布局优化  <br>
  1.1.7.5、actionSheet 新增自定义文字颜色、title 字体颜色  <br>
-
  
  最新更新时间：2017-05-10 【倒叙】 <br>
  最新Version：【Version：1.1.5】 <br>
  更新内容： <br>
  1.1.5.1、删除原有封装内部按钮点击事件中 ba_dismissAlertView 方法，此方法可在外部自由调用  <br>
  
- 
  最新更新时间：2017-05-09 【倒叙】 <br>
  最新Version：【Version：1.1.4】 <br>
  更新内容： <br>
  1.1.4.1、pod 更新xib 文件 <br>
- 
  
  最新更新时间：2017-05-08 【倒叙】
  最新Version：【Version：1.1.0】
