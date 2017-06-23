@@ -455,7 +455,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     {
         [button setBackgroundImage:[self imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
-    [button setBackgroundImage:[self imageWithColor:BAKit_Color_RGBA(135, 140, 145, 0.45)] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[self imageWithColor:BAKit_Color_RGBA_pod(135, 140, 145, 0.45)] forState:UIControlStateHighlighted];
 
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:button];
