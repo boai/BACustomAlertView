@@ -74,7 +74,7 @@ static NSString * const kCellID = @"BAActionSheetCell";
 
 - (void)setupCommonUI
 {
-    self.backgroundColor = BAKit_Color_Translucent;
+    self.backgroundColor = BAKit_Color_Translucent_pod;
     self.actionSheetType = BAActionSheetTypeNormal;
     self.isExpand = NO;
     self.isTouchEdgeHide = YES;
@@ -159,7 +159,7 @@ static NSString * const kCellID = @"BAActionSheetCell";
         cell.textLabel.text = model.content;
         cell.detailTextLabel.text = model.subContent;
         cell.imageView.image = [UIImage imageNamed:model.imageUrl];
-        cell.detailTextLabel.textColor = BAKit_Color_Gray_7;
+        cell.detailTextLabel.textColor = BAKit_Color_Gray_7_pod;
         
         if (indexPath.row == 0)
         {
@@ -185,9 +185,9 @@ static NSString * const kCellID = @"BAActionSheetCell";
             {
                 BAActionSheetSubContentModel *subContentModel = model.subContentArray[indexPath.row];
                 cell.textLabel.text = subContentModel.subContent;
-                cell.textLabel.textColor = BAKit_Color_Gray_7;
+                cell.textLabel.textColor = BAKit_Color_Gray_7_pod;
                 
-                cell.backgroundColor = BAKit_Color_Gray_11;
+                cell.backgroundColor = BAKit_Color_Gray_11_pod;
                 
                 return cell;
             }
@@ -562,7 +562,7 @@ static NSString * const kCellID = @"BAActionSheetCell";
         _tableView.delegate        = self;
         _tableView.dataSource      = self;
         _tableView.scrollEnabled   = NO;
-        _tableView.backgroundColor = BAKit_Color_Gray_11;
+        _tableView.backgroundColor = BAKit_Color_Gray_11_pod;
         
         [self addSubview:_tableView];
     }
@@ -595,7 +595,7 @@ static NSString * const kCellID = @"BAActionSheetCell";
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"windowLevel == %ld AND hidden == 0 " , UIWindowLevelNormal];
             self.actionSheetWindow = [[UIApplication sharedApplication].windows filteredArrayUsingPredicate:predicate].firstObject;
         }
-        self.actionSheetWindow.backgroundColor = BAKit_Color_Translucent;
+        self.actionSheetWindow.backgroundColor = BAKit_Color_Translucent_pod;
     }
 
     return _actionSheetWindow;

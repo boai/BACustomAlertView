@@ -57,9 +57,9 @@
  OC 版 ：https://github.com/BAHome/BAAlert
  
  最新更新时间：2017-06-23 【倒叙】
- 最新Version：【Version：1.2.1】
+ 最新Version：【Version：1.2.2】
  更新内容：
- 1.2.1.1、优化部分宏定义
+ 1.2.2.1、优化部分宏定义
  
  最新更新时间：2017-06-19 【倒叙】 <br>
  最新Version：【Version：1.2.0】 <br>
@@ -506,10 +506,10 @@ typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetM
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
- 最新更新时间：2017-06-19 【倒叙】 <br>
- 最新Version：【Version：1.2.0】 <br>
- 更新内容： <br>
- 1.2.0.1、统一全局宏定义文件，优化代码规范  <br>
+ 最新更新时间：2017-06-23 【倒叙】
+ 最新Version：【Version：1.2.2】
+ 更新内容：
+ 1.2.2.1、优化部分宏定义
  
  最新更新时间：2017-05-20 【倒叙】 <br>
  最新Version：【Version：1.1.9】 <br>

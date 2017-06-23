@@ -363,7 +363,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
 
 - (void)setupCommonUI
 {
-    self.bgColor = BAKit_Color_Translucent;
+    self.bgColor = BAKit_Color_Translucent_pod;
     self.blurImageView.hidden = NO;
     
     if (self.alertType == BAAlertTypeCustom)
@@ -466,7 +466,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
 - (void)addLine:(CGRect)frame toView:(UIView *)view
 {
     UIView *line = [[UIView alloc] initWithFrame:frame];
-    line.backgroundColor = BAKit_Color_Gray_9;
+    line.backgroundColor = BAKit_Color_Gray_9_pod;
     [view addSubview:line];
     [_lineArray addObject:line];
 }
@@ -915,7 +915,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"windowLevel == %ld AND hidden == 0 " , UIWindowLevelNormal];
             self.alertWindow = [[UIApplication sharedApplication].windows filteredArrayUsingPredicate:predicate].firstObject;
         }
-        self.alertWindow.backgroundColor = BAKit_Color_Translucent;
+        self.alertWindow.backgroundColor = BAKit_Color_Translucent_pod;
     }
     return _alertWindow;
 }
