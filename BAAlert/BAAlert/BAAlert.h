@@ -86,7 +86,7 @@ typedef void(^BAAlert_ConfigBlock)(BAAlert *tempView);
 @property (nonatomic, assign) BAAlertBlurEffectStyle blurEffectStyle;
 
 /*!
- *  创建一个完全自定义的 alertView，注意：【自定义 alert 只适用于竖屏状态！】
+ *  创建一个完全自定义的 alertView
  *
  *  @param customView    自定义 View
  *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...

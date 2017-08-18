@@ -11,8 +11,7 @@
 #import "BAAlert.h"
 #import <Accelerate/Accelerate.h>
 #import <float.h>
-//#import "UIView+BAAnimation.h"
-#import "CALayer+Animation.h"
+#import "UIView+BAAnimation.h"
 #import "BAKit_ConfigurationDefine.h"
 
 
@@ -336,9 +335,11 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
         [self addSubview:customView];
         [self bringSubviewToFront:customView];
         [self setupCommonUI];
+        
     }
     return self;
 }
+
 
 #pragma mark - ***** 创建一个类似系统的警告框
 - (instancetype)ba_showTitle:(NSString *)title
@@ -482,7 +483,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     }
 }
 
-#pragma mark 纯颜色转图片
+#pragma mark - 纯颜色转图片
 - (UIImage *)imageWithColor:(UIColor *)color
 {
     UIImage *image = [self imageWithColor:color andSize:CGSizeMake(1.0f, 1.0f)];
@@ -615,21 +616,23 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     BAKit_WeakSelf
     if (self.animatingStyle == BAAlertAnimatingStyleScale)
     {
-        [animationView scaleAnimationShowFinishAnimation:^{
+        [animationView ba_animation_scaleShowWithDuration:0.5 ratio:1.1 finishBlock:^{
             BAKit_StrongSelf
             self.isAnimating = NO;
         }];
+
     }
     else if (self.animatingStyle == BAAlertAnimatingStyleShake)
     {
-        [animationView.layer shakeAnimationWithDuration:1.0 shakeRadius:16.0 repeat:1 finishAnimation:^{
+        [animationView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:0.5 finishBlock:^{
             BAKit_StrongSelf
             self.isAnimating = NO;
         }];
+
     }
     else if (self.animatingStyle == BAAlertAnimatingStyleFall)
     {
-        [animationView.layer fallAnimationWithDuration:0.35 finishAnimation:^{
+        [animationView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:0.5 finishBlock:^{
             BAKit_StrongSelf
             self.isAnimating = NO;
         }];
@@ -643,7 +646,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     BAKit_WeakSelf
     if (self.animatingStyle == BAAlertAnimatingStyleScale)
     {
-        [animationView scaleAnimationDismissFinishAnimation:^{
+        [animationView ba_animation_scaleDismissWithDuration:0.5 ratio:1.1 finishBlock:^{
             BAKit_StrongSelf
             self.isAnimating = NO;
             [self ba_removeSelf];
@@ -651,7 +654,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     }
     else if (self.animatingStyle == BAAlertAnimatingStyleShake)
     {
-        [animationView.layer floatAnimationWithDuration:0.35f finishAnimation:^{
+        [animationView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:0.5 finishBlock:^{
             BAKit_StrongSelf
             self.isAnimating = NO;
             [self ba_removeSelf];
@@ -659,7 +662,7 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     }
     else if (self.animatingStyle == BAAlertAnimatingStyleFall)
     {
-        [animationView.layer floatAnimationWithDuration:0.35f finishAnimation:^{
+        [animationView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:0.5 finishBlock:^{
             BAKit_StrongSelf
             self.isAnimating = NO;
             [self ba_removeSelf];
@@ -784,8 +787,32 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     }
     else if (self.alertType == BAAlertTypeCustom)
     {
-        NSLog(@"【 BAAlert 】注意：【自定义 alert 只适用于竖屏状态！】");
-        self.customView.frame = self.customView_frame;
+        
+//        NSLog(@"【 BAAlert 】注意：【自定义 alert 只适用于竖屏状态！】");
+        if (self.view_width > self.view_height) {
+            if (self.customView.center.x == self.center.y && self.customView.center.y == self.center.x) {
+                self.customView.center = CGPointMake(self.center.x, self.center.y);
+            }else{
+                CGFloat scale_x = self.view_width/self.view_height ;
+                CGFloat scale_y = self.view_height/self.view_width;
+                
+                CGFloat scale_height = (self.view_width - CGRectGetMaxY(self.customView_frame)) / self.customView_frame.origin.y;
+                
+                CGFloat scale_width = (self.view_height - CGRectGetMaxX(self.customView_frame))/self.customView_frame.origin.x;
+                
+                CGFloat x = self.customView_frame.origin.x * scale_x + self.customView_frame.size.width * (scale_x - 1) / (1+ scale_width);
+                CGFloat y = self.customView_frame.origin.y * scale_y + self.customView_frame.size.height * (scale_y - 1) / (1+ scale_height) ;
+                
+                CGRect frame = CGRectMake(x, y, self.customView_frame.size.width, self.customView_frame.size.height);
+                self.customView.frame = frame;
+ 
+            }
+
+    }
+        else
+        {
+            self.customView.frame = self.customView_frame;
+        }
     }
 }
 

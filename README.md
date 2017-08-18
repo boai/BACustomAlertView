@@ -9,7 +9,7 @@
 * 1、手势触摸隐藏开关，可随时开关 <br>
 * 2、可以自定义背景图片、背景颜色、按钮颜色
 * 3、可以添加文字和图片，且可以滑动查看！
-* 4、横竖屏适配完美，注意：自定义 alert 不支持横屏
+* 4、横竖屏适配完美
 * 5、有各种炫酷动画展示你的 alert
 * 6、可以自定义每个按钮颜色
 
@@ -55,6 +55,11 @@
  
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAAlert
+ 
+ 最新更新时间：2017-08-18 【倒叙】 <br>
+ 最新Version：【Version：1.2.3】 <br>
+ 更新内容： <br>
+ 1.2.3.1、优化自定义 alert 的布局，横竖屏可以适配了！ <br>
  
  最新更新时间：2017-06-23 【倒叙】
  最新Version：【Version：1.2.2】
@@ -142,7 +147,7 @@ typedef void(^BAAlert_ConfigBlock)(BAAlert *tempView);
 @property (nonatomic, assign) BAAlertBlurEffectStyle blurEffectStyle;
 
 /*!
- *  创建一个完全自定义的 alertView，注意：【自定义 alert 只适用于竖屏状态！】
+ *  创建一个完全自定义的 alertView
  *
  *  @param customView    自定义 View
  *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...
@@ -480,8 +485,10 @@ typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetM
 {
     /*! 5、完全自定义alert */
     _customView = [CustomView new];
-    self.customView.frame = CGRectMake(50, SCREENHEIGHT - 300, SCREENWIDTH - 50 * 2, 162);
-
+    self.customView.frame = CGRectMake(50, BAKit_SCREEN_HEIGHT - 200, BAKit_SCREEN_WIDTH - 50 * 2, 162);
+//    设置居中
+//    self.customView.center = self.view.center;
+    /*! 使用 BAAlert 弹出自定义View  */
     BAKit_WeakSelf
     [BAAlert ba_alertShowCustomView:self.customView configuration:^(BAAlert *tempView) {
         BAKit_StrongSelf
@@ -506,10 +513,16 @@ typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetM
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
- 最新更新时间：2017-06-23 【倒叙】
- 最新Version：【Version：1.2.2】
- 更新内容：
- 1.2.2.1、优化部分宏定义
+ 
+ 最新更新时间：2017-08-18 【倒叙】 <br>
+ 最新Version：【Version：1.2.3】 <br>
+ 更新内容： <br>
+ 1.2.3.1、优化自定义 alert 的布局，横竖屏可以适配了！ <br>
+ 
+ 最新更新时间：2017-06-23 【倒叙】 <br>
+ 最新Version：【Version：1.2.2】 <br>
+ 更新内容： <br>
+ 1.2.2.1、优化部分宏定义 <br>
  
  最新更新时间：2017-05-20 【倒叙】 <br>
  最新Version：【Version：1.1.9】 <br>
@@ -597,7 +610,7 @@ git：[https://github.com/CrazyCoderShi](https://github.com/CrazyCoderShi) <br>
 > 开发使用 最新版本 Xcode，理论上支持 iOS 8 及以上版本，如有版本适配问题，请及时反馈！多谢合作！
 
 ## 9、感谢
-> 感谢 BAHome 团队成员倾力合作，后期会推出一系列 常用 UI 控件的封装，大家有需求得也可以在 issue 提出，如果合理，我们会尽快推出新版本！<br>
+> 感谢 [【BAHome】](https://github.com/BAHome)  团队成员倾力合作，后期会推出一系列 常用 UI 控件的封装，大家有需求得也可以在 issue 提出，如果合理，我们会尽快推出新版本！<br>
 
-> BAHome 的发展离不开小伙伴儿的信任与推广，再次感谢各位小伙伴儿的支持！
+> [【BAHome】](https://github.com/BAHome)  的发展离不开小伙伴儿的信任与推广，再次感谢各位小伙伴儿的支持！
 

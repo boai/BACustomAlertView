@@ -19,12 +19,6 @@
 ///*! 使用方法二：pod */
 //#import <BAAlert_OC.h>
 
-/*! VC 用 BAKit_ShowAlertWithMsg */
-#define BAKit_ShowAlertWithMsg_ios8(msg) UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:msg preferredStyle:UIAlertControllerStyleAlert];\
-UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAlertActionStyleDefault handler:nil];\
-[alert addAction:sureAction];\
-[self presentViewController:alert animated:YES completion:nil];
-
 
 static NSString * const title0 = @"温馨提示";
 static NSString * const titleMsg0 = @"欢迎使用 iPhone SE，迄今最高性能的 4 英寸 iPhone。在打造这款手机时，我们在深得人心的 4 英寸设计基础上，从里到外重新构想。它所采用的 A9 芯片，正是在 iPhone 6s 上使用的先进芯片。1200 万像素的摄像头能拍出令人叹为观止的精彩照片和 4K 视频，而 Live Photos 则会让你的照片栩栩如生。这一切，成就了一款外形小巧却异常强大的 iPhone。\n对于 MacBook，我们给自己设定了一个几乎不可能实现的目标：在有史以来最为轻盈纤薄的 Mac 笔记本电脑上，打造全尺寸的使用体验。这就要求每个元素都必须重新构想，不仅令其更为纤薄轻巧，还要更加出色。最终我们带来的，不仅是一部新款的笔记本电脑，更是一种对笔记本电脑的前瞻性思考。现在，有了第六代 Intel 处理器、提升的图形处理性能、高速闪存和最长可达 10 小时的电池使用时间*，MacBook 的强大更进一步。\n欢迎使用 iPhone SE，迄今最高性能的 4 英寸 iPhone。在打造这款手机时，我们在深得人心的 4 英寸设计基础上，从里到外重新构想。它所采用的 A9 芯片，正是在 iPhone 6s 上使用的先进芯片。1200 万像素的摄像头能拍出令人叹为观止的精彩照片和 4K 视频，而 Live Photos 则会让你的照片栩栩如生。这一切，成就了一款外形小巧却异常强大的 iPhone。\n对于 MacBook，我们给自己设定了一个几乎不可能实现的目标：在有史以来最为轻盈纤薄的 Mac 笔记本电脑上，打造全尺寸的使用体验。这就要求每个元素都必须重新构想，不仅令其更为纤薄轻巧，还要更加出色。最终我们带来的，不仅是一部新款的笔记本电脑，更是一种对笔记本电脑的前瞻性思考。现在，有了第六代 Intel 处理器、提升的图形处理性能、高速闪存和最长可达 10 小时的电池使用时间*，MacBook 的强大更进一步。";
@@ -89,6 +83,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     }
     NSArray *tempArray = self.dataArray[indexPath.section];
     cell.textLabel.text = tempArray[indexPath.row];
+    
     return cell;
 }
 
@@ -97,7 +92,8 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
     if ( 0 == indexPath.section )
     {
         [self showAlertAction:indexPath.row + 1];
-    }else if ( 1 == indexPath.section )
+    }
+    else if ( 1 == indexPath.section )
     {
         switch ( indexPath.row ) {
             case 0:
@@ -427,8 +423,10 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
     /*! 5、完全自定义alert */
     _customView = [CustomView new];
-    self.customView.frame = CGRectMake(50, BAKit_SCREEN_HEIGHT - 300, BAKit_SCREEN_WIDTH - 50 * 2, 162);
-
+    self.customView.frame = CGRectMake(50, BAKit_SCREEN_HEIGHT - 200, BAKit_SCREEN_WIDTH - 50 * 2, 162);
+//    设置居中
+//    self.customView.center = self.view.center;
+    /*! 使用 BAAlert 弹出自定义View  */
     BAKit_WeakSelf
     [BAAlert ba_alertShowCustomView:self.customView configuration:^(BAAlert *tempView) {
         BAKit_StrongSelf

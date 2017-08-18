@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18822EB61F32F31C0070938B /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18822EB51F32F31C0070938B /* UIView+BAAnimation.m */; };
 		C431D9C21EC03F150081799B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C431D9C11EC03F150081799B /* main.m */; };
 		C431D9C51EC03F150081799B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C431D9C41EC03F150081799B /* AppDelegate.m */; };
 		C431D9CB1EC03F150081799B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C431D9C91EC03F150081799B /* Main.storyboard */; };
@@ -21,11 +22,12 @@
 		C43D26441EF77FC200CD078C /* BAActionSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C43D263B1EF77FC200CD078C /* BAActionSheetCell.m */; };
 		C43D26451EF77FC200CD078C /* BAAlert.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C43D263C1EF77FC200CD078C /* BAAlert.bundle */; };
 		C43D26461EF77FC200CD078C /* BAAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C43D263E1EF77FC200CD078C /* BAAlert.m */; };
-		C43D26471EF77FC200CD078C /* CALayer+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = C43D26421EF77FC200CD078C /* CALayer+Animation.m */; };
 		C46BF7E31EC5BC5C00A56A25 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BF7E21EC5BC5C00A56A25 /* CustomView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18822EB41F32F31C0070938B /* UIView+BAAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BAAnimation.h"; sourceTree = "<group>"; };
+		18822EB51F32F31C0070938B /* UIView+BAAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BAAnimation.m"; sourceTree = "<group>"; };
 		C431D9BD1EC03F150081799B /* BAAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C431D9C11EC03F150081799B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C431D9C31EC03F150081799B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -50,8 +52,6 @@
 		C43D263E1EF77FC200CD078C /* BAAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAAlert.m; sourceTree = "<group>"; };
 		C43D263F1EF77FC200CD078C /* BAAlert_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAAlert_Config.h; sourceTree = "<group>"; };
 		C43D26401EF77FC200CD078C /* BAAlert_OC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAAlert_OC.h; sourceTree = "<group>"; };
-		C43D26411EF77FC200CD078C /* CALayer+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Animation.h"; sourceTree = "<group>"; };
-		C43D26421EF77FC200CD078C /* CALayer+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Animation.m"; sourceTree = "<group>"; };
 		C43D26481EF77FE100CD078C /* BAKit_ConfigurationDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAKit_ConfigurationDefine.h; sourceTree = "<group>"; };
 		C46BF7E11EC5BC5C00A56A25 /* CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
 		C46BF7E21EC5BC5C00A56A25 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
@@ -129,8 +129,8 @@
 				C43D263A1EF77FC200CD078C /* BAActionSheetCell.h */,
 				C43D263B1EF77FC200CD078C /* BAActionSheetCell.m */,
 				C43D263C1EF77FC200CD078C /* BAAlert.bundle */,
-				C43D26411EF77FC200CD078C /* CALayer+Animation.h */,
-				C43D26421EF77FC200CD078C /* CALayer+Animation.m */,
+				18822EB41F32F31C0070938B /* UIView+BAAnimation.h */,
+				18822EB51F32F31C0070938B /* UIView+BAAnimation.m */,
 			);
 			path = BAAlert;
 			sourceTree = "<group>";
@@ -214,7 +214,7 @@
 				C43D26431EF77FC200CD078C /* BAActionSheet.m in Sources */,
 				C431D9F11EC043B50081799B /* ViewController.m in Sources */,
 				C431D9C51EC03F150081799B /* AppDelegate.m in Sources */,
-				C43D26471EF77FC200CD078C /* CALayer+Animation.m in Sources */,
+				18822EB61F32F31C0070938B /* UIView+BAAnimation.m in Sources */,
 				C43D26441EF77FC200CD078C /* BAActionSheetCell.m in Sources */,
 				C431D9C21EC03F150081799B /* main.m in Sources */,
 				C46BF7E31EC5BC5C00A56A25 /* CustomView.m in Sources */,
