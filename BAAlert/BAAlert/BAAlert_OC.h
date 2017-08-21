@@ -75,6 +75,10 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAAlert
  
+ 最新更新时间：2017-08-21 【倒叙】 <br>
+ 最新Version：【Version：1.2.4】 <br>
+ 更新内容： <br>
+ 1.2.4.1、修复 自定义背景图片不显示的问题（感谢群里 [@北京-邵峰] 同学提出的 bug！）<br>
  
  最新更新时间：2017-08-18 【倒叙】 <br>
  最新Version：【Version：1.2.3】 <br>

@@ -296,7 +296,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
     BAKit_WeakSelf
     /*! 第一种封装使用示例 */
-    [BAAlert ba_alertShowWithTitle:title0 message:titleMsg0 image:nil buttonTitleArray:@[@"取消",@"确定",@"确定2",@"确定3"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor], [UIColor grayColor], [UIColor purpleColor]] configuration:^(BAAlert *tempView) {
+    [BAAlert ba_alertShowWithTitle:title0 message:titleMsg0 image:nil buttonTitleArray:@[@"取消",@"确定",@"确定2",@"确定3"] buttonTitleColorArray:@[[UIColor greenColor], [UIColor redColor], [UIColor grayColor], [UIColor purpleColor]] configuration:^(BAAlert *tempView) {
         BAKit_StrongSelf
         //        temp.bgColor       = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
         /*! 开启边缘触摸隐藏alertView */
@@ -325,7 +325,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
 //    /*! 2、自定义按钮颜色 */
     BAKit_WeakSelf
-    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg2 image:nil buttonTitleArray:@[@"取消", @"跳转VC2"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor]] configuration:^(BAAlert *tempView) {
+    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg2 image:nil buttonTitleArray:@[@"取消", @"跳转VC2"] buttonTitleColorArray:@[[UIColor greenColor], [UIColor redColor]] configuration:^(BAAlert *tempView) {
         BAKit_StrongSelf
         /*! 自定义按钮文字颜色 */
         //    tempView.buttonTitleColor = [UIColor orangeColor];
@@ -359,7 +359,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
     /*! 3、自定义背景图片 */
     BAKit_WeakSelf
-    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg1 image:nil buttonTitleArray:@[@"取消", @"确定"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor]] configuration:^(BAAlert *tempView) {
+    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg1 image:nil buttonTitleArray:@[@"取消", @"确定"] buttonTitleColorArray:@[[UIColor greenColor], [UIColor redColor]] configuration:^(BAAlert *tempView) {
         BAKit_StrongSelf
         /*! 自定义按钮文字颜色 */
         //    tempView.buttonTitleColor = [UIColor orangeColor];
@@ -393,7 +393,7 @@ static NSString * const titleMsg2 = @"对于 MacBook，我们给自己设定了�
 {
     /*! 4、内置图片和文字，可滑动查看 */
     BAKit_WeakSelf
-    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg1 image:[UIImage imageNamed:@"美女.jpg"] buttonTitleArray:@[@"取消", @"跳转VC2"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor]] configuration:^(BAAlert *tempView) {
+    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg1 image:[UIImage imageNamed:@"美女.jpg"] buttonTitleArray:@[@"取消", @"跳转VC2"] buttonTitleColorArray:@[[UIColor greenColor], [UIColor redColor]] configuration:^(BAAlert *tempView) {
         BAKit_StrongSelf
         /*! 自定义按钮文字颜色 */
         //    tempView.buttonTitleColor = [UIColor orangeColor];

@@ -882,6 +882,8 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
     self.scrollView.frame = CGRectMake(min_x, min_y, min_w, min_h);
     self.scrollView.contentSize = CGSizeMake(_maxContent_Width, _scroll_bottom);
     
+//    self.containerView.backgroundColor = [UIColor greenColor];
+
     [self loadButtons];
 }
 
@@ -1041,10 +1043,12 @@ typedef NS_ENUM(NSUInteger, BAAlertType) {
 {
     _bgImageName                   = bgImageName;
     
-    _containerView.backgroundColor = [UIColor clearColor];
-    _scrollView.backgroundColor    = [UIColor clearColor];
-    _containerView.image           = [UIImage imageNamed:bgImageName];
-    _containerView.contentMode     = UIViewContentModeScaleAspectFill;
+    self.containerView.backgroundColor = [UIColor clearColor];
+    self.scrollView.backgroundColor    = [UIColor clearColor];
+
+    self.containerView.image           = [UIImage imageNamed:bgImageName];
+    self.containerView.contentMode     = UIViewContentModeScaleAspectFill;
+
 }
 
 - (void)setCurrent_blurEffectStyle:(BAAlertBlurEffectStyle)current_blurEffectStyle
